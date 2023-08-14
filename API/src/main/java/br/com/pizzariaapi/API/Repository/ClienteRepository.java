@@ -1,4 +1,9 @@
 package br.com.pizzariaapi.API.Repository;
 
-public interface ClienteRepository {
+import br.com.pizzariaapi.API.Entity.ClienteEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ClienteRepository extends JpaRepository<ClienteEntity,Long> {
 }
