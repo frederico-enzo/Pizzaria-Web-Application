@@ -3,7 +3,6 @@
 
 ## Índice
 
-- [Principais Funções](#principais-funções)
 - [Tecnologias](#tecnologias)
 - [Requisitos para Desenvolvimento](#requisitos-para-desenvolvimento)
 - [Configuração PostgreSQL](#configuração-postgresql)
