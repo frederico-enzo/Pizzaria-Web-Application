@@ -10,32 +10,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/cliente")
+@RequestMapping("/api/Cliente")
 public class ClienteCotroller {
     @Autowired
     private ClienteService clienteService;
-    @GetMapping(params = "id")
-    public ResponseEntity<?> findById(@RequestParam("id") final Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         try {
-            final ClienteEntity cliente = clienteService.findById(id);
-            return ResponseEntity.ok(cliente);
+            ClienteEntity cliente = clienteService.findById(id);
+            return ResponseEntity.ok(cliente.getEnderecos());
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // 404 Not Found
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao buscar o cliente.");
         }
     }
+
+
+
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody final ClienteDTO cliente){
-        try{
+    public ResponseEntity<String> create(@RequestBody final ClienteDTO cliente) {
+        try {
             this.clienteService.create(cliente);
             return ResponseEntity.ok("Registro cadastrado com sucesso");
-        }catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar o registro: " + e.getMessage());
         }
     }
+
     @PutMapping(params = "id")
     public ResponseEntity<?> update(@RequestParam("id") final Long id,@RequestBody final ClienteDTO cliente){
         try{

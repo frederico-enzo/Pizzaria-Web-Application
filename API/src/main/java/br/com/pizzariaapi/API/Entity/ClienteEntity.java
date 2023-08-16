@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter @Setter
@@ -23,8 +25,10 @@ public class ClienteEntity {
     private String email;
     @Column(name = "Senha", nullable = false)
     private String senha;
-//    @OneToMany
-//    @JoinColumn(name = "Enderecos", nullable = false)
-//    private List<EnderecoEntity> enderecos = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "cliente_endereco",
+            joinColumns = @JoinColumn(name = "cliente_id"),
+            inverseJoinColumns = @JoinColumn(name = "endereco_id"))
+    private Set<EnderecoEntity> enderecos = new HashSet<>();
 
 }

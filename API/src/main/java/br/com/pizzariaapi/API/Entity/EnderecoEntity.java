@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter @Setter
 @Table(name = "tb.Endereço",schema = "public")
@@ -16,6 +19,8 @@ public class EnderecoEntity {
     private String rua;
     @Column(name = "Bairro", nullable = false)
     private String bairro;
-    @Column(name = "Numereo", nullable = false)
-    private Integer numereo;
+    @Column(name = "Numero", nullable = false)
+    private Integer numero;
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<ClienteEntity> clientes = new HashSet<>();
 }
