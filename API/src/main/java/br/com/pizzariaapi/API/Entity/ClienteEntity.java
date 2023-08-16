@@ -23,8 +23,8 @@ public class ClienteEntity {
     private String email;
     @Column(name = "Senha", nullable = false)
     private String senha;
-    @OneToMany
-    @JoinColumn(name = "Enderecos", nullable = false)
-    private List<EnderecoEntity> enderecos = new ArrayList<>();
+//    @OneToMany
+//    @JoinColumn(name = "Enderecos", nullable = false)
+//    private List<EnderecoEntity> enderecos = new ArrayList<>();
 
 }

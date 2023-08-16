@@ -15,5 +15,5 @@ public class ClienteDTO {
     private String telefone;
     private String email;
     private String senha;
-    private List<EnderecoEntity> enderecos = new ArrayList<>();
+    //private List<EnderecoEntity> enderecos = new ArrayList<>();
 }
