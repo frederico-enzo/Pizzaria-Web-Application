@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/Endereco")
+@RequestMapping("/endereco")
 public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
@@ -44,13 +44,13 @@ public class EnderecoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @GetMapping(params = "id")
+    @DeleteMapping(params = "id")
     public ResponseEntity<?> delete(@RequestParam("id") final Long id) {
         try {
             enderecoService.delete(id);
             return ResponseEntity.ok("Registro deletado com sucesso");
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body("Endereço não encontrado");
+            return ResponseEntity.badRequest().body(e.getCause());
         }
     }
 
