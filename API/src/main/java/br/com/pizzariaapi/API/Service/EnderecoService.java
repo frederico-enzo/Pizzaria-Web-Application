@@ -1,8 +1,8 @@
 package br.com.pizzariaapi.API.Service;
 
 import br.com.pizzariaapi.API.DTO.EnderecoDTO;
-import br.com.pizzariaapi.API.Entity.ClienteEntity;
-import br.com.pizzariaapi.API.Entity.EnderecoEntity;
+import br.com.pizzariaapi.API.Entity.Cliente;
+import br.com.pizzariaapi.API.Entity.Endereco;
 import br.com.pizzariaapi.API.Repository.EnderecoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -18,20 +18,15 @@ public class EnderecoService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Transactional(rollbackFor = Exception.class)
-    public EnderecoEntity findById(Long id){
-        final EnderecoEntity endereco  = enderecoRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("Endereço não encontrado com o ID: \" + id"));
-        return endereco;
+    public Endereco findById(Long id) {
+        return enderecoRepository.findById(id).orElse(null);
     }
     @Transactional(rollbackFor = Exception.class)
-    public EnderecoEntity create(EnderecoDTO enderecoDTO){
-
+    public Endereco create(EnderecoDTO enderecoDTO){
         Assert.notNull(enderecoDTO.getBairro(), "Bairro inválido");
         Assert.notNull(enderecoDTO.getRua(), "Rua inválido");
         Assert.notNull(enderecoDTO.getNumero(), "Numero inválido");
-
-        EnderecoEntity endereco = modelMapper.map(enderecoDTO, EnderecoEntity.class);
+        Endereco endereco = modelMapper.map(enderecoDTO, Endereco.class);
 
         return enderecoRepository.save(endereco);
     }
@@ -39,8 +34,5 @@ public class EnderecoService {
 
 
 
-
-    public EnderecoEntity update(EnderecoDTO enderecoDTO){return null;}
-    public void delete(Long id){}
 
 }

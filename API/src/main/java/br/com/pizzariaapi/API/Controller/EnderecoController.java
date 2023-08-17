@@ -1,9 +1,8 @@
 package br.com.pizzariaapi.API.Controller;
 
-import br.com.pizzariaapi.API.DTO.ClienteDTO;
 import br.com.pizzariaapi.API.DTO.EnderecoDTO;
-import br.com.pizzariaapi.API.Entity.ClienteEntity;
-import br.com.pizzariaapi.API.Entity.EnderecoEntity;
+import br.com.pizzariaapi.API.Entity.Cliente;
+import br.com.pizzariaapi.API.Entity.Endereco;
 import br.com.pizzariaapi.API.Service.EnderecoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +17,11 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
     @GetMapping(params = "id")
-    public ResponseEntity<EnderecoEntity> findById(@RequestParam("id") final Long id) {
-        try {
-            final EnderecoEntity endereco = enderecoService.findById(id);
-            return ResponseEntity.ok(endereco);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public ResponseEntity<?>findById(@RequestParam("id") final Long id) {
+        Endereco endereco = enderecoService.findById(id);
+        return endereco == null
+                ? ResponseEntity.badRequest().body("Endereço não encontrado")
+                : ResponseEntity.ok(endereco);
     }
     @PostMapping
     public ResponseEntity<?> create(@RequestBody final EnderecoDTO enderecoDTO){

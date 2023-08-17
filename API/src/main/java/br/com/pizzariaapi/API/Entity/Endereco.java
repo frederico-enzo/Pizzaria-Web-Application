@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Getter @Setter
 @Table(name = "tb.Endereço",schema = "public")
-public class EnderecoEntity {
+public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -21,6 +21,4 @@ public class EnderecoEntity {
     private String bairro;
     @Column(name = "Numero", nullable = false)
     private Integer numero;
-    @ManyToMany(mappedBy = "enderecos")
-    private Set<ClienteEntity> clientes = new HashSet<>();
 }

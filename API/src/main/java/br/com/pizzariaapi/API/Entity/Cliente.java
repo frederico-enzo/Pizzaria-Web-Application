@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Getter @Setter
 @Table(name = "tb.Cliente", schema = "public")
-public class ClienteEntity {
+public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
@@ -25,10 +25,7 @@ public class ClienteEntity {
     private String email;
     @Column(name = "Senha", nullable = false)
     private String senha;
-    @ManyToMany
-    @JoinTable(name = "cliente_endereco",
-            joinColumns = @JoinColumn(name = "cliente_id"),
-            inverseJoinColumns = @JoinColumn(name = "endereco_id"))
-    private Set<EnderecoEntity> enderecos = new HashSet<>();
-
+    @Column(name = "enderecos", nullable = false)
+    @OneToMany(cascade = CascadeType.MERGE)
+    private List<Endereco> enderecos = new ArrayList<>();
 }
