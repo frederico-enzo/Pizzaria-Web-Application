@@ -1,5 +1,6 @@
 package br.com.pizzariaapi.API.Controller;
 
+import br.com.pizzariaapi.API.DTO.ClienteDTO;
 import br.com.pizzariaapi.API.DTO.EnderecoDTO;
 import br.com.pizzariaapi.API.Entity.Cliente;
 import br.com.pizzariaapi.API.Entity.Endereco;
@@ -34,7 +35,23 @@ public class EnderecoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-
+    @PutMapping(params = "id")
+    public ResponseEntity<?> update(@RequestParam("id") final Long id, @RequestBody final EnderecoDTO enderecoDTO){
+        try{
+            this.enderecoService.update(id, enderecoDTO);
+            return ResponseEntity.ok("Registro editado com sucesso");
+        } catch(Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @GetMapping(params = "id")
+    public ResponseEntity<?> delete(@RequestParam("id") final Long id) {
+        try {
+            enderecoService.delete(id);
+            return ResponseEntity.ok("Registro deletado com sucesso");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body("Endereço não encontrado");
+        }
+    }
 
 }

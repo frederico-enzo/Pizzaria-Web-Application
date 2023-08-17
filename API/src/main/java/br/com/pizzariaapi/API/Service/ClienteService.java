@@ -84,10 +84,6 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-
-
-
-
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
         final Cliente cliente = clienteRepository.findById(id)

@@ -30,9 +30,21 @@ public class EnderecoService {
 
         return enderecoRepository.save(endereco);
     }
-
-
-
+    @Transactional(rollbackFor = Exception.class)
+    public Endereco update(Long id, EnderecoDTO enderecoDTO){
+        final Endereco validation = enderecoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Endereco não encontrado com o ID: " + id));
+        Assert.notNull(enderecoDTO.getBairro(), "Bairro inválido");
+        Assert.notNull(enderecoDTO.getRua(), "Rua inválido");
+        Assert.notNull(enderecoDTO.getNumero(), "Numero inválido");
+        Endereco endereco = modelMapper.map(enderecoDTO, Endereco.class);
+        return enderecoRepository.save(endereco);
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Long id){
+        final Endereco validation = enderecoRepository.findById(id).orElse(null);
+        enderecoRepository.delete(validation);
+    }
 
 
 }
