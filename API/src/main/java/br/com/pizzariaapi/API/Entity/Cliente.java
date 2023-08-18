@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Getter @Setter
-@Table(name = "tb.Clientes", schema = "public")
+@Table(name = "tb_Clientes", schema = "public")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Cliente {
     private String nome;
     @Column(name = "Telefone", nullable = false, unique = true)
     private String telefone;
-    @Column(name = "E-mail", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
     @Column(name = "Senha", nullable = false)
     private String senha;

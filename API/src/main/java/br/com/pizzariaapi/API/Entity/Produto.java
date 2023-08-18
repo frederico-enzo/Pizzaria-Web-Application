@@ -18,8 +18,6 @@ public class Produto {
     private String nome;
     @Column(name = "categoria", nullable = false)
     private String categoria;
-    @Column(name = "imagemUrl")
-    private String imagemUrl;
     @Column(name = "disponivel", nullable = false)
     private boolean disponivel;
     @Column(name = "tempoPreparo", nullable = false)

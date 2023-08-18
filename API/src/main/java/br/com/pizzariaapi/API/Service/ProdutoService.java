@@ -1,10 +1,7 @@
 package br.com.pizzariaapi.API.Service;
 
-import br.com.pizzariaapi.API.DTO.AtributoDTO;
 import br.com.pizzariaapi.API.DTO.ProdutoDTO;
-import br.com.pizzariaapi.API.Entity.Atributo;
 import br.com.pizzariaapi.API.Entity.Produto;
-import br.com.pizzariaapi.API.Repository.AtributoRepository;
 import br.com.pizzariaapi.API.Repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
