@@ -24,25 +24,25 @@ public class AtributoService {
         return atributoRepository.findById(id).orElse(null);
     }
     @Transactional(rollbackFor = Exception.class)
-    public Atributo create(AtributoDTO atributoDTO){
-        Assert.notNull(atributoDTO.getDescricao(),"Descrição inválida");
-        Assert.notNull(atributoDTO.getTamanho(),"Tamanho inválida");
-        Assert.notNull(atributoDTO.getDescricao(),"Descrição inválida");
+    public Atributo create(AtributoDTO atributoDTO) {
+        Assert.notNull(atributoDTO.getDescricao(), "Descrição inválida");
+        Assert.notNull(atributoDTO.getTamanho(), "Tamanho inválido");
+        Assert.notNull(atributoDTO.getPreco(), "Preço inválido");
+
         Atributo atributo = modelMapper.map(atributoDTO, Atributo.class);
         return atributoRepository.save(atributo);
     }
+
     @Transactional(rollbackFor = Exception.class)
     public Atributo update(Long id, AtributoDTO atributoDTO){
         Atributo validation = atributoRepository.findById(id)
                         .orElseThrow(()-> new IllegalArgumentException("Atributo não encontrado com o ID: " + id));
-        Assert.notNull(atributoDTO.getDescricao(),"Descrição inválida");
-        Assert.notNull(atributoDTO.getTamanho(),"Tamanho inválida");
-        Assert.notNull(atributoDTO.getDescricao(),"Descrição inválida");
+        Assert.notNull(atributoDTO.getDescricao(), "Descrição inválida");
+        Assert.notNull(atributoDTO.getTamanho(), "Tamanho inválido");
+        Assert.notNull(atributoDTO.getPreco(), "Preço inválido");
         Atributo atributo = modelMapper.map(atributoDTO, Atributo.class);
         return atributoRepository.save(atributo);
     }
-
-
 
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){

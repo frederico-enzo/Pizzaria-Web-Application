@@ -31,8 +31,7 @@ public class Produto {
             inverseJoinColumns = @JoinColumn(name = "ingrediente_id")
     )
     private List<Ingrediente> ingredientes;
-    @ElementCollection
-    @CollectionTable(name = "opcoes_personalizadas", joinColumns = @JoinColumn(name = "produto_id"))
-    @Column(name = "opcao")
-    private List<String> opcoesPersonalizadas;
+    @ManyToOne
+    @JoinColumn(name = "atributo_id")
+    private Atributo atributoEspecifico;
 }

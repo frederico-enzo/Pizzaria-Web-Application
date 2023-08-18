@@ -1,8 +1,11 @@
 package br.com.pizzariaapi.API.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter @Setter
 @Table(name = "tb.Atributo", schema = "public")
 public class Atributo {
     @Id

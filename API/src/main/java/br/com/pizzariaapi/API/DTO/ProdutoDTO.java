@@ -16,6 +16,5 @@ public class ProdutoDTO {
     private boolean disponivel;
     private int tempoPreparo;
     private List<Ingrediente> ingredientes;
-    private List<String> opcoesPersonalizadas;
     private Atributo atributoEspecifico;
 }
