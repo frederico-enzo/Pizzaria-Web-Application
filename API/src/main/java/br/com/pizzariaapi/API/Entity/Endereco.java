@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Getter @Setter
-@Table(name = "tb.Endereço",schema = "public")
+@Table(name = "tb.Endereços",schema = "public")
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
