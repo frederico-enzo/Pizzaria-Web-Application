@@ -15,14 +15,11 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
     @Column(name = "valorTotal")
     private double valorTotal;
-
     @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
     private List<Item> items;
 }
