@@ -17,7 +17,7 @@ import lombok.Setter;
         private Long id;
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "pedido_id")
-        @JsonIgnore // Ignora a serialização do pedido ao serializar o item
+        @JsonIgnore
         private Pedido pedido;
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "produto_id")
