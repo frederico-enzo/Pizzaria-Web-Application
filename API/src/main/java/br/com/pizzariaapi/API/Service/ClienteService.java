@@ -6,6 +6,7 @@ import br.com.pizzariaapi.API.Entity.Cliente;
 import br.com.pizzariaapi.API.Entity.Endereco;
 import br.com.pizzariaapi.API.Repository.ClienteRepository;
 import br.com.pizzariaapi.API.Repository.EnderecoRepository;
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
@@ -24,6 +25,8 @@ public class ClienteService {
     private EnderecoRepository enderecoRepository;
     @Autowired
     private  ModelMapper modelMapper;
+
+
     public Cliente findById(Long id) {
         return clienteRepository.findById(id).orElse(null);
     }
@@ -33,7 +36,6 @@ public class ClienteService {
         //Validacões iniciais
         Assert.notNull(clienteDTO.getNome(), "Nome inválido");
         Assert.notNull(clienteDTO.getEmail(), "E-Mail inválido");
-        Assert.notNull(clienteDTO.getEnderecos(), "Enderecos inválidos");
         Assert.notNull(clienteDTO.getSenha(), "Senha inválida");
         Assert.notNull(clienteDTO.getTelefone(), "Telefone inválido");
 
@@ -62,9 +64,8 @@ public class ClienteService {
 
         //Validacões iniciais
         Assert.notNull(clienteDTO.getNome(), "Nome inválido");
-        Assert.notNull(clienteDTO.getEmail(), "E-Mail inválido");
-        Assert.notNull(clienteDTO.getEnderecos(), "Enderecos inválidos");
         Assert.notNull(clienteDTO.getSenha(), "Senha inválida");
+        Assert.notNull(clienteDTO.getEmail(), "E-Mail inválido");
         Assert.notNull(clienteDTO.getTelefone(), "Telefone inválido");
 
         // DTO para Entity
@@ -83,11 +84,19 @@ public class ClienteService {
 
         return clienteRepository.save(cliente);
     }
-
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
         final Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID: " + id));
         clienteRepository.delete(cliente);
+    }
+
+
+
+    private void validationClienteDTO(ClienteDTO clienteDTO){
+        assert StringUtils.isBlank(clienteDTO.getNome()) : "Nome inválido";
+        assert StringUtils.isBlank(clienteDTO.getSenha()) : "Senha inválida";
+        assert StringUtils.isBlank(clienteDTO.getEmail()) : "E-Mail inválido";
+        assert StringUtils.isBlank(clienteDTO.getTelefone()) : "Telefone inválido";
     }
 }
