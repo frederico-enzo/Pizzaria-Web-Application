@@ -26,33 +26,24 @@ public class ClienteService {
     @Autowired
     private  ModelMapper modelMapper;
 
-
     public Cliente findById(Long id) {
         return clienteRepository.findById(id).orElse(null);
     }
     @Transactional(rollbackFor = Exception.class)
     public Cliente create(ClienteDTO clienteDTO) {
 
-        //Validacões iniciais
-        Assert.notNull(clienteDTO.getNome(), "Nome inválido");
-        Assert.notNull(clienteDTO.getEmail(), "E-Mail inválido");
-        Assert.notNull(clienteDTO.getSenha(), "Senha inválida");
-        Assert.notNull(clienteDTO.getTelefone(), "Telefone inválido");
-
-        // DTO para Entity
-        Cliente cliente = modelMapper.map(clienteDTO, Cliente.class);
-
-        //Add o Endereco em um List para salvar na entity
-        List<Endereco> enderecos = new ArrayList<>();
-        for (EnderecoDTO enderecoDTO : clienteDTO.getEnderecos()) {
-            Long enderecoId = enderecoDTO.getId();
-            Endereco endereco = enderecoRepository.findById(enderecoId)
-                    .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado com o ID: " + enderecoId));
-            enderecos.add(endereco);
+        validationClienteDTO(clienteDTO);
+        Cliente cliente = toCliente(clienteDTO);
+        if (clienteDTO.getEnderecos() != null) {
+            List<Endereco> enderecos = new ArrayList<>();
+            for (EnderecoDTO enderecoDTO : clienteDTO.getEnderecos()) {
+                Long enderecoId = enderecoDTO.getId();
+                Endereco endereco = enderecoRepository.findById(enderecoId)
+                        .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado com o ID: " + enderecoId));
+                enderecos.add(endereco);
+            }
+            cliente.setEnderecos(enderecos);
         }
-        // Add A List nos Enderecos
-        cliente.setEnderecos(enderecos);
-
         return clienteRepository.save(cliente);
     }
 
@@ -62,26 +53,18 @@ public class ClienteService {
         final Cliente validation = clienteRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID: " + id));
 
-        //Validacões iniciais
-        Assert.notNull(clienteDTO.getNome(), "Nome inválido");
-        Assert.notNull(clienteDTO.getSenha(), "Senha inválida");
-        Assert.notNull(clienteDTO.getEmail(), "E-Mail inválido");
-        Assert.notNull(clienteDTO.getTelefone(), "Telefone inválido");
-
-        // DTO para Entity
-        Cliente cliente = modelMapper.map(clienteDTO, Cliente.class);
-
-        //Add o Endereco em um List para salvar na entity
-        List<Endereco> enderecos = new ArrayList<>();
-        for (EnderecoDTO enderecoDTO : clienteDTO.getEnderecos()) {
-            Long enderecoId = enderecoDTO.getId();
-            Endereco endereco = enderecoRepository.findById(enderecoId)
-                    .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado com o ID: " + enderecoId));
-            enderecos.add(endereco);
+        validationClienteDTO(clienteDTO);
+        Cliente cliente = toCliente(clienteDTO);
+        if (clienteDTO.getEnderecos() != null) {
+            List<Endereco> enderecos = new ArrayList<>();
+            for (EnderecoDTO enderecoDTO : clienteDTO.getEnderecos()) {
+                Long enderecoId = enderecoDTO.getId();
+                Endereco endereco = enderecoRepository.findById(enderecoId)
+                        .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado com o ID: " + enderecoId));
+                enderecos.add(endereco);
+            }
+            cliente.setEnderecos(enderecos);
         }
-        // Add A List nos Enderecos
-        cliente.setEnderecos(enderecos);
-
         return clienteRepository.save(cliente);
     }
     @Transactional(rollbackFor = Exception.class)
@@ -93,6 +76,14 @@ public class ClienteService {
 
 
 
+    private Cliente  toCliente(ClienteDTO clienteDTO){
+        Cliente cliente = modelMapper.map(clienteDTO, Cliente.class);
+        return cliente;
+    }
+    private ClienteDTO toClienteDTO(Cliente cliente){
+        ClienteDTO clienteDTO = modelMapper.map(cliente, ClienteDTO.class);
+        return clienteDTO;
+    }
     private void validationClienteDTO(ClienteDTO clienteDTO){
         assert StringUtils.isBlank(clienteDTO.getNome()) : "Nome inválido";
         assert StringUtils.isBlank(clienteDTO.getSenha()) : "Senha inválida";
