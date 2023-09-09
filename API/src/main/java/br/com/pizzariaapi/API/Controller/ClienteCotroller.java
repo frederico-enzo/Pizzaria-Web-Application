@@ -17,7 +17,7 @@ public class ClienteCotroller {
 
     @GetMapping(params = "id")
     public ResponseEntity<?>findById(@RequestParam("id") final Long id) {
-            Cliente cliente = clienteService.findById(id);
+            ClienteDTO cliente = clienteService.findById(id);
             return cliente == null
                     ? ResponseEntity.badRequest().body("Cliente não encontrado")
                     : ResponseEntity.ok(cliente);

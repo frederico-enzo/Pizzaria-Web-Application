@@ -8,4 +8,6 @@ public class EnderecoDTO {
     private String rua;
     private String bairro;
     private Integer numero;
+    private String cep;
+
 }

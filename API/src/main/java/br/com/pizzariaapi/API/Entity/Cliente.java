@@ -25,7 +25,7 @@ public class Cliente {
     private String email;
     @Column(name = "Senha", nullable = false)
     private String senha;
-    @Column(name = "enderecos")
-    @OneToMany(cascade = CascadeType.MERGE)
-    private List<Endereco> enderecos = new ArrayList<>();
+    @JoinColumn(name = "enderecos")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Endereco endereco;
 }

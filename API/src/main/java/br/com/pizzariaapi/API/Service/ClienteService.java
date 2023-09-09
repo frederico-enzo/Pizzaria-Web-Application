@@ -9,13 +9,14 @@ import br.com.pizzariaapi.API.Repository.EnderecoRepository;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 @Service
 public class ClienteService {
@@ -26,68 +27,39 @@ public class ClienteService {
     @Autowired
     private  ModelMapper modelMapper;
 
-    public Cliente findById(Long id) {
-        return clienteRepository.findById(id).orElse(null);
-    }
-    @Transactional(rollbackFor = Exception.class)
-    public Cliente create(ClienteDTO clienteDTO) {
-
-        validationClienteDTO(clienteDTO);
-        Cliente cliente = toCliente(clienteDTO);
-        if (clienteDTO.getEnderecos() != null) {
-            List<Endereco> enderecos = new ArrayList<>();
-            for (EnderecoDTO enderecoDTO : clienteDTO.getEnderecos()) {
-                Long enderecoId = enderecoDTO.getId();
-                Endereco endereco = enderecoRepository.findById(enderecoId)
-                        .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado com o ID: " + enderecoId));
-                enderecos.add(endereco);
-            }
-            cliente.setEnderecos(enderecos);
-        }
-        return clienteRepository.save(cliente);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public Cliente update(Long id, ClienteDTO clienteDTO) {
-
-        final Cliente validation = clienteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID: " + id));
-
-        validationClienteDTO(clienteDTO);
-        Cliente cliente = toCliente(clienteDTO);
-        if (clienteDTO.getEnderecos() != null) {
-            List<Endereco> enderecos = new ArrayList<>();
-            for (EnderecoDTO enderecoDTO : clienteDTO.getEnderecos()) {
-                Long enderecoId = enderecoDTO.getId();
-                Endereco endereco = enderecoRepository.findById(enderecoId)
-                        .orElseThrow(() -> new EntityNotFoundException("Endereço não encontrado com o ID: " + enderecoId));
-                enderecos.add(endereco);
-            }
-            cliente.setEnderecos(enderecos);
-        }
-        return clienteRepository.save(cliente);
-    }
-    @Transactional(rollbackFor = Exception.class)
-    public void delete(Long id){
-        final Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID: " + id));
-        clienteRepository.delete(cliente);
-    }
-
-
-
-    private Cliente  toCliente(ClienteDTO clienteDTO){
-        Cliente cliente = modelMapper.map(clienteDTO, Cliente.class);
-        return cliente;
+    private Cliente toCliente(ClienteDTO clienteDTO){
+        return modelMapper.map(clienteDTO, Cliente.class);
     }
     private ClienteDTO toClienteDTO(Cliente cliente){
-        ClienteDTO clienteDTO = modelMapper.map(cliente, ClienteDTO.class);
-        return clienteDTO;
+        return modelMapper.map(cliente, ClienteDTO.class);
     }
     private void validationClienteDTO(ClienteDTO clienteDTO){
-        assert StringUtils.isBlank(clienteDTO.getNome()) : "Nome inválido";
-        assert StringUtils.isBlank(clienteDTO.getSenha()) : "Senha inválida";
-        assert StringUtils.isBlank(clienteDTO.getEmail()) : "E-Mail inválido";
-        assert StringUtils.isBlank(clienteDTO.getTelefone()) : "Telefone inválido";
+        Assert.notNull(clienteDTO.getNome(), "Digite seu Nome!");
+        Assert.hasText(clienteDTO.getNome(), "Digite seu Nome!");
+        Assert.hasText(clienteDTO.getSenha(), "Digite sua Senha!");
+        Assert.notNull(clienteDTO.getSenha(), "Digite sua Senha!");
+        Assert.hasText(clienteDTO.getEmail(), "Digite seu E-mail!");
+        Assert.notNull(clienteDTO.getEmail(), "Digite seu E-mail!");
+        Assert.hasText(clienteDTO.getTelefone(), "Digite seu Telefone!");
+        Assert.notNull(clienteDTO.getTelefone(), "Digite seu Telefone!");
+    }
+    public ClienteDTO findById(Long id){
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
+        return toClienteDTO(cliente);
+    }
+    public List<ClienteDTO> findAll(){
+        return clienteRepository.findAll().stream().map(this::toClienteDTO).toList();
+    }
+    public ClienteDTO create(ClienteDTO clienteDTO){
+        validationClienteDTO(clienteDTO);
+        return toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+    }
+    public ClienteDTO update(Long id, ClienteDTO clienteDTO){
+        validationClienteDTO(clienteDTO);
+        return toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+    }
+    public void delete(Long id){
+        Assert.notNull(clienteRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        clienteRepository.deleteById(id);
     }
 }
