@@ -50,13 +50,15 @@ public class ClienteService {
     public List<ClienteDTO> findAll(){
         return clienteRepository.findAll().stream().map(this::toClienteDTO).toList();
     }
-    public ClienteDTO create(ClienteDTO clienteDTO){
+    public String create(ClienteDTO clienteDTO){
         validationClienteDTO(clienteDTO);
-        return toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+        toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+        return "Sucesso ao cadastrar novo Cliente";
     }
-    public ClienteDTO update(Long id, ClienteDTO clienteDTO){
+    public String update(Long id, ClienteDTO clienteDTO){
         validationClienteDTO(clienteDTO);
-        return toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+        toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+        return "Sucesso ao atualizar cliente do ID:" + id + " Cliente";
     }
     public void delete(Long id){
         Assert.notNull(clienteRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));

@@ -13,43 +13,38 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cliente")
 public class ClienteCotroller {
     @Autowired
-    private ClienteService clienteService;
-
+    private ClienteService service;
     @GetMapping(params = "id")
     public ResponseEntity<?>findById(@RequestParam("id") final Long id) {
-            ClienteDTO cliente = clienteService.findById(id);
-            return cliente == null
-                    ? ResponseEntity.badRequest().body("Cliente não encontrado")
-                    : ResponseEntity.ok(cliente);
+           try {
+               return ResponseEntity.ok(service.findById(id));
+           }catch(Exception e){
+               return ResponseEntity.badRequest().body("Error : " + e.getMessage());
+           }
     }
-
     @PostMapping
     public ResponseEntity<String> create(@RequestBody final ClienteDTO cliente) {
         try {
-            this.clienteService.create(cliente);
-            return ResponseEntity.ok("Registro cadastrado com sucesso");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao cadastrar o registro: " + e.getMessage());
+            return ResponseEntity.ok(service.create(cliente));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("Error : " + e.getMessage());
         }
     }
-
     @PutMapping(params = "id")
-    public ResponseEntity<?> update(@RequestParam("id") final Long id, @RequestBody final ClienteDTO cliente){
-        try{
-            this.clienteService.update(id, cliente);
-            return ResponseEntity.ok("Registro editado com sucesso");
-        } catch(Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity<String> update(@RequestParam("id") final Long id, @RequestBody final ClienteDTO cliente){
+        try {
+            return ResponseEntity.ok(service.update(id, cliente));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("Error : " + e.getMessage());
         }
     }
-
     @DeleteMapping(params = "id")
     public ResponseEntity<?> delete(@RequestParam("id") final Long id){
-        try{
-            clienteService.delete(id);
-            return ResponseEntity.ok("Registro deletado com sucesso");
-        } catch (RuntimeException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+        try {
+            service.delete(id);
+            return ResponseEntity.ok("Sucesso ao deletar Registro!");
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("Error : " + e.getMessage());
         }
     }
 
