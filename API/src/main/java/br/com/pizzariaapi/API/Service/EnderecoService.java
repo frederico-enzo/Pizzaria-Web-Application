@@ -3,13 +3,13 @@ package br.com.pizzariaapi.API.Service;
 import br.com.pizzariaapi.API.DTO.EnderecoDTO;
 import br.com.pizzariaapi.API.Entity.Endereco;
 import br.com.pizzariaapi.API.Repository.EnderecoRepository;
-import jakarta.persistence.EntityNotFoundException;
-import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import java.util.List;
 
 @Service
 public class EnderecoService {
@@ -17,38 +17,45 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
     @Autowired
     private ModelMapper modelMapper;
-    public Endereco findById(Long id) {
-        return enderecoRepository.findById(id).orElse(null);
-    }
-    @Transactional(rollbackFor = Exception.class)
-    public Endereco create(EnderecoDTO enderecoDTO){
-        validationEnderecoDTO(enderecoDTO);
-        Endereco endereco = toEndereco(enderecoDTO);
-        return enderecoRepository.save(endereco);
-    }
-    @Transactional(rollbackFor = Exception.class)
-    public Endereco update(Long id, EnderecoDTO enderecoDTO){
-        final Endereco validation = enderecoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Endereco não encontrado com o ID: " + id));
-        validationEnderecoDTO(enderecoDTO);
-        Endereco endereco = toEndereco(enderecoDTO);
-        return enderecoRepository.save(endereco);
-    }
-    @Transactional(rollbackFor = Exception.class)
-    public void delete(Long id){
-        final Endereco validation = enderecoRepository.findById(id).orElse(null);
-        enderecoRepository.delete(validation);
-    }
+
     private Endereco toEndereco(EnderecoDTO enderecoDTO){
-        Endereco endereco = modelMapper.map(enderecoDTO, Endereco.class);
-        return endereco;
+        return modelMapper.map(enderecoDTO, Endereco.class);
     }
-    private EnderecoDTO toEndrecoDTO(Endereco endereco){
-        EnderecoDTO enderecoDTO = modelMapper.map(endereco, EnderecoDTO.class);
-        return enderecoDTO;
+    private EnderecoDTO toEnderecoDTO(Endereco endereco){
+        return modelMapper.map(endereco, EnderecoDTO.class);
     }
     private void validationEnderecoDTO(EnderecoDTO enderecoDTO){
-        assert StringUtils.isBlank(enderecoDTO.getRua()) : "Rua inválido";
-        assert StringUtils.isBlank(enderecoDTO.getBairro()) : "Rua inválido";
-        Assert.notNull(enderecoDTO.getNumero(), "Numero inválido");
+        Assert.notNull(enderecoDTO.getBairro(), "Informe o Bairro!");
+        Assert.hasText(enderecoDTO.getBairro(), "Informe o Bairro!");
+        Assert.notNull(enderecoDTO.getNumero(), "Informe o Numero!");
+        Assert.notNull(enderecoDTO.getCep(), "Informe o Cep!");
+        Assert.notNull(enderecoDTO.getRua(), "Informe o Rua!");
+        Assert.hasText(enderecoDTO.getRua(), "Informe o Rua!");
     }
+    public EnderecoDTO findById(Long id){
+        Endereco endereco = enderecoRepository.findById(id).orElse(null);
+        return toEnderecoDTO(endereco);
+    }
+    public List<EnderecoDTO> findAll(){
+        return enderecoRepository.findAll().stream().map(this::toEnderecoDTO).toList();
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public String create(EnderecoDTO enderecoDTO){
+        validationEnderecoDTO(enderecoDTO);
+        toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public String update(Long id, EnderecoDTO enderecoDTO){
+        validationEnderecoDTO(enderecoDTO);
+        toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
+        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
+    }
+    public void delete(Long id){
+        Assert.notNull(enderecoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado", id));
+        enderecoRepository.deleteById(id);
+    }
+
+
+
 }

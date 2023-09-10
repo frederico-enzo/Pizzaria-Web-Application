@@ -1,22 +1,16 @@
 package br.com.pizzariaapi.API.Service;
 
 import br.com.pizzariaapi.API.DTO.ClienteDTO;
-import br.com.pizzariaapi.API.DTO.EnderecoDTO;
 import br.com.pizzariaapi.API.Entity.Cliente;
-import br.com.pizzariaapi.API.Entity.Endereco;
 import br.com.pizzariaapi.API.Repository.ClienteRepository;
 import br.com.pizzariaapi.API.Repository.EnderecoRepository;
-import com.nimbusds.oauth2.sdk.util.StringUtils;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 @Service
 public class ClienteService {
@@ -50,15 +44,17 @@ public class ClienteService {
     public List<ClienteDTO> findAll(){
         return clienteRepository.findAll().stream().map(this::toClienteDTO).toList();
     }
+    @Transactional(rollbackFor = Exception.class)
     public String create(ClienteDTO clienteDTO){
         validationClienteDTO(clienteDTO);
         toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
-        return "Sucesso ao cadastrar novo Cliente";
+        return "Sucesso ao cadastrar novo Registro";
     }
+    @Transactional(rollbackFor = Exception.class)
     public String update(Long id, ClienteDTO clienteDTO){
         validationClienteDTO(clienteDTO);
         toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
-        return "Sucesso ao atualizar cliente do ID:" + id + " Cliente";
+        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
     public void delete(Long id){
         Assert.notNull(clienteRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));

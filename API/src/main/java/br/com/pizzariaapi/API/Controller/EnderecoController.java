@@ -1,13 +1,8 @@
 package br.com.pizzariaapi.API.Controller;
 
-import br.com.pizzariaapi.API.DTO.ClienteDTO;
 import br.com.pizzariaapi.API.DTO.EnderecoDTO;
-import br.com.pizzariaapi.API.Entity.Cliente;
-import br.com.pizzariaapi.API.Entity.Endereco;
 import br.com.pizzariaapi.API.Service.EnderecoService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,42 +11,40 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/endereco")
 public class EnderecoController {
     @Autowired
-    private EnderecoService enderecoService;
+    private EnderecoService service;
     @GetMapping(params = "id")
     public ResponseEntity<?>findById(@RequestParam("id") final Long id) {
-        Endereco endereco = enderecoService.findById(id);
-        return endereco == null
-                ? ResponseEntity.badRequest().body("Endereço não encontrado")
-                : ResponseEntity.ok(endereco);
+        try {
+            return ResponseEntity.ok(service.findById(id));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("Error : " + e.getMessage());
+        }
     }
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody final EnderecoDTO enderecoDTO){
-        try{
-            this.enderecoService.create(enderecoDTO);
-            return ResponseEntity.ok("Registro cadastrado com sucesso");
-        }catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    public ResponseEntity<String> create(@RequestBody final EnderecoDTO enderecoDTO) {
+        try {
+            return ResponseEntity.ok(service.create(enderecoDTO));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("Error : " + e.getMessage());
         }
     }
     @PutMapping(params = "id")
-    public ResponseEntity<?> update(@RequestParam("id") final Long id, @RequestBody final EnderecoDTO enderecoDTO){
-        try{
-            this.enderecoService.update(id, enderecoDTO);
-            return ResponseEntity.ok("Registro editado com sucesso");
-        } catch(Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+    public ResponseEntity<String> update(@RequestParam("id") final Long id, @RequestBody final EnderecoDTO enderecoDTO){
+        try {
+            return ResponseEntity.ok(service.update(id, enderecoDTO));
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("Error : " + e.getMessage());
         }
     }
     @DeleteMapping(params = "id")
-    public ResponseEntity<?> delete(@RequestParam("id") final Long id) {
+    public ResponseEntity<?> delete(@RequestParam("id") final Long id){
         try {
-            enderecoService.delete(id);
-            return ResponseEntity.ok("Registro deletado com sucesso");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getCause());
+            service.delete(id);
+            return ResponseEntity.ok("Sucesso ao deletar Registro!");
+        }catch(Exception e){
+            return ResponseEntity.badRequest().body("Error : " + e.getMessage());
         }
     }
+
 
 }

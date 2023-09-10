@@ -1,10 +1,7 @@
 package br.com.pizzariaapi.API.Controller;
 import br.com.pizzariaapi.API.DTO.ClienteDTO;
-import br.com.pizzariaapi.API.Entity.Cliente;
 import br.com.pizzariaapi.API.Service.ClienteService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
