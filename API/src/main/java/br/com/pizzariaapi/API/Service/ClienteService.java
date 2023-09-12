@@ -28,14 +28,10 @@ public class ClienteService {
         return modelMapper.map(cliente, ClienteDTO.class);
     }
     private void validationClienteDTO(ClienteDTO clienteDTO){
-        Assert.notNull(clienteDTO.getNome(), "Digite seu Nome!");
-        Assert.hasText(clienteDTO.getNome(), "Digite seu Nome!");
-        Assert.hasText(clienteDTO.getSenha(), "Digite sua Senha!");
-        Assert.notNull(clienteDTO.getSenha(), "Digite sua Senha!");
-        Assert.hasText(clienteDTO.getEmail(), "Digite seu E-mail!");
-        Assert.notNull(clienteDTO.getEmail(), "Digite seu E-mail!");
-        Assert.hasText(clienteDTO.getTelefone(), "Digite seu Telefone!");
-        Assert.notNull(clienteDTO.getTelefone(), "Digite seu Telefone!");
+        Assert.isTrue(!clienteDTO.getNome().isBlank(),"Digite seu Nome!");
+        Assert.isTrue(!clienteDTO.getSenha().isBlank(),"Digite seu Senha!");
+        Assert.isTrue(!clienteDTO.getEmail().isBlank(),"Digite seu E-mail!");
+        Assert.isTrue(!clienteDTO.getTelefone().isBlank(),"Digite seu Telefone!");
     }
     public ClienteDTO findById(Long id){
         Cliente cliente = clienteRepository.findById(id).orElse(null);

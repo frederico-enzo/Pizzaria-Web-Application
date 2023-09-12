@@ -11,34 +11,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class IngredienteService {
     @Autowired
     private IngredienteRepository ingredienteRepository;
     @Autowired
     private ModelMapper modelMapper;
-    @Transactional(rollbackFor = Exception.class)
-    public Ingrediente findById(Long id) {
-        return ingredienteRepository.findById(id).orElse(null);
+    private Ingrediente toIngrediente(IngredientesDTO ingredientesDTO){
+        return modelMapper.map(ingredientesDTO, Ingrediente.class);
+    }
+    private IngredientesDTO toIngredienteDTO(Ingrediente ingrediente){
+        return modelMapper.map(ingrediente, IngredientesDTO.class);
+    }
+    private void validationIngredienteDTO(IngredientesDTO ingredientesDTO){
+        Assert.notNull(ingredientesDTO.getSabor(),"Ingforme os Sabor!");
+        Assert.notNull(ingredientesDTO.getIngrediente(),"Ingforme os ingredientes!");
+        Assert.isTrue(!ingredientesDTO.getSabor().isBlank(), "Ingforme o nome do Sabor!");
+        Assert.isTrue(!ingredientesDTO.getIngrediente().isEmpty(),"Ingforme os ingredientes!");
+
+    }
+    public IngredientesDTO findById(Long id) {
+        Ingrediente ingrediente = ingredienteRepository.findById(id).orElse(null);
+        return toIngredienteDTO(ingrediente);
+    }
+    public List<IngredientesDTO>findAll(){
+        return ingredienteRepository.findAll().stream().map(this::toIngredienteDTO).toList();
     }
     @Transactional(rollbackFor = Exception.class)
-    public Ingrediente create(IngredientesDTO ingredientesDTO){
-        Assert.notNull(ingredientesDTO.getIngrediente(), "Ingredeiente inválido");
-        Ingrediente ingrediente = modelMapper.map(ingredientesDTO, Ingrediente.class);
-        return ingredienteRepository.save(ingrediente);
+    public String create(IngredientesDTO ingredientesDTO){
+        validationIngredienteDTO(ingredientesDTO);
+        toIngredienteDTO(ingredienteRepository.save(toIngrediente(ingredientesDTO)));
+        return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
-    public Ingrediente update(Long id, IngredientesDTO ingredientesDTO){
-        Ingrediente validation = ingredienteRepository.findById(id)
-                        .orElseThrow(()-> new IllegalArgumentException("Ingredeiente não encontrado com o ID: " + id));
-        Assert.notNull(ingredientesDTO.getIngrediente(), "Ingredeiente inválido");
-        Ingrediente ingrediente = modelMapper.map(ingredientesDTO, Ingrediente.class);
-        return ingredienteRepository.save(ingrediente);
+    public String update(Long id, IngredientesDTO ingredientesDTO){
+        validationIngredienteDTO(ingredientesDTO);
+        toIngredienteDTO(ingredienteRepository.save(toIngrediente(ingredientesDTO)));
+        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
-    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
-        final Ingrediente validation = ingredienteRepository.findById(id).orElse(null);
-        ingredienteRepository.delete(validation);
+        Assert.notNull(ingredienteRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        ingredienteRepository.deleteById(id);
     }
 
 }

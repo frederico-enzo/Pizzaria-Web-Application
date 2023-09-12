@@ -25,12 +25,9 @@ public class EnderecoService {
         return modelMapper.map(endereco, EnderecoDTO.class);
     }
     private void validationEnderecoDTO(EnderecoDTO enderecoDTO){
-        Assert.notNull(enderecoDTO.getBairro(), "Informe o Bairro!");
-        Assert.hasText(enderecoDTO.getBairro(), "Informe o Bairro!");
-        Assert.notNull(enderecoDTO.getNumero(), "Informe o Numero!");
-        Assert.notNull(enderecoDTO.getCep(), "Informe o Cep!");
-        Assert.notNull(enderecoDTO.getRua(), "Informe o Rua!");
-        Assert.hasText(enderecoDTO.getRua(), "Informe o Rua!");
+        Assert.isTrue(!enderecoDTO.getRua().isBlank(), "Informe o Rua!");
+        Assert.isTrue(!enderecoDTO.getCep().isBlank(), "Informe o Cep!");
+        Assert.isTrue(!enderecoDTO.getBairro().isBlank(), "Informe o Bairro!");
     }
     public EnderecoDTO findById(Long id){
         Endereco endereco = enderecoRepository.findById(id).orElse(null);
