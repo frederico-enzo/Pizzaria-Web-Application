@@ -4,7 +4,7 @@ import br.com.pizzariaapi.API.DTO.ProdutoDTO;
 import br.com.pizzariaapi.API.Entity.Produto;
 import br.com.pizzariaapi.API.Repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.util.Assert;
+import org.springframework.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,41 +15,44 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
     @Autowired
     private ModelMapper modelMapper;
-    @Transactional(rollbackFor = Exception.class)
-    public Produto findById(Long id) {
-        return produtoRepository.findById(id).orElse(null);
+    private Produto toProtudo(ProdutoDTO produtoDTO){
+        return modelMapper.map(produtoDTO, Produto.class);
     }
-    @Transactional(rollbackFor = Exception.class)
-    public Produto create(ProdutoDTO produtoDTO) {
-
+    private ProdutoDTO toProdutorDTO(Produto produto){
+        return modelMapper.map(produto, ProdutoDTO.class);
+    }
+    private void idNotNull(Long id){
+        Assert.notNull(produtoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
+    private void validationProdutoDTO(ProdutoDTO produtoDTO){
         Assert.notNull(produtoDTO.getNome(), "Nome inválido");
+        Assert.hasText(produtoDTO.getNome(), "Nome inválido");
         Assert.notNull(produtoDTO.getCategoria(), "Categoria inválida");
+        Assert.hasText(produtoDTO.getCategoria(), "Categoria inválida");
         Assert.notNull(produtoDTO.isDisponivel(), "Disponibilidade inválida");
         Assert.notNull(produtoDTO.getTempoPreparo(), "Tempo de preparo inválido");
-
-        Produto produto = modelMapper.map(produtoDTO, Produto.class);
-        return produtoRepository.save(produto);
     }
-
+    public ProdutoDTO findById(Long id) {
+        Produto produto = produtoRepository.findById(id).orElse(null);
+        return toProdutorDTO(produto);
+    }
     @Transactional(rollbackFor = Exception.class)
-    public Produto update(Long id, ProdutoDTO produtoDTO ){
-        Produto validation = produtoRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Produto não encontrado com o ID: " + id));
-
-        Assert.notNull(produtoDTO.getNome(), "Nome inválido");
-        Assert.notNull(produtoDTO.getCategoria(), "Categoria inválida");
-        Assert.notNull(produtoDTO.isDisponivel(), "Disponibilidade inválida");
-        Assert.notNull(produtoDTO.getTempoPreparo(), "Tempo de preparo inválido");
-
-
-        Produto produto = modelMapper.map(produtoDTO, Produto.class);
-        return produtoRepository.save(produto);
+    public String create(ProdutoDTO produtoDTO) {
+        validationProdutoDTO(produtoDTO);
+        toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
     }
-
+    @Transactional(rollbackFor = Exception.class)
+    public String update(Long id, ProdutoDTO produtoDTO ){
+        idNotNull(id);
+        validationProdutoDTO(produtoDTO);
+        toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
+    }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
-        final Produto validation = produtoRepository.findById(id).orElse(null);
-        produtoRepository.delete(validation);
+        idNotNull(id);
+        produtoRepository.deleteById(id);
     }
 
 

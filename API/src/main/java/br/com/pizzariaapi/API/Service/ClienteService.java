@@ -27,6 +27,9 @@ public class ClienteService {
     private ClienteDTO toClienteDTO(Cliente cliente){
         return modelMapper.map(cliente, ClienteDTO.class);
     }
+    private void idNotNull(Long id){
+        Assert.notNull(clienteRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
     private void validationClienteDTO(ClienteDTO clienteDTO){
         Assert.notNull(clienteDTO.getNome(), "Digite seu Nome!");
         Assert.hasText(clienteDTO.getNome(), "Digite seu Nome!");
@@ -52,12 +55,13 @@ public class ClienteService {
     }
     @Transactional(rollbackFor = Exception.class)
     public String update(Long id, ClienteDTO clienteDTO){
+        idNotNull(id);
         validationClienteDTO(clienteDTO);
         toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
         return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
     public void delete(Long id){
-        Assert.notNull(clienteRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        idNotNull(id);
         clienteRepository.deleteById(id);
     }
 }

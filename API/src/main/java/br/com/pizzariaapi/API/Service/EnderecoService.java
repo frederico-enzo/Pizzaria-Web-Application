@@ -24,6 +24,9 @@ public class EnderecoService {
     private EnderecoDTO toEnderecoDTO(Endereco endereco){
         return modelMapper.map(endereco, EnderecoDTO.class);
     }
+    private void idNotNull(Long id){
+        Assert.notNull(enderecoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
     private void validationEnderecoDTO(EnderecoDTO enderecoDTO){
         Assert.notNull(enderecoDTO.getBairro(), "Informe o Bairro!");
         Assert.hasText(enderecoDTO.getBairro(), "Informe o Bairro!");
@@ -47,12 +50,13 @@ public class EnderecoService {
     }
     @Transactional(rollbackFor = Exception.class)
     public String update(Long id, EnderecoDTO enderecoDTO){
+        idNotNull(id);
         validationEnderecoDTO(enderecoDTO);
         toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
         return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
     public void delete(Long id){
-        Assert.notNull(enderecoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado", id));
+        idNotNull(id);
         enderecoRepository.deleteById(id);
     }
 
