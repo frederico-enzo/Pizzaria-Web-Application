@@ -44,7 +44,4 @@ public class ClienteCotroller {
             return ResponseEntity.badRequest().body("Error : " + e.getMessage());
         }
     }
-
-
-
 }

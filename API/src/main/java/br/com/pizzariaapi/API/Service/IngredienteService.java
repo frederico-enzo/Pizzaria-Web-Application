@@ -1,8 +1,6 @@
 package br.com.pizzariaapi.API.Service;
 
 import br.com.pizzariaapi.API.DTO.IngredientesDTO;
-import br.com.pizzariaapi.API.Entity.Cliente;
-import br.com.pizzariaapi.API.Entity.Endereco;
 import br.com.pizzariaapi.API.Entity.Ingrediente;
 import br.com.pizzariaapi.API.Repository.IngredienteRepository;
 import org.modelmapper.ModelMapper;

@@ -15,31 +15,38 @@ public class ItemService {
     private ItemRepository itemRepository;
     @Autowired
     private ModelMapper modelMapper;
-    public Item findById(Long id) {
-        return itemRepository.findById(id).orElse(null);
+    private Item toItem(ItemDTO itemDTO){
+        return modelMapper.map(itemDTO, Item.class);
     }
-    @Transactional(rollbackFor = Exception.class)
-    public Item create(ItemDTO itemDTO) {
+    private ItemDTO toItemDTO(Item item){
+        return modelMapper.map(item, ItemDTO.class);
+    }
+    private void idNotNull(Long id){
+    Assert.notNull(itemRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
+    private void validationItemDTO(ItemDTO itemDTO){
         Assert.notNull(itemDTO.getProduto(), "Produto inválida");
         Assert.notNull(itemDTO.getQuantidade(), "Quantidade inválido");
-
-        Item item = modelMapper.map(itemDTO, Item.class);
-        return itemRepository.save(item);
     }
-
+    public ItemDTO findById(Long id) {
+        return toItemDTO(itemRepository.findById(id).orElse(null));
+    }
     @Transactional(rollbackFor = Exception.class)
-    public Item update(Long id, ItemDTO itemDTO){
-        Item validation = itemRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Atributo não encontrado com o ID: " + id));
-        Assert.notNull(itemDTO.getProduto(), "Produto inválida");
-        Assert.notNull(itemDTO.getQuantidade(), "Quantidade inválido");
-        Item item = modelMapper.map(itemDTO, Item.class);
-        return itemRepository.save(item);
+    public String create(ItemDTO itemDTO) {
+        validationItemDTO(itemDTO);
+        toItemDTO(itemRepository.save(toItem(itemDTO)));
+        return "Sucesso ao cadastrar novo Registro";
     }
-
+    @Transactional(rollbackFor = Exception.class)
+    public String update(Long id, ItemDTO itemDTO){
+        idNotNull(id);
+        validationItemDTO(itemDTO);
+        toItemDTO(itemRepository.save(toItem(itemDTO)));
+        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
+    }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
-        final Item validation = itemRepository.findById(id).orElse(null);
-        itemRepository.delete(validation);
+        idNotNull(id);
+        itemRepository.deleteById(id);
     }
 }
