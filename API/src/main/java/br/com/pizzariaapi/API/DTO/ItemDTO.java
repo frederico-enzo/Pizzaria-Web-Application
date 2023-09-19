@@ -1,6 +1,6 @@
-package br.com.pizzariaapi.API.DTO;
+package br.com.pizzariaapi.api.dto;
 
-import br.com.pizzariaapi.API.Entity.Pedido;
+import br.com.pizzariaapi.api.entity.Pedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

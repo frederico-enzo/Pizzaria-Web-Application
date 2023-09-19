@@ -1,4 +1,4 @@
-package br.com.pizzariaapi.API.DTO;
+package br.com.pizzariaapi.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

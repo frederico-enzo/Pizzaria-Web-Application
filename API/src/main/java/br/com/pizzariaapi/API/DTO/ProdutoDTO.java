@@ -1,7 +1,7 @@
-package br.com.pizzariaapi.API.DTO;
+package br.com.pizzariaapi.api.dto;
 
-import br.com.pizzariaapi.API.Entity.Atributo;
-import br.com.pizzariaapi.API.Entity.Ingrediente;
+import br.com.pizzariaapi.api.entity.Atributo;
+import br.com.pizzariaapi.api.entity.Ingrediente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

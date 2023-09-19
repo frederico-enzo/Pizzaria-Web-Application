@@ -1,6 +1,6 @@
-package br.com.pizzariaapi.API.Repository;
+package br.com.pizzariaapi.api.repository;
 
-import br.com.pizzariaapi.API.Entity.Cliente;
+import br.com.pizzariaapi.api.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,8 @@
-package br.com.pizzariaapi.API.Entity;
+package br.com.pizzariaapi.api.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.ModCheck;
 
 import java.util.List;
 
@@ -18,5 +17,5 @@ public class Ingrediente {
     @Column(name = "sabor", nullable = false, unique = true)
     private String sabor;
     @Column(name = "ingrediente", nullable = false, unique = true)
-    private List<String> ingrediente;
+    private List<String> componentes;
 }

@@ -1,8 +1,5 @@
-package br.com.pizzariaapi.API.DTO;
+package br.com.pizzariaapi.api.dto;
 
-import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

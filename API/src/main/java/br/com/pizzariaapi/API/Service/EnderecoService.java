@@ -1,8 +1,8 @@
-package br.com.pizzariaapi.API.Service;
+package br.com.pizzariaapi.api.service;
 
-import br.com.pizzariaapi.API.DTO.EnderecoDTO;
-import br.com.pizzariaapi.API.Entity.Endereco;
-import br.com.pizzariaapi.API.Repository.EnderecoRepository;
+import br.com.pizzariaapi.api.dto.EnderecoDTO;
+import br.com.pizzariaapi.api.entity.Endereco;
+import br.com.pizzariaapi.api.repository.EnderecoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

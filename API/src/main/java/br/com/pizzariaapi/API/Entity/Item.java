@@ -1,4 +1,4 @@
-package br.com.pizzariaapi.API.Entity;
+package br.com.pizzariaapi.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

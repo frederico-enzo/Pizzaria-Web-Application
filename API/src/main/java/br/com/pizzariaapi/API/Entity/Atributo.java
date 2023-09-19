@@ -1,4 +1,4 @@
-package br.com.pizzariaapi.API.Entity;
+package br.com.pizzariaapi.api.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

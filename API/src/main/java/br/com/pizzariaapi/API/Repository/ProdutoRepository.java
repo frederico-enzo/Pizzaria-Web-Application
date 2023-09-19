@@ -1,6 +1,6 @@
-package br.com.pizzariaapi.API.Repository;
+package br.com.pizzariaapi.api.repository;
 
-import br.com.pizzariaapi.API.Entity.Produto;
+import br.com.pizzariaapi.api.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProdutoRepository extends JpaRepository<Produto,Long> {

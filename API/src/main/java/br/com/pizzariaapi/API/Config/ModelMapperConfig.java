@@ -1,4 +1,4 @@
-package br.com.pizzariaapi.API.Config;
+package br.com.pizzariaapi.api.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

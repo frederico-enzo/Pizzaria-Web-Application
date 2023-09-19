@@ -1,12 +1,7 @@
-package br.com.pizzariaapi.API.DTO;
-import br.com.pizzariaapi.API.Entity.Endereco;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+package br.com.pizzariaapi.api.dto;
+import br.com.pizzariaapi.api.entity.Endereco;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter @Setter
 public class ClienteDTO {

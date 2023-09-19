@@ -1,8 +1,8 @@
-package br.com.pizzariaapi.API.Service;
+package br.com.pizzariaapi.api.service;
 
-import br.com.pizzariaapi.API.DTO.ProdutoDTO;
-import br.com.pizzariaapi.API.Entity.Produto;
-import br.com.pizzariaapi.API.Repository.ProdutoRepository;
+import br.com.pizzariaapi.api.dto.ProdutoDTO;
+import br.com.pizzariaapi.api.entity.Produto;
+import br.com.pizzariaapi.api.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;

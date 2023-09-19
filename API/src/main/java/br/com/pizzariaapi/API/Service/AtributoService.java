@@ -1,11 +1,10 @@
-package br.com.pizzariaapi.API.Service;
+package br.com.pizzariaapi.api.service;
 
-import br.com.pizzariaapi.API.DTO.AtributoDTO;
-import br.com.pizzariaapi.API.DTO.IngredientesDTO;
-import br.com.pizzariaapi.API.Entity.Atributo;
-import br.com.pizzariaapi.API.Entity.Cliente;
-import br.com.pizzariaapi.API.Entity.Ingrediente;
-import br.com.pizzariaapi.API.Repository.AtributoRepository;
+import br.com.pizzariaapi.api.dto.AtributoDTO;
+import br.com.pizzariaapi.api.dto.ClienteDTO;
+import br.com.pizzariaapi.api.entity.Atributo;
+import br.com.pizzariaapi.api.entity.Cliente;
+import br.com.pizzariaapi.api.repository.AtributoRepository;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
@@ -16,39 +15,43 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AtributoService {
     @Autowired
-    private AtributoRepository atributoRepository;
+    private AtributoRepository repository;
     @Autowired
     private ModelMapper modelMapper;
-    @Transactional(rollbackFor = Exception.class)
-    public Atributo findById(Long id) {
-        return atributoRepository.findById(id).orElse(null);
+    private Atributo toAtributo(AtributoDTO atributoDTO){
+        return modelMapper.map(atributoDTO, Atributo.class);
     }
-    @Transactional(rollbackFor = Exception.class)
-    public Atributo create(AtributoDTO atributoDTO) {
+    private AtributoDTO toAtributoDTO(Atributo atributo){
+        return modelMapper.map(atributo, AtributoDTO.class);
+    }
+    private void idNotNull(Long id){
+        org.springframework.util.Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
+    private void validationAtributoDTO(AtributoDTO atributoDTO){
         Assert.notNull(atributoDTO.getDescricao(), "Descrição inválida");
         Assert.notNull(atributoDTO.getTamanho(), "Tamanho inválido");
         Assert.notNull(atributoDTO.getPreco(), "Preço inválido");
-
-        Atributo atributo = modelMapper.map(atributoDTO, Atributo.class);
-        return atributoRepository.save(atributo);
     }
-
     @Transactional(rollbackFor = Exception.class)
-    public Atributo update(Long id, AtributoDTO atributoDTO){
-        Atributo validation = atributoRepository.findById(id)
-                        .orElseThrow(()-> new IllegalArgumentException("Atributo não encontrado com o ID: " + id));
-        Assert.notNull(atributoDTO.getDescricao(), "Descrição inválida");
-        Assert.notNull(atributoDTO.getTamanho(), "Tamanho inválido");
-        Assert.notNull(atributoDTO.getPreco(), "Preço inválido");
-        Atributo atributo = modelMapper.map(atributoDTO, Atributo.class);
-        return atributoRepository.save(atributo);
+    public AtributoDTO findById(Long id) {
+        Atributo atributo = repository.findById(id).orElse(null);
+        return toAtributoDTO(atributo);
     }
-
+    @Transactional(rollbackFor = Exception.class)
+    public AtributoDTO post(AtributoDTO atributoDTO) {
+        validationAtributoDTO(atributoDTO);
+        return toAtributoDTO(repository.save(toAtributo(atributoDTO)));
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public AtributoDTO put(AtributoDTO atributoDTO) {
+        idNotNull(atributoDTO.getId());
+        validationAtributoDTO(atributoDTO);
+        return toAtributoDTO(repository.save(toAtributo(atributoDTO)));
+    }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
-        final Atributo validation = atributoRepository.findById(id).orElse(null);
-        atributoRepository.delete(validation);
+        idNotNull(id);
+        repository.deleteById(id);
     }
-
 
 }
