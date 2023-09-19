@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter
-public class IngredientesDTO {
+public class SaborDTO {
     private Long id;
     private String sabor;
     private List<String> ingrediente;

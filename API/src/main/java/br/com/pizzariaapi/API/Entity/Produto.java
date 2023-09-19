@@ -28,7 +28,7 @@ public class Produto {
             joinColumns = @JoinColumn(name = "produto_id"),
             inverseJoinColumns = @JoinColumn(name = "ingrediente_id")
     )
-    private List<Ingrediente> ingredientes;
+    private List<Sabor> sabors;
     @ManyToOne
     @JoinColumn(name = "atributo_id")
     private Atributo atributoEspecifico;
