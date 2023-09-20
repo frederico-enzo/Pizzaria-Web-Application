@@ -20,6 +20,7 @@ public class Pedido {
     private Cliente cliente;
     @Column(name = "valorTotal")
     private double valorTotal;
-    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "items_list")
     private List<Item> items;
 }

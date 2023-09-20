@@ -12,15 +12,20 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
+
     @Column(name = "Nome", nullable = false)
     private String nome;
+
     @Column(name = "Telefone", nullable = false, unique = true)
     private String telefone;
+
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
     @Column(name = "Senha", nullable = false)
     private String senha;
-    @JoinColumn(name = "enderecos")
-    @ManyToOne(cascade = CascadeType.MERGE)
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 }

@@ -6,18 +6,22 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-@Table(name = "tb_Endereços",schema = "public")
+@Table(name = "tb_enderecos", schema = "public")
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
-    @Column(name = "Rua", nullable = false)
+
+    @Column(name = "rua")
     private String rua;
-    @Column(name = "Bairro", nullable = false)
+
+    @Column(name = "bairro")
     private String bairro;
-    @Column(name = "Numero", nullable = false)
+
+    @Column(name = "numero")
     private Integer numero;
-    @Column(name = "Cep", nullable = false)
+
+    @Column(name = "cep")
     private String cep;
 }

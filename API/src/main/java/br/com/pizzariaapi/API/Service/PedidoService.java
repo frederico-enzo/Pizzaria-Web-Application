@@ -54,8 +54,8 @@ public class PedidoService {
     public String update(Long id, PedidoDTO pedidoDTO){
         idNotNull(id);
         Assert.isTrue(pedidoDTO.getCliente() != null,"Cliente inválido");
-        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
+        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
         return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
     @Transactional(rollbackFor = Exception.class)

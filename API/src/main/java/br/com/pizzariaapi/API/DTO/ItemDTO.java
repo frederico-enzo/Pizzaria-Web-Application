@@ -12,7 +12,6 @@ import java.util.List;
 public class ItemDTO {
     private Long id;
     private ProdutoDTO produto;
-    private Pedido pedido;
     private int quantidade;
     private List<Sabor> sabors;
     private Atributo atributoEspecifico;
