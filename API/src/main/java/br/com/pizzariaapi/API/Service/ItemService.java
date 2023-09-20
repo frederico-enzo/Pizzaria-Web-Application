@@ -2,6 +2,7 @@ package br.com.pizzariaapi.api.service;
 
 import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.entity.Item;
+import br.com.pizzariaapi.api.entity.Tamanho;
 import br.com.pizzariaapi.api.repository.ItemRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
@@ -24,9 +25,28 @@ public class ItemService {
     private void idNotNull(Long id){
     Assert.notNull(itemRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
+     void quantidadeDeSabores(ItemDTO itemDTO) {
+        int maxSabores = 0;
+        Tamanho tamanho = itemDTO.getAtributoEspecifico().getTamanho();
+        if (tamanho == Tamanho.GIGANTE) {
+            maxSabores = 5;
+        } else if (tamanho == Tamanho.GRANDE) {
+            maxSabores = 4;
+        } else if (tamanho == Tamanho.MEDIA) {
+            maxSabores = 4;
+        } else if (tamanho == Tamanho.PEQUENO) {
+            maxSabores = 3;
+        }
+        if (itemDTO.getSabors().size() < maxSabores) {
+            throw new IllegalArgumentException("O tamanho " + tamanho + " é permitido somente " + maxSabores + " sabores");
+        }
+    }
     private void validationItemDTO(ItemDTO itemDTO){
         Assert.notNull(itemDTO.getProduto(), "Produto inválida");
         Assert.notNull(itemDTO.getQuantidade(), "Quantidade inválido");
+        Assert.notNull(itemDTO.getSabors(), "Sabor inválido");
+        Assert.notNull(itemDTO.getAtributoEspecifico(), "Atributo inválido");
+
     }
     public ItemDTO findById(Long id) {
         return toItemDTO(itemRepository.findById(id).orElse(null));

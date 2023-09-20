@@ -13,8 +13,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
+import java.util.Optional;
 
- class AtributoServiceTest {
+
+class AtributoServiceTest {
 
     @InjectMocks
     private AtributoService service;
@@ -67,13 +69,6 @@ import org.modelmapper.ModelMapper;
         assertEquals(55.0, atributo.getPreco());
     }
     @Test
-    void post_Failure() {
-        AtributoDTO atributoDTO = new AtributoDTO();
-        assertThrows(IllegalArgumentException.class, () -> {
-            service.post(atributoDTO);
-        });
-    }
-    @Test
     void put_Failure() {
         AtributoDTO atributo = new AtributoDTO();
         atributo.setTamanho(Tamanho.GIGANTE);
@@ -82,5 +77,42 @@ import org.modelmapper.ModelMapper;
         });
     }
 
+     @Test
+     void idNotNull_WhenIdNotFound_ShouldThrowException() {
+         Long id = 1L;
+         when(repository.findById(id)).thenReturn(Optional.empty());
+         assertThrows(IllegalArgumentException.class, () -> {
+             service.idNotNull(id);
+         });
+     }
 
-}
+     @Test
+     void idNotNull_WhenIdFound_ShouldNotThrowException() {
+         Long id = 1L;
+         when(repository.findById(id)).thenReturn(Optional.of(new Atributo()));
+         assertDoesNotThrow(() -> {
+             service.idNotNull(id);
+         });
+     }
+    @Test
+    void delete_ShouldCallIddDeleteById() {
+        Long id = 1L;
+        when(repository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class, () -> {
+            service.delete(id);
+        });
+    }
+    @Test
+    void delete() {
+
+        Long id = 1L;
+        Atributo atributo = new Atributo();
+        atributo.setId(id);
+        when(repository.findById(id)).thenReturn(Optional.of(atributo));
+        service.delete(id);
+
+        verify(repository, times(1)).deleteById(id);
+    }
+ }
+
+

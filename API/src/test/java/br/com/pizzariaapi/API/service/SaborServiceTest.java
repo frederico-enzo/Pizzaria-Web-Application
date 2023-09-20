@@ -107,20 +107,15 @@ class SaborServiceTest {
     @Test
     void findAll_WhenNoSaboresFound_ShouldReturnEmptyList() {
         when(repository.findAll()).thenReturn(new ArrayList<>());
-
         List<SaborDTO> result = service.findAll();
-
         assertTrue(result.isEmpty());
     }
-
-
 
     @Test
     void update_WhenSaborNotFound_ShouldThrowException() {
         Long id = 1L;
         SaborDTO saborDTO = new SaborDTO();
         when(repository.findById(id)).thenReturn(Optional.empty());
-
         assertThrows(IllegalArgumentException.class, () -> {
             service.update(id, saborDTO);
         });

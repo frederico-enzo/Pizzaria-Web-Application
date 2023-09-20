@@ -23,25 +23,33 @@ public class AtributoService {
     private AtributoDTO toAtributoDTO(Atributo atributo){
         return modelMapper.map(atributo, AtributoDTO.class);
     }
-    private void idNotNull(Long id){
+     void idNotNull(Long id){
         org.springframework.util.Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
-    private void validationAtributoDTO(AtributoDTO atributoDTO){
+     void validationAtributoDTO(AtributoDTO atributoDTO){
         Assert.notNull(atributoDTO.getTamanho(), "Tamanho inválido");
     }
-     void setDescricao(AtributoDTO atributo) {
-        if (atributo.getTamanho() == Tamanho.PEQUENO) {
-            atributo.setDescricao("Pequena: 25 cm, 4 fatias – até 2 sabores.");
-            atributo.setPreco(10.0);
-        } else if (atributo.getTamanho() == Tamanho.MEDIA) {
-            atributo.setDescricao("30 cm, 6 fatias – até 3 sabores.");
-            atributo.setPreco(20.0);
-        } else if (atributo.getTamanho() == Tamanho.GRANDE) {
-            atributo.setDescricao("35 cm, 8 fatias – até 3 sabores.");
-            atributo.setPreco(35.0);
-        } else if (atributo.getTamanho() == Tamanho.GIGANTE) {
-            atributo.setDescricao("50 cm, 12 fatias – até 4 sabores.");
-            atributo.setPreco(55.0);
+    void setDescricao(AtributoDTO atributo) {
+        Tamanho tamanho = atributo.getTamanho();
+        switch (tamanho) {
+            case PEQUENO:
+                atributo.setDescricao("Pequena: 25 cm, 4 fatias – até 2 sabores.");
+                atributo.setPreco(10.0);
+                break;
+            case MEDIA:
+                atributo.setDescricao("30 cm, 6 fatias – até 3 sabores.");
+                atributo.setPreco(20.0);
+                break;
+            case GRANDE:
+                atributo.setDescricao("35 cm, 8 fatias – até 3 sabores.");
+                atributo.setPreco(35.0);
+                break;
+            case GIGANTE:
+                atributo.setDescricao("50 cm, 12 fatias – até 4 sabores.");
+                atributo.setPreco(55.0);
+                break;
+            default:
+                break;
         }
     }
 

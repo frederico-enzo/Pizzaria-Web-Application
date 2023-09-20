@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 
-    @Entity
+
+@Entity
     @Getter
     @Setter
     @Table(name = "tb_item")
@@ -24,4 +26,14 @@ import lombok.Setter;
         private Produto produto;
         @Column(name = "quantidade")
         private int quantidade;
+         @ManyToMany
+         @JoinTable(
+                 name = "produto_ingredientes",
+                 joinColumns = @JoinColumn(name = "produto_id"),
+                 inverseJoinColumns = @JoinColumn(name = "ingrediente_id")
+         )
+         private List<Sabor> sabors;
+         @ManyToOne
+         @JoinColumn(name = "atributo_id")
+         private Atributo atributoEspecifico;
     }

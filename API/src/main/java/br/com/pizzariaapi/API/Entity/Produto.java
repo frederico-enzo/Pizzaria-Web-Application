@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -22,14 +21,5 @@ public class Produto {
     private boolean disponivel;
     @Column(name = "tempoPreparo", nullable = false)
     private int tempoPreparo;
-    @ManyToMany
-    @JoinTable(
-            name = "produto_ingredientes",
-            joinColumns = @JoinColumn(name = "produto_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingrediente_id")
-    )
-    private List<Sabor> sabors;
-    @ManyToOne
-    @JoinColumn(name = "atributo_id")
-    private Atributo atributoEspecifico;
+
 }

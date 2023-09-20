@@ -1,9 +1,7 @@
 package br.com.pizzariaapi.api.service;
 
-import br.com.pizzariaapi.api.dto.AtributoDTO;
 import br.com.pizzariaapi.api.dto.ClienteDTO;
 import br.com.pizzariaapi.api.entity.Cliente;
-import br.com.pizzariaapi.api.entity.Tamanho;
 import br.com.pizzariaapi.api.repository.ClienteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

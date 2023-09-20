@@ -1,14 +1,19 @@
 package br.com.pizzariaapi.api.dto;
 
+import br.com.pizzariaapi.api.entity.Atributo;
 import br.com.pizzariaapi.api.entity.Pedido;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import br.com.pizzariaapi.api.entity.Sabor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+import java.util.List;
+
+@Setter @Getter
 public class ItemDTO {
     private Long id;
     private ProdutoDTO produto;
     private Pedido pedido;
     private int quantidade;
+    private List<Sabor> sabors;
+    private Atributo atributoEspecifico;
 }
