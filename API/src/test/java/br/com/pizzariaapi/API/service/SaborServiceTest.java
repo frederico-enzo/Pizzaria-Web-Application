@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -34,7 +34,6 @@ class SaborServiceTest {
 
     @Test
     void findById() {
-        // Arrange
         Long id = 1L;
         Sabor sabor = new Sabor();
         sabor.setId(id);
@@ -42,14 +41,9 @@ class SaborServiceTest {
         SaborDTO expectedDto = new SaborDTO();
         expectedDto.setId(id);
         expectedDto.setNome("Sabor Teste");
-
         when(repository.findById(id)).thenReturn(Optional.of(sabor));
         when(modelMapper.map(sabor, SaborDTO.class)).thenReturn(expectedDto);
-
-        // Act
         SaborDTO result = service.findById(id);
-
-        // Assert
         assertEquals(expectedDto, result);
     }
 
@@ -66,11 +60,7 @@ class SaborServiceTest {
 
         when(repository.findAll()).thenReturn(sabores);
         when(modelMapper.map(any(Sabor.class), eq(SaborDTO.class))).thenReturn(new SaborDTO());
-
-        // Act
         List<SaborDTO> result = service.findAll();
-
-        // Assert
         assertEquals(expectedDtos.size(), result.size());
     }
 
@@ -106,12 +96,42 @@ class SaborServiceTest {
 
     @Test
     void delete() {
-        // Arrange
         Long id = 1L;
         Sabor sabor = new Sabor();
         sabor.setId(id);
         when(repository.findById(id)).thenReturn(Optional.of(sabor));
         service.delete(id);
         verify(repository, times(1)).deleteById(id);
+    }
+
+    @Test
+    void findAll_WhenNoSaboresFound_ShouldReturnEmptyList() {
+        when(repository.findAll()).thenReturn(new ArrayList<>());
+
+        List<SaborDTO> result = service.findAll();
+
+        assertTrue(result.isEmpty());
+    }
+
+
+
+    @Test
+    void update_WhenSaborNotFound_ShouldThrowException() {
+        Long id = 1L;
+        SaborDTO saborDTO = new SaborDTO();
+        when(repository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            service.update(id, saborDTO);
+        });
+    }
+
+    @Test
+    void delete_WhenSaborNotFound_ShouldThrowException() {
+        Long id = 1L;
+        when(repository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(IllegalArgumentException.class, () -> {
+            service.delete(id);
+        });
     }
 }
