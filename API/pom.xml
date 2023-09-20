@@ -130,5 +130,12 @@
 			</plugin>
 		</plugins>
 	</build>
+<!--$
+ mvn clean verify sonar:sonar
+-Dsonar.projectKey=Pizzaria-Web-Application
+-Dsonar.projectName='Pizzaria-Web-Application'
+-Dsonar.host.url=http://localhost:9000
+-Dsonar.token=sqp_4d20222f2de0466dbffa7416277081691cffc3d3
+-->
 
 </project>
