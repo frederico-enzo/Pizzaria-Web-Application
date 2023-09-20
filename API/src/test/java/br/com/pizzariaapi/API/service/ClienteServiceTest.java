@@ -1,7 +1,9 @@
 package br.com.pizzariaapi.api.service;
 
+import br.com.pizzariaapi.api.dto.AtributoDTO;
 import br.com.pizzariaapi.api.dto.ClienteDTO;
 import br.com.pizzariaapi.api.entity.Cliente;
+import br.com.pizzariaapi.api.entity.Tamanho;
 import br.com.pizzariaapi.api.repository.ClienteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -118,4 +121,12 @@ class ClienteServiceTest {
 
         verify(repository, times(1)).deleteById(id);
     }
+    @Test
+    void post_Failure() {
+        ClienteDTO clienteDTO = new ClienteDTO();
+        assertThrows(IllegalArgumentException.class, () -> {
+            service.create(clienteDTO);
+        });
+    }
+
 }

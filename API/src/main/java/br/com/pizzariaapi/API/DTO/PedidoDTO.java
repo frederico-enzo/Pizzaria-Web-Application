@@ -1,13 +1,12 @@
 package br.com.pizzariaapi.api.dto;
 import br.com.pizzariaapi.api.entity.Item;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 
-@Data
-@AllArgsConstructor
+@Getter @Setter
 public class PedidoDTO {
     private Long id;
     private ClienteDTO cliente;

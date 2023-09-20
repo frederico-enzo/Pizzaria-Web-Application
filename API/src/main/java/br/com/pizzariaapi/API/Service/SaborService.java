@@ -27,10 +27,10 @@ public class SaborService {
         Assert.notNull(saborRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
     private void validationIngredienteDTO(SaborDTO saborDTO){
-        Assert.notNull(saborDTO.getSabor(),"Ingforme os Sabor!");
-        Assert.notNull(saborDTO.getIngrediente(),"Ingforme os ingredientes!");
-        Assert.isTrue(!saborDTO.getSabor().isBlank(), "Ingforme o nome do Sabor!");
-        Assert.isTrue(!saborDTO.getIngrediente().isEmpty(),"Ingforme os ingredientes!");
+        Assert.notNull(saborDTO.getNome(),"Ingforme os Sabor!");
+        Assert.notNull(saborDTO.getComponentes(),"Ingforme os ingredientes!");
+        Assert.isTrue(!saborDTO.getNome().isBlank(), "Ingforme o nome do Sabor!");
+        Assert.isTrue(!saborDTO.getComponentes().isEmpty(),"Ingforme os ingredientes!");
 
     }
     public SaborDTO findById(Long id) {

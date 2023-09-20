@@ -1,5 +1,7 @@
 package br.com.pizzariaapi.api.service;
+import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.dto.PedidoDTO;
+import br.com.pizzariaapi.api.entity.Item;
 import br.com.pizzariaapi.api.entity.Pedido;
 import br.com.pizzariaapi.api.repository.PedidoRepository;
 import org.modelmapper.ModelMapper;
@@ -11,33 +13,40 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PedidoService {
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoRepository repository;
     @Autowired
     private ModelMapper modelMapper;
-    @Transactional(rollbackFor = Exception.class)
-    public Pedido findById(Long id) {
-        return pedidoRepository.findById(id).orElse(null);
+    private Pedido toPedido(PedidoDTO pedidoDTO){
+        return modelMapper.map(pedidoDTO, Pedido.class);
     }
-    @Transactional(rollbackFor = Exception.class)
-    public Pedido create(PedidoDTO pedidoDTO) {
-        Assert.notNull(pedidoDTO.getCliente(), "Pedido inválido");
-        Assert.notNull(pedidoDTO.getValorTotal(), "Quantidade inválido");
+    private PedidoDTO toPedidoDTO(Pedido pedido){
+        return modelMapper.map(pedido, PedidoDTO.class);
+    }
+    private void idNotNull(Long id){
+        Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
+    public PedidoDTO findById(Long id) {
+        Pedido pedido = repository.findById(id).orElse(null);
+        return toPedidoDTO(pedido);
+    }
 
-        Pedido pedido = modelMapper.map(pedidoDTO, Pedido.class);
-        return pedidoRepository.save(pedido);
+    @Transactional(rollbackFor = Exception.class)
+    public String create(PedidoDTO pedidoDTO) {
+        Assert.isTrue(pedidoDTO.getCliente() != null, "Cliente inválido");
+        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
+
     }
     @Transactional(rollbackFor = Exception.class)
-    public Pedido update(Long id, PedidoDTO pedidoDTO){
-        Pedido validation = pedidoRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("Atributo não encontrado com o ID: " + id));
-        Assert.notNull(pedidoDTO.getCliente(), "Pedido inválido");
-        Assert.notNull(pedidoDTO.getValorTotal(), "Quantidade inválido");
-        Pedido pedido = modelMapper.map(pedidoDTO, Pedido.class);
-        return pedidoRepository.save(pedido);
+    public String update(Long id, PedidoDTO pedidoDTO){
+        idNotNull(id);
+        Assert.isTrue(pedidoDTO.getCliente() != null,"Cliente inválido");
+        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
-        final Pedido validation = pedidoRepository.findById(id).orElse(null);
-        pedidoRepository.delete(validation);
+        idNotNull(id);
+        repository.deleteById(id);
     }
 }

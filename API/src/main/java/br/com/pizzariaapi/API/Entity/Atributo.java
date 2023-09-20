@@ -12,10 +12,17 @@ public class Atributo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
-    @Column(name = "tamanho")
-    private String tamanho;
+    @Enumerated
+    private Tamanho tamanho;
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "preco")
     private double preco;
+
+    public Atributo(Tamanho tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public Atributo() {
+    }
 }

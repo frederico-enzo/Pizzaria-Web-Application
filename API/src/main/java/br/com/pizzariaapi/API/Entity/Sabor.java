@@ -14,8 +14,8 @@ public class Sabor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
-    @Column(name = "sabor", nullable = false, unique = true)
-    private String sabor;
+    @Column(name = "nome", nullable = false, unique = true)
+    private String nome;
     @Column(name = "ingrediente", nullable = false, unique = true)
     private List<String> componentes;
 }

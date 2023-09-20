@@ -1,13 +1,13 @@
 package br.com.pizzariaapi.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import br.com.pizzariaapi.api.entity.Tamanho;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+@Getter @Setter
 public class AtributoDTO {
     private Long id;
-    private String tamanho;
+    private Tamanho tamanho;
     private String descricao;
     private double preco;
 }

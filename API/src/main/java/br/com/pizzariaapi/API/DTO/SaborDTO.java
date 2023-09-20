@@ -8,6 +8,6 @@ import java.util.List;
 @Getter @Setter
 public class SaborDTO {
     private Long id;
-    private String sabor;
-    private List<String> ingrediente;
+    private String nome;
+    private List<String> componentes;
 }
