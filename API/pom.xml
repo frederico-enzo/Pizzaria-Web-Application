@@ -70,6 +70,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.12.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
@@ -130,12 +136,6 @@
 			</plugin>
 		</plugins>
 	</build>
-<!--$
- mvn clean verify sonar:sonar
--Dsonar.projectKey=Pizzaria-Web-Application
--Dsonar.projectName='Pizzaria-Web-Application'
--Dsonar.host.url=http://localhost:9000
--Dsonar.token=sqp_4d20222f2de0466dbffa7416277081691cffc3d3
--->
+
 
 </project>
