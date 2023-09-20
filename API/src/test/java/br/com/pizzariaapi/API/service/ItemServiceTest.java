@@ -103,16 +103,20 @@ class ItemServiceTest {
     void create_Success() {
         ProdutoDTO produto = new ProdutoDTO();
         produto.setNome("Pizza");
+
         List<Sabor> expectedDtos = new ArrayList<>();
         expectedDtos.add(new Sabor());
         expectedDtos.add(new Sabor());
+
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setProduto(produto);
         itemDTO.setQuantidade(2);
         itemDTO.setSabors(expectedDtos);
+
         Atributo atributoDTO = new Atributo();
         atributoDTO.setTamanho(Tamanho.PEQUENO);
         itemDTO.setAtributoEspecifico(atributoDTO);
+
         Produto produt = new Produto();
         Item item = new Item();
         item.setProduto(produt);

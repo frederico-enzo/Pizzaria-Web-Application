@@ -26,7 +26,6 @@ class SaborServiceTest {
     SaborRepository repository;
     @Mock
     ModelMapper modelMapper;
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -49,15 +48,12 @@ class SaborServiceTest {
 
     @Test
     void findAll() {
-        // Arrange
         List<Sabor> sabores = new ArrayList<>();
         sabores.add(new Sabor());
         sabores.add(new Sabor());
-
         List<SaborDTO> expectedDtos = new ArrayList<>();
         expectedDtos.add(new SaborDTO());
         expectedDtos.add(new SaborDTO());
-
         when(repository.findAll()).thenReturn(sabores);
         when(modelMapper.map(any(Sabor.class), eq(SaborDTO.class))).thenReturn(new SaborDTO());
         List<SaborDTO> result = service.findAll();
@@ -72,7 +68,6 @@ class SaborServiceTest {
         Sabor sabor = new Sabor();
         sabor.setNome("Sabor Teste");
         sabor.setComponentes(List.of("Ingrediente 1", "Ingrediente 2"));
-
         when(repository.save(any(Sabor.class))).thenReturn(sabor);
         String result = service.create(saborDTO);
         assertEquals("Sucesso ao cadastrar novo Registro", result);

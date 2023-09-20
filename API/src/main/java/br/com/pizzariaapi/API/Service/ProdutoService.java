@@ -21,10 +21,10 @@ public class ProdutoService {
     private ProdutoDTO toProdutorDTO(Produto produto){
         return modelMapper.map(produto, ProdutoDTO.class);
     }
-    private void idNotNull(Long id){
+     void idNotNull(Long id){
         Assert.notNull(produtoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
-    private void validationProdutoDTO(ProdutoDTO produtoDTO){
+     void validationProdutoDTO(ProdutoDTO produtoDTO){
         Assert.notNull(produtoDTO.getNome(), "Nome inválido");
         Assert.hasText(produtoDTO.getNome(), "Nome inválido");
         Assert.notNull(produtoDTO.getCategoria(), "Categoria inválida");

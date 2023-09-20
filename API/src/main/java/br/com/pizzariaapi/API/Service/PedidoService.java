@@ -1,14 +1,18 @@
 package br.com.pizzariaapi.api.service;
 import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.dto.PedidoDTO;
+import br.com.pizzariaapi.api.entity.Atributo;
 import br.com.pizzariaapi.api.entity.Item;
 import br.com.pizzariaapi.api.entity.Pedido;
+import br.com.pizzariaapi.api.entity.Produto;
 import br.com.pizzariaapi.api.repository.PedidoRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class PedidoService {
@@ -25,23 +29,33 @@ public class PedidoService {
     private void idNotNull(Long id){
         Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
+    public double calcularValorTotal(PedidoDTO pedidoDTO) {
+        double valorTotal = 0.0;
+        for (Item item : pedidoDTO.getItems()) {
+            int quantidade = item.getQuantidade();
+            double precoUnitario = item.getAtributoEspecifico().getPreco();
+            double valorParcialItem = quantidade * precoUnitario;
+            valorTotal += valorParcialItem;
+        }
+        return valorTotal;
+    }
     public PedidoDTO findById(Long id) {
         Pedido pedido = repository.findById(id).orElse(null);
         return toPedidoDTO(pedido);
     }
-
     @Transactional(rollbackFor = Exception.class)
     public String create(PedidoDTO pedidoDTO) {
         Assert.isTrue(pedidoDTO.getCliente() != null, "Cliente inválido");
         toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+        pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
         return "Sucesso ao cadastrar novo Registro";
-
     }
     @Transactional(rollbackFor = Exception.class)
     public String update(Long id, PedidoDTO pedidoDTO){
         idNotNull(id);
         Assert.isTrue(pedidoDTO.getCliente() != null,"Cliente inválido");
         toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+        pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
         return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
     @Transactional(rollbackFor = Exception.class)
