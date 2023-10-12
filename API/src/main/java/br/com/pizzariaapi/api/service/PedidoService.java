@@ -46,8 +46,8 @@ public class PedidoService {
     @Transactional(rollbackFor = Exception.class)
     public String create(PedidoDTO pedidoDTO) {
         Assert.isTrue(pedidoDTO.getCliente() != null, "Cliente inválido");
-        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
+        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
         return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
