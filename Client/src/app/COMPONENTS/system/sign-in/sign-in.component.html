@@ -1,37 +1,40 @@
+<body>
+    <div class="container">
+      
+        <div class="form">
+            <form action="#">
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Conecte-se</h1>
+                    </div>
+               
+                </div>
 
-<div class="background d-flex">
-    <div class="img ">
-        <img src="./assets/Pizza-Ifood.jpg" alt="">
-    </div>
-    <div class="d-flex login align-items-center justify-content-center">
-        <div class=" win    shadow-lg p-3 mb-5 bg-body rounded ">
-            <div class="logo"></div>
-            <br>
-            <article class="d-flex  flex-column">
-                <div>
-                    <h3>Portal do Parceiro</h3>
-                    <h5>Gerencie sua loja de forma fácil e rápida</h5>
+                <div class="input-group">
+                 
+
+              
+                    <div class="input-box">
+                        <label for="email">E-mail</label>
+                        <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
+                
+
+                
+                        <label for="password">Senha</label>
+                        <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
+                    </div>
+
+
                 </div>
-            </article>
-            <form class="d-flex flex-column form-signin form-control">
-                <br>
-                <div class="mt-3">
-                    <label for="user" class="sr-only">E-mail</label>
-                    <input type="text" id="user" [(ngModel)]="usuario.email" name="login" class="form-control"
-                        placeholder="E-mail" required="" autofocus="">
+
+               
+
+                <div class="continue-button">
+                    <button><a href="#">Continuar</a> </button>
                 </div>
-                <div class="mt-3 mb-4">
-                    <label for="senha" class="sr-only">Senha</label>
-                    <input type="password" id="senha" [(ngModel)]="usuario.senha" name="senha" class="form-control"
-                        placeholder="Senha" required="">
-                </div>
-                <br>
-                <button class="btn btn-lg btn-danger btn-block" (click)="login()" type="submit">Avançar</button>
-                <br><br>
-                <p class="d-flex align-items-center justify-content-center">Ainda não tem cadastro?
-                    <a class="red " routerLink="/signup">Cadastre sua loja</a>
-                </p>
             </form>
         </div>
+        <div class="form-image">
+            <img src="assets/img//undraw_shopping_re_3wst.svg" alt="">
+        </div>
     </div>
-</div>
