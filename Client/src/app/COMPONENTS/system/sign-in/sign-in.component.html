@@ -1,40 +1,39 @@
 <body>
     <div class="container">
-      
+
         <div class="form">
             <form action="#">
                 <div class="form-header">
                     <div class="title">
                         <h1>Conecte-se</h1>
                     </div>
-               
-                </div>
-
-                <div class="input-group">
                  
-
-              
+                </div>
+                <div>
+                    <h3>Portal do Parceiro</h3>
+                    <h5>Gerencie sua loja de forma fácil e rápida</h5>
+                </div>
+                <br>
+                <div class="input-group">
                     <div class="input-box">
                         <label for="email">E-mail</label>
                         <input id="email" type="email" name="email" placeholder="Digite seu e-mail" required>
-                
-
-                
                         <label for="password">Senha</label>
                         <input id="password" type="password" name="password" placeholder="Digite sua senha" required>
                     </div>
-
-
                 </div>
-
-               
-
                 <div class="continue-button">
-                    <button><a href="#">Continuar</a> </button>
+                    <button class="btn btn-danger" (click)="login()" type="submit"><a>Continuar</a> </button>
                 </div>
+                <br><br>
+
+                <p class="d-flex align-items-center justify-content-center">Ainda não tem cadastro?
+                    <a class="red " routerLink="/signup">Cadastre sua loja</a>
+                </p>
             </form>
+
         </div>
         <div class="form-image">
-            <img src="assets/img//undraw_shopping_re_3wst.svg" alt="">
         </div>
     </div>
+</body>

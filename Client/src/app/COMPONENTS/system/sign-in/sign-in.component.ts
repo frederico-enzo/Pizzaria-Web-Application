@@ -9,8 +9,7 @@ import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service'
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
-  constructor(private router: Router, private clienteService: ClienteService) {}
-
+  constructor(private router: Router, private clienteService: ClienteService, ) {}
   usuario: Cliente = new Cliente();
 
   login() {
