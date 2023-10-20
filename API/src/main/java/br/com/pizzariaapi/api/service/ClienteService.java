@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -44,6 +45,7 @@ public class ClienteService {
         Cliente cliente = clienteRepository.findById(id).orElse(null);
         return toClienteDTO(cliente);
     }
+
     public List<ClienteDTO> findAll(){
         return clienteRepository.findAll().stream().map(this::toClienteDTO).toList();
     }
