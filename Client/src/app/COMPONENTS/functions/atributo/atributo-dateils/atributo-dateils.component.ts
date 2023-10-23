@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-atributo-dateils',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./atributo-dateils.component.scss']
 })
 export class AtributoDateilsComponent {
+  @Input() pessoa: Pessoa = new Pessoa();
+  @Output() retorno = new EventEmitter<Pessoa>();
 
+  pessoaService = inject(PessoaService);
 }

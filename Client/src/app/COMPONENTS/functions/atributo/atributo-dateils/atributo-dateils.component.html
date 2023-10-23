@@ -1,1 +1,11 @@
-<p>atributo-dateils works!</p>
+<div class="register-form">
+    <form class="d-flex flex-column justify-content-between">
+      <div class="form-group mb-4">
+        <label for="idade">Idade</label>
+        <input type="number" [(ngModel)]="atributo.tamanho" name="idade" class="form-control" id="idade"
+          placeholder="Idade da Pessoa">
+      </div>
+      <button *ngIf="pessoa.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
+      <button *ngIf="pessoa.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+    </form>
+  </div>

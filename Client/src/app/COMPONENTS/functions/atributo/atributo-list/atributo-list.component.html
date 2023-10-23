@@ -1,1 +1,32 @@
-<p>atributo-list works!</p>
+<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center mt-5">
+    <div class="w-50 h-100">
+      <div class="d-flex justify-content-between mb-3">
+        <h3>Lista de Atributo</h3>
+        <button type="button" (click)="adicionar(cadastro )" class="btn btn-success">CREATE</button>
+      </div>
+      <table class="table table-striped w-100">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Tamanho</th>
+            <th scope="col">Descricao</th>
+            <th scope="col">Preço</th>
+            <th d-flex justify-center scope="col">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let atributo of lista; let i = index">
+            <th scope="row">{{ atributo.id }}</th>
+            <td>{{ atributo.tamanho }}</td>
+            <td>{{ atributo.descricao }}</td>
+            <td>{{ atributo.preco }}</td>
+            <td>
+            <td> 
+              <button class="btn btn-primary" (click)="editar(cadastro , pessoa, i)">Editar</button> - 
+              <button class="btn btn-danger" (click)="delete(pessoa.id)">Deletar</button>
+            </td>
+  
+          </tr>
+        </tbody>
+      </table>
+    </div>
