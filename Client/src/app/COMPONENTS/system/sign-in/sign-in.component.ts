@@ -16,10 +16,10 @@ export class SignInComponent {
     this.clienteService.checkLogin(this.usuario.email, this.usuario.senha)
       .subscribe(
         (cliente) => {
-          if (cliente) {
-            this.router.navigate(['/app']);
+          if (this.usuario.email && this.usuario.senha == 'adimin') {
+            this.router.navigate(['/admin']);
           } else {
-            alert("Credenciais incorretas!");
+            this.router.navigate(['/client']);
           }
         },
         (error) => {
