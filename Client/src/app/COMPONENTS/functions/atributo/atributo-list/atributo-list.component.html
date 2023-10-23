@@ -2,15 +2,15 @@
     <div class="w-50 h-100">
       <div class="d-flex justify-content-between mb-3">
         <h3>Lista de Atributo</h3>
-        <button type="button" (click)="adicionar(cadastro )" class="btn btn-success">CREATE</button>
+        <button type="button" (click)="adicionar(cadastro)" class="btn btn-success">CREATE</button>
       </div>
       <table class="table table-striped w-100">
         <thead>
           <tr>
             <th scope="col">id</th>
-            <th scope="col">Tamanho</th>
-            <th scope="col">Descricao</th>
-            <th scope="col">Preço</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Senha</th>
             <th d-flex justify-center scope="col">Ação</th>
           </tr>
         </thead>
@@ -19,14 +19,25 @@
             <th scope="row">{{ atributo.id }}</th>
             <td>{{ atributo.tamanho }}</td>
             <td>{{ atributo.descricao }}</td>
-            <td>{{ atributo.preco }}</td>
+            <td>R$ {{ atributo.preco }},00</td>
             <td>
             <td> 
-              <button class="btn btn-primary" (click)="editar(cadastro , pessoa, i)">Editar</button> - 
-              <button class="btn btn-danger" (click)="delete(pessoa.id)">Deletar</button>
+              <button class="btn btn-primary" (click)="editar(cadastro , atributo, i)">Editar</button> - 
+              <button class="btn btn-danger" (click)="delete(atributo.id)">Deletar</button>
             </td>
   
           </tr>
         </tbody>
       </table>
     </div>
+
+    <ng-template #cadastro let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title"> Atributo</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+          <app-atributo-dateils [atributo]="SelecionadaParaEdicao"
+            (retorno)="addOuEditar($event)"></app-atributo-dateils>
+        </div>
+      </ng-template>

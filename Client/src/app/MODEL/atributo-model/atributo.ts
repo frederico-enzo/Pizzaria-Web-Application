@@ -1,8 +1,8 @@
 import { Tamanho } from "../tamanho-enum/tamanho";
 
 export class Atributo {
-    id!:Number;
+    id!:number;
     tamanho!:Tamanho;
     descricao!:String;
-    preco!:Number;
+    preco!:number;
 }

@@ -1,7 +1,7 @@
 import { Endereco } from "../endereco-model/endereco";
 
 export class Cliente {
-    id!: Number;
+    id!: number;
     nome!: string;
     telefone!: string;
     email!: string;
