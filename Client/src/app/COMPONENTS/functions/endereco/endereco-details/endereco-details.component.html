@@ -1,1 +1,12 @@
-<p>endereco-details works!</p>
+<div class="register-form">
+    <form class="d-flex flex-column justify-content-between">
+        <div class="form-group mb-4">
+            <input type="text" [(ngModel)]="endereco.rua" name="rua" class="form-control" id="tamanho"placeholder="Tamnaho do seu rua"><br>
+            <input type="text" [(ngModel)]="endereco.bairro" name="bairro" class="form-control" id="tamanho"placeholder="Tamnaho do seu bairro"><br>
+            <input type="number" [(ngModel)]="endereco.numero" name="numero" class="form-control" id="tamanho"placeholder="Tamnaho do seu numero"><br>
+            <input type="text" [(ngModel)]="endereco.cep" name="cep" class="form-control" id="tamanho"placeholder="Tamnaho do seu procepduto">
+        </div>
+        <button *ngIf="endereco.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
+        <button *ngIf="endereco.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+    </form>
+</div>

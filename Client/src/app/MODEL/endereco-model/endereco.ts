@@ -1,7 +1,7 @@
 export class Endereco {
-    id!:Number;
+    id!:number;
     rua!:String;
     bairro!:String;
     numero!:String;
-    cep!:Number;
+    cep!:number;
 }

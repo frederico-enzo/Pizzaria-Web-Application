@@ -15,7 +15,6 @@ export class AtributoDateilsComponent {
   constructor() {  }
 
   create() {
-
     this.service.create(this.atributo).subscribe({
       next: atributo => { // QUANDO DÁ CERTO
         this.retorno.emit(atributo);
