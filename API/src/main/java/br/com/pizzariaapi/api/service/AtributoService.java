@@ -1,6 +1,7 @@
 package br.com.pizzariaapi.api.service;
 
 import br.com.pizzariaapi.api.dto.AtributoDTO;
+import br.com.pizzariaapi.api.dto.ClienteDTO;
 import br.com.pizzariaapi.api.entity.Atributo;
 import br.com.pizzariaapi.api.entity.Tamanho;
 import br.com.pizzariaapi.api.repository.AtributoRepository;
@@ -10,6 +11,8 @@ import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class AtributoService {
@@ -23,7 +26,11 @@ public class AtributoService {
     private AtributoDTO toAtributoDTO(Atributo atributo){
         return modelMapper.map(atributo, AtributoDTO.class);
     }
-     void idNotNull(Long id){
+    public List<AtributoDTO> findAll(){
+        return repository.findAll().stream().map(this::toAtributoDTO).toList();
+    }
+
+    void idNotNull(Long id){
         org.springframework.util.Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
      void validationAtributoDTO(AtributoDTO atributoDTO){

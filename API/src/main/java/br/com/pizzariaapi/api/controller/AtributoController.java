@@ -1,11 +1,14 @@
 package br.com.pizzariaapi.api.controller;
 
 import br.com.pizzariaapi.api.dto.AtributoDTO;
+import br.com.pizzariaapi.api.dto.ClienteDTO;
 import br.com.pizzariaapi.api.service.AtributoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -21,6 +24,11 @@ public class AtributoController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping
+    public ResponseEntity<List<AtributoDTO>> getAll() {
+        List<AtributoDTO> atributoDTOS = service.findAll();
+        return ResponseEntity.ok(atributoDTOS);
     }
     @PostMapping
     public ResponseEntity<AtributoDTO> createAtributo(@RequestBody AtributoDTO atributoDTO) {
