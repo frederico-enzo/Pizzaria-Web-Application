@@ -17,16 +17,16 @@ const routes: Routes = [
   {path: "login",component: SignInComponent},
   { path: "signup", component: SignUpComponent },
   { path: "admin", component: AdmIndexComponent, children: [
-    {path : "atributo" , component: AtributoListComponent},
-    {path : "cliente" , component: ClienteListComponent},
-    {path : "endereco" , component: EnderecoListComponent},
-    {path : "item" , component: ItemListComponent},
-    {path : "pedido" , component: PedidoListComponent},
-    {path : "produto" , component: ProdutoListComponent},
-    {path : "sabor" , component: SaborListComponent},
+    {path : "atributo-adm" , component: AtributoListComponent},
+    {path : "cliente-adm" , component: ClienteListComponent},
+    {path : "endereco-adm" , component: EnderecoListComponent},
+    {path : "item-adm" , component: ItemListComponent},
+    {path : "pedido-adm" , component: PedidoListComponent},
+    {path : "produto-adm" , component: ProdutoListComponent},
+    {path : "sabor-adm" , component: SaborListComponent},
   ] },
   { path: "client", component: IndexComponent, children: [
-    
+
   ] },
 
 ];
