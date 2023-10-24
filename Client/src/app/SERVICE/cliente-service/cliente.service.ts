@@ -22,6 +22,10 @@ export class ClienteService {
   listAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.API);
   }
+  
+  findById(id: Number): Observable<Cliente> {
+    return this.http.get<Cliente>(this.API+"/"+id);
+  }
 
   create(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.API, cliente);

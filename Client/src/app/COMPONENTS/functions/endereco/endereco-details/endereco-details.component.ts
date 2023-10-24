@@ -32,7 +32,6 @@ export class EnderecoDetailsComponent {
         this.retorno.emit(endereco);
       },
       error: erro => { // QUANDO DÁ ERRO
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
         console.error(erro);
       }
     });

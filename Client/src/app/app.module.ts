@@ -11,12 +11,10 @@ import { SignInComponent } from './COMPONENTS/system/sign-in/sign-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-
 import { AdmIndexComponent } from './COMPONENTS/layout/adm-index/adm-index.component';
 import { AdmHeaderComponent } from './COMPONENTS/layout/adm-header/adm-header.component';
 import { AdmFooterComponent } from './COMPONENTS/layout/adm-footer/adm-footer.component';
 import { AtributoDateilsComponent } from './COMPONENTS/functions/atributo/atributo-dateils/atributo-dateils.component';
-import { AtributoListComponent } from './COMPONENTS/functions/atributo/atributo-list/atributo-list.component';
 import { EnderecoDetailsComponent } from './COMPONENTS/functions/endereco/endereco-details/endereco-details.component';
 import { ItemDetailsComponent } from './COMPONENTS/functions/item/item-details/item-details.component';
 import { ItemListComponent } from './COMPONENTS/functions/item/item-list/item-list.component';
@@ -29,6 +27,11 @@ import { ProdutoDetailsComponent } from './COMPONENTS/functions/produto/produto-
 import { ProdutoListComponent } from './COMPONENTS/functions/produto/produto-list/produto-list.component';
 import { ClienteDetailsComponent } from './COMPONENTS/functions/cliente/cliente-details/cliente-details.component';
 import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-list/cliente-list.component';
+import { AtributoListComponent } from './COMPONENTS/functions/atributo/atributo-list/atributo-list.component';
+import { SideMenuComponent } from './COMPONENTS/funtions-client/Cliente/side-menu/side-menu.component';
+import { ClienteDateilsInterfaceComponent } from './COMPONENTS/funtions-client/Cliente/cliente-dateils-interface/cliente-dateils-interface.component';
+import { CarrinhoDatailsComponent } from './COMPONENTS/funtions-client/Carrinho/carrinho-datails/carrinho-datails.component';
+import { ProfileComponent } from './COMPONENTS/funtions-client/Cliente/profile/profile.component';
 
 
 @NgModule({
@@ -56,6 +59,10 @@ import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-lis
     ProdutoListComponent,
     ClienteDetailsComponent,
     ClienteListComponent,
+    SideMenuComponent,
+    ClienteDateilsInterfaceComponent,
+    CarrinhoDatailsComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +71,7 @@ import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-lis
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

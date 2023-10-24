@@ -1,0 +1,95 @@
+img{
+    width: 50px;
+    height: 50px;
+}
+.ifood-header{
+    border-bottom: 1px rgb(197, 195, 195) solid;
+}
+.nav-red {
+    color: #ea1d2c;
+}
+.perfil{
+    cursor: pointer;
+    width: 45px;
+    height: 40px;
+    background-image: url("./assets/Opera\ Instantâneo_2023-10-24_021624_www.ifood.com.br.png");
+}
+
+.carrinho{
+    cursor: pointer;
+    width: 35px;
+    height: 38px;
+    background-image: url("./assets/Opera\ Instantâneo_2023-10-24_021641_www.ifood.com.br.png");
+}
+
+.gap{
+    gap: 10px;
+}
+.abc{
+    padding-bottom: 60px;
+    background-repeat: no-repeat;    
+    width: 43px;
+    height: 43px;
+    background-image: url("./assets/Opera\ Instantâneo_2023-10-24_192247_www.ifood.com.br.png");
+}
+.d{
+  
+    position: absolute;
+    top:70px ;
+    padding-right: 160px;
+    width: 100vw;
+    align-items: end;
+    justify-content: flex-end;
+}
+
+.d :nth-child(1){
+    background-color: white;
+    width: 350px;
+    height: 250px ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10); 
+    border: 1px solid #d8d5d5;
+
+}
+.profile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 10px;
+    background-color: #9c9a9a;
+    border: 1px solid #949090;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease; 
+  }
+  
+  .profile-menu.visible {
+    display: block;
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+  
+  .verd{
+    background-color: #50a773;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  h2{
+    font-size: 1.125em;
+    color: #fff;
+    padding: 0 28px;
+  }
+.profile-menu-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .profile-menu-leave {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  

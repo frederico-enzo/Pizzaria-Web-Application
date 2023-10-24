@@ -11,6 +11,7 @@ import { PedidoListComponent } from './COMPONENTS/functions/pedido/pedido-list/p
 import { EnderecoListComponent } from './COMPONENTS/functions/endereco/endereco-list/endereco-list.component';
 import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-list/cliente-list.component';
 import { AtributoListComponent } from './COMPONENTS/functions/atributo/atributo-list/atributo-list.component';
+import { ProfileComponent } from './COMPONENTS/funtions-client/Cliente/profile/profile.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
@@ -25,7 +26,8 @@ const routes: Routes = [
     {path : "produto-adm" , component: ProdutoListComponent},
     {path : "sabor-adm" , component: SaborListComponent},
   ] },
-  { path: "client", component: IndexComponent, children: [
+  { path: "client/:id", component: IndexComponent, children: [
+    {path : "profile" , component: ProfileComponent},
 
   ] },
 

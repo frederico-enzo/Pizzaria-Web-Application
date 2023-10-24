@@ -1,1 +1,17 @@
-<p>sabor-details works!</p>
+<div class="register-form">
+    <form class="d-flex flex-column justify-content-between">
+        <div class="b form-group mb-4">
+            <input type="select" [(ngModel)]="sabor.nome" name="nome" class="form-control" id="nome"
+                placeholder="Nome do Sabor">
+            <div class="d-flex mb-4 a">
+                <input type="text" #inputElement class="form-control" placeholder="Novo componente">
+                <button type="button"(click)="addComponente(inputElement.value, inputElement)"
+                    class="w-30 btn btn-success">+</button>
+            </div>
+            <div>
+            </div>
+        </div>
+        <button *ngIf="sabor.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
+        <button *ngIf="sabor.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+    </form>
+</div>
