@@ -1,5 +1,6 @@
 package br.com.pizzariaapi.api.service;
 
+import br.com.pizzariaapi.api.dto.AtributoDTO;
 import br.com.pizzariaapi.api.dto.ProdutoDTO;
 import br.com.pizzariaapi.api.entity.Produto;
 import br.com.pizzariaapi.api.repository.ProdutoRepository;
@@ -8,6 +9,8 @@ import org.springframework.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ProdutoService {
@@ -36,6 +39,10 @@ public class ProdutoService {
         Produto produto = produtoRepository.findById(id).orElse(null);
         return toProdutorDTO(produto);
     }
+    public List<ProdutoDTO> findAll(){
+        return produtoRepository.findAll().stream().map(this::toProdutorDTO).toList();
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public String create(ProdutoDTO produtoDTO) {
         validationProdutoDTO(produtoDTO);

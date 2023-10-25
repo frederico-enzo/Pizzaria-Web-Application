@@ -30,14 +30,23 @@ public class SaborController {
 
     @PostMapping
     public ResponseEntity<String> createSabor(@RequestBody SaborDTO saborDTO) {
-        String responseMessage = service.create(saborDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
+        try {
+            String responseMessage = service.create(saborDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro durante a criação do sabor");
+        }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateSabor(@PathVariable Long id, @RequestBody SaborDTO saborDTO) {
+        try{
         String responseMessage = service.update(id, saborDTO);
         return ResponseEntity.ok(responseMessage);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro durante a criação do sabor");
+        }
     }
 
     @DeleteMapping("/{id}")

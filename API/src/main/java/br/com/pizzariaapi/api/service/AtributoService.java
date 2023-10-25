@@ -40,7 +40,7 @@ public class AtributoService {
         Tamanho tamanho = atributo.getTamanho();
         switch (tamanho) {
             case PEQUENO:
-                atributo.setDescricao("Pequena: 25 cm, 4 fatias – até 2 sabores.");
+                atributo.setDescricao("25 cm, 4 fatias – até 2 sabores.");
                 atributo.setPreco(10.0);
                 break;
             case MEDIA:
@@ -74,7 +74,6 @@ public class AtributoService {
     @Transactional(rollbackFor = Exception.class)
     public AtributoDTO put(AtributoDTO atributoDTO) {
         idNotNull(atributoDTO.getId());
-        setDescricao(atributoDTO);
         validationAtributoDTO(atributoDTO);
         return toAtributoDTO(repository.save(toAtributo(atributoDTO)));
     }

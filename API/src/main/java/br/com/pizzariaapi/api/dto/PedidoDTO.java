@@ -14,7 +14,7 @@ public class PedidoDTO {
     private Cliente cliente;
     private double valorTotal;
     private List<Item> items;
-
+    private boolean ativo;
     public PedidoDTO() {
         this.items = new ArrayList<>();
     }

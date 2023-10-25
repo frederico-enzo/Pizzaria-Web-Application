@@ -41,6 +41,20 @@ img{
     align-items: end;
     justify-content: flex-end;
 }
+.new{
+  position: absolute;
+  top:70px ;
+  padding-right: 160px;
+  width: 100vw;
+  align-items: end;
+  justify-content: flex-end;
+  background-color: white;
+  width: 350px;
+  height: 250px ;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10); 
+  border: 1px solid #d8d5d5;
+}
+
 
 .d :nth-child(1){
     background-color: white;
@@ -93,3 +107,33 @@ img{
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
   
+
+  .pedido-menu-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .pedido-menu-leave {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .profile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 10px;
+    background-color: #9c9a9a;
+    border: 1px solid #949090;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease; 
+  }
+  
+  .profile-menu.visible {
+    display: block;
+    opacity: 1; 
+    transform: translateY(0); 
+  }

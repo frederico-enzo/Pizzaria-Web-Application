@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Atributo } from 'src/app/MODEL/atributo-model/atributo';
 import { AtributoService } from 'src/app/SERVICE/atributo-service/atributo.service';
 
@@ -12,27 +13,36 @@ export class AtributoDateilsComponent {
   @Output() retorno = new EventEmitter<Atributo>();
 
   service = inject(AtributoService);
-  constructor() {  }
+  constructor(private modalService: NgbModal) { }
 
   create() {
     this.service.create(this.atributo).subscribe({
-      next: atributo => { // QUANDO DÁ CERTO
+      next: atributo => {
         this.retorno.emit(atributo);
+        window.location.reload();
+        this.modalService.dismissAll();
       },
-      error: erro => { // QUANDO DÁ ERRO
-        console.error(erro);
+      error: erro => {
+        if (erro.status < 400) {
+          window.location.reload();
+          this.modalService.dismissAll();
+        }
       }
     });
   }
 
   update() {
     this.service.update(this.atributo, this.atributo.id).subscribe({
-      next: atributo => { // QUANDO DÁ CERTO
+      next: atributo => {
         this.retorno.emit(atributo);
+        window.location.reload();
+        this.modalService.dismissAll();
       },
-      error: erro => { // QUANDO DÁ ERRO
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
-        console.error(erro);
+      error: erro => {
+        if (erro.status < 400) {
+          window.location.reload();
+          this.modalService.dismissAll();
+        }
       }
     });
   }

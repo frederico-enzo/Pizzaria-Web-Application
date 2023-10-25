@@ -7,11 +7,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 showProfileMenu = true; 
+showPedidoMenu = true; 
 
   toggleProfileMenu() {
     this.showProfileMenu = !this.showProfileMenu;
   }
 
-
+  togglePedidoMenu() {
+    this.showPedidoMenu = !this.showPedidoMenu;
+  }
   
 }

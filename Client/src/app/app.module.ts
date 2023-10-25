@@ -28,10 +28,10 @@ import { ProdutoListComponent } from './COMPONENTS/functions/produto/produto-lis
 import { ClienteDetailsComponent } from './COMPONENTS/functions/cliente/cliente-details/cliente-details.component';
 import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-list/cliente-list.component';
 import { AtributoListComponent } from './COMPONENTS/functions/atributo/atributo-list/atributo-list.component';
-import { SideMenuComponent } from './COMPONENTS/funtions-client/Cliente/side-menu/side-menu.component';
 import { ClienteDateilsInterfaceComponent } from './COMPONENTS/funtions-client/Cliente/cliente-dateils-interface/cliente-dateils-interface.component';
 import { CarrinhoDatailsComponent } from './COMPONENTS/funtions-client/Carrinho/carrinho-datails/carrinho-datails.component';
 import { ProfileComponent } from './COMPONENTS/funtions-client/Cliente/profile/profile.component';
+import { ProdutoListInterfaceComponent } from './COMPONENTS/funtions-client/Produto/produto-list-interface/produto-list-interface.component';
 
 
 @NgModule({
@@ -59,10 +59,10 @@ import { ProfileComponent } from './COMPONENTS/funtions-client/Cliente/profile/p
     ProdutoListComponent,
     ClienteDetailsComponent,
     ClienteListComponent,
-    SideMenuComponent,
     ClienteDateilsInterfaceComponent,
     CarrinhoDatailsComponent,
     ProfileComponent,
+    ProdutoListInterfaceComponent,
   ],
   imports: [
     BrowserModule,

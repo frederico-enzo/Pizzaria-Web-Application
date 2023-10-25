@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Pedido } from 'src/app/MODEL/pedido-model/pedido';
+import { PedidoService } from 'src/app/SERVICE/pedido-service/pedido.service';
 
 @Component({
   selector: 'app-pedido-details',
@@ -6,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./pedido-details.component.scss']
 })
 export class PedidoDetailsComponent {
-
 }

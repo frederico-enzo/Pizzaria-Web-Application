@@ -23,4 +23,6 @@ public class Pedido {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "items_list")
     private List<Item> items;
+    @Column(name = "ativo")
+    private boolean ativo;
 }

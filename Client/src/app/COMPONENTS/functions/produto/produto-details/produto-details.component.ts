@@ -9,6 +9,8 @@ import { ProdutoService } from 'src/app/SERVICE/produto-service/produto.service'
   styleUrls: ['./produto-details.component.scss']
 })
 export class ProdutoDetailsComponent {
+  mensagem !: string;
+  error: boolean = false;
 
   @Input() produto: Produto = new Produto();
   @Output() retorno = new EventEmitter<Produto>();
@@ -16,37 +18,47 @@ export class ProdutoDetailsComponent {
   service = inject(ProdutoService);
   constructor(private modalService : NgbModal) {  }
 
-  create() {
+   create() {
     this.service.create(this.produto).subscribe({
-      next: sabor => { 
-        this.retorno.emit(sabor);
+      next: produto => {
+        this.retorno.emit(produto);
         this.modalService.dismissAll();
       },
-      error: erro => { 
+      error: erro => {
         console.error(erro);
-        if(erro.status < 400){
+        if (erro.status < 400) {
           this.modalService.dismissAll();
-            window.location.reload();
+          window.location.reload();
+        } else {
+          this.mensagem = "Erro!";
+          this.error = true;
+          setTimeout(() => {
+            this.error = false;
+          }, 1000);
         }
       }
     });
   }
-
   update() {
     this.service.update(this.produto, this.produto.id).subscribe({
-      next: sabor => {
-        this.retorno.emit(sabor);
+      next: produto => {
+        this.retorno.emit(produto);
         this.modalService.dismissAll();
         window.location.reload();
       },
-      error: erro => { 
-          if(erro.status < 400){
-            this.modalService.dismissAll();
-            window.location.reload();
-
-          }
+      error: erro => {
+        console.error(erro);
+        if (erro.status < 400) {
+          this.modalService.dismissAll();
+          window.location.reload();
+        } else {
+          this.mensagem = "Erro!";
+          this.error = true;
+          setTimeout(() => {
+            this.error = false;
+          }, 1000);
+        }
       }
     });
   }
-
 }
