@@ -18,15 +18,12 @@ export class ClienteDateilsInterfaceComponent {
 
   findbyId() {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
-
     if (id !== null) {
       const clientId = Number(id);
       this.service.findById(clientId).subscribe({
         next: cliente => {
           this.model = cliente;
           this.clienteRetornado.emit(cliente);
-          console.log(cliente);
         },
         error: erro => {
           console.error(erro);

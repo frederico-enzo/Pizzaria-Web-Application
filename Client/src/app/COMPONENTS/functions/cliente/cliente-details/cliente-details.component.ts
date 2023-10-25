@@ -8,6 +8,7 @@ import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service'
   styleUrls: ['./cliente-details.component.scss']
 })
 export class ClienteDetailsComponent {
+  @Input() clienteId: number = 0;
   @Input() cliente: Cliente = new Cliente();
   @Output() retorno = new EventEmitter<Cliente>();
 

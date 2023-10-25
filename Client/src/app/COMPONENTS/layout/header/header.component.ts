@@ -6,12 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-showProfileMenu = false; 
+showProfileMenu = true; 
 
   toggleProfileMenu() {
     this.showProfileMenu = !this.showProfileMenu;
   }
-
 
 
   
