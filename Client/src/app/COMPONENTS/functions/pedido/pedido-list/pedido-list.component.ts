@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Pedido } from 'src/app/MODEL/pedido-model/pedido';
 import { PedidoService } from 'src/app/SERVICE/pedido-service/pedido.service';
+import { ItemDetailsComponent } from '../../item/item-details/item-details.component';
 
 @Component({
   selector: 'app-pedido-list',
@@ -9,33 +10,29 @@ import { PedidoService } from 'src/app/SERVICE/pedido-service/pedido.service';
   styleUrls: ['./pedido-list.component.scss']
 })
 export class PedidoListComponent {
-  lista: Pedido[] = []
-  SelecionadaParaEdicao: Pedido = new Pedido();
+  
+
+  lista: Pedido[] = [];
+  find : Pedido = new Pedido;
+
+  selectedPedidoId: number | undefined; 
+  SelecionadoParaEdicao: Pedido = new Pedido();
   indiceSelecionadoParaEdicao!: number;
 
-  constructor(
-    private modalService: NgbModal,
-    private service: PedidoService
-  ) { this.listAll();
-    }
+  service = inject(PedidoService);
 
-  delete(id: number) {
-    this.service.delete(id).subscribe({
-      next: () => {
-        console.error('Exclusão bem-sucedida!');
-        this.listAll();
-      },
-      error: erro => {
-        console.error(erro);
-      }
-    });
+  constructor(private modalService: NgbModal) {
+    this.listAll();
+  }
+  selectPedido(pedidoId: number) {
+    this.selectedPedidoId = pedidoId;
   }
 
-  findbyId(id: number) {
+  go(id: number) {
     this.service.find(id).subscribe({
-      next: () => {
-        console.error('Exclusão bem-sucedida!');
-        this.listAll();
+      next: cliente => {
+        this.find = cliente;
+        console.log(this.find);
       },
       error: erro => {
         console.error(erro);
@@ -55,36 +52,19 @@ export class PedidoListComponent {
   }
 
   adicionar(modal: any) {
-    this.SelecionadaParaEdicao = new Pedido();
-    this.modalService.open(modal, { size:  'xd'});
+    this.SelecionadoParaEdicao = new Pedido();
+    this.modalService.open(modal, { size:  'lg'});
+  }
+  editar(modal: any, pedido: Pedido, indice: number) {
+    this.SelecionadoParaEdicao = Object.assign({}, pedido);
+    this.indiceSelecionadoParaEdicao = indice;
+    this.modalService.open(modal, { size: 'lg' });
+  }
+  addOuEditar(pedido: Pedido) {
+    this.listAll();
+    this.modalService.dismissAll();
   }
 
-  editar(modal: any, Pedido: Pedido, indice: number) {
-    this.SelecionadaParaEdicao = Object.assign({}, Pedido);
-    this.indiceSelecionadoParaEdicao = indice;
-    this.modalService.open(modal, { size: 'xd' });
-  }
-  addOuEditar(Pedido: Pedido) {
-    if (Pedido.id === 0) {
-      this.service.create(Pedido).subscribe({
-        next: pessoaCriada => {
-          this.lista.push(pessoaCriada);
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error(erro);
-        }
-      });
-    } else {
-      this.service.update(Pedido, Pedido.id).subscribe({
-        next: Atualizada => {
-          this.lista[this.indiceSelecionadoParaEdicao] = Atualizada;
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error(erro);
-        }
-      });
-    }
-  }
+
+  
 }

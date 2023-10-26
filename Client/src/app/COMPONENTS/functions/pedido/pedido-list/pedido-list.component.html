@@ -1,0 +1,61 @@
+<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center mt-5">
+  <div class="w-50 h-100">
+    <div class="d-flex justify-content-between mb-3">
+      <h3>Lista de Cliente</h3>
+      <button type="button" (click)="adicionar(form)" class="btn btn-success">CREATE</button>
+    </div>
+    <table class="table table-striped w-100">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of lista; let i = index">
+          <th scope="row">{{ pedido.id }}</th>
+          <td>{{ pedido.cliente.nome }}</td>
+          <td>
+            <button class="btn btn-outline-primary" (click)="selectPedido(pedido.id)" (click)="adicionar(Carrinho)">Item</button>-
+              <button class="btn btn-outline-secondary" (click)="adicionar(info)" (click)="go(pedido.id)">..</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ng-template #form let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"> Pessoa</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-pedido-details [pedido]="SelecionadoParaEdicao" (retorno)="addOuEditar($event)"></app-pedido-details>
+  </div>
+</ng-template>
+
+<ng-template #Carrinho let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"> Pessoa</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-item-details [pedidoId]="selectedPedidoId"></app-item-details>
+  </div>
+</ng-template>
+
+
+<ng-template #info let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"> Endereco Cliente</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex justify-content-center flex-column align-items-center">
+      iD: {{find.id }}
+ 
+    </div>
+  </div>
+</ng-template>

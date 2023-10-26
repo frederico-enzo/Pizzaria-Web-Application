@@ -17,7 +17,6 @@ import { AdmFooterComponent } from './COMPONENTS/layout/adm-footer/adm-footer.co
 import { AtributoDateilsComponent } from './COMPONENTS/functions/atributo/atributo-dateils/atributo-dateils.component';
 import { EnderecoDetailsComponent } from './COMPONENTS/functions/endereco/endereco-details/endereco-details.component';
 import { ItemDetailsComponent } from './COMPONENTS/functions/item/item-details/item-details.component';
-import { ItemListComponent } from './COMPONENTS/functions/item/item-list/item-list.component';
 import { EnderecoListComponent } from './COMPONENTS/functions/endereco/endereco-list/endereco-list.component';
 import { SaborDetailsComponent } from './COMPONENTS/functions/sabor/sabor-details/sabor-details.component';
 import { SaborListComponent } from './COMPONENTS/functions/sabor/sabor-list/sabor-list.component';
@@ -49,7 +48,6 @@ import { ProdutoListInterfaceComponent } from './COMPONENTS/funtions-client/Prod
     AtributoListComponent,
     EnderecoDetailsComponent,
     ItemDetailsComponent,
-    ItemListComponent,
     EnderecoListComponent,
     SaborDetailsComponent,
     SaborListComponent,

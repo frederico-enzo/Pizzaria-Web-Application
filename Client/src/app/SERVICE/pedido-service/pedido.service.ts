@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of, throwError } from 'rxjs';
 import { Pedido } from 'src/app/MODEL/pedido-model/pedido';
 
 @Injectable({
@@ -25,7 +25,8 @@ export class PedidoService {
   update(pedido:Pedido, id: Number):Observable<Pedido>{
     return this.http.put<Pedido>(this.API+"/"+id, pedido);
   } 
-  delete(id: Number): Observable<void>{
-    return this.http.delete<void>(this.API+"/"+id);
-  } 
+
+
+
+
 }

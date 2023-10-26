@@ -10,65 +10,58 @@ import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service'
   styleUrls: ['./cliente-details.component.scss']
 })
 export class ClienteDetailsComponent {
-  @Input() clienteId: number = 0;
+  @Input() enderecoId!: number;
   @Input() cliente: Cliente = new Cliente();
   @Output() retorno = new EventEmitter<Cliente>();
   mensagem !: string;
-  error: boolean = false;
+  sucesso : boolean = false;
+  error : boolean = false;
 
-  SelecionadoParaEdicao: Endereco = new Endereco();
-
-  constructor(private modalService: NgbModal, private service: ClienteService) { }
-
-
-
-
-
-
-
-
+  service = inject(ClienteService);
+  constructor(private modalService: NgbModal) {  }
 
   create() {
     this.service.create(this.cliente).subscribe({
-      next: cliente => {
+      next: cliente => { 
+        this.mensagem = "Sucesso!";
+        this.sucesso = true;
         this.retorno.emit(cliente);
         this.modalService.dismissAll();
       },
-      error: erro => {
+      error: erro => { 
         console.error(erro);
-        if (erro.status < 400) {
+        if(erro.status < 400){
+
           this.modalService.dismissAll();
-          window.location.reload();
-        } else {
-          this.mensagem = "Erro!";
-          this.error = true;
-          setTimeout(() => {
-            this.error = false;
-          }, 1000);
+            window.location.reload();
         }
       }
     });
   }
   update() {
+    // Verifique se o cliente tem um endereço associado
+    if (this.enderecoId) {
+      // Crie um objeto de endereço com o ID fornecido
+      const novoEndereco = new Endereco();
+      novoEndereco.id = this.enderecoId;
+  
+      // Atribua o novo endereço ao cliente
+      this.cliente.endereco = novoEndereco;
+    }
+  
     this.service.update(this.cliente, this.cliente.id).subscribe({
       next: cliente => {
         this.retorno.emit(cliente);
         this.modalService.dismissAll();
         window.location.reload();
       },
-      error: erro => {
-        console.error(erro);
-        if (erro.status < 400) {
-          this.modalService.dismissAll();
-          window.location.reload();
-        } else {
-          this.mensagem = "Erro!";
-          this.error = true;
-          setTimeout(() => {
-            this.error = false;
-          }, 1000);
-        }
+      error: erro => { 
+          if(erro.status < 400){
+            this.modalService.dismissAll();
+            window.location.reload();
+          }
       }
     });
   }
+  
 }

@@ -1,19 +1,29 @@
 <div class="register-form">
     <form class="d-flex flex-column justify-content-between">
-        <div class="form-group mb-4">
-            <input type="text" [(ngModel)]="item.produto.id" name="nome" class="form-control" id="nome"
-                placeholder="Digite do seu nome"><br>
-            <input type="text" [(ngModel)]="item.quantidade" name="categoria" class="form-control" id="categoria"
-                placeholder="Digite do seu categoria"><br>
-
-            <input type="number" [(ngModel)]="item.sabors" name="tempoPreparo" class="form-control"
-                id="tempoPreparo" placeholder="Digite do seu tempo Preparo">
-         
-            <label class="form-check-label" for="flexCheckDefault">
-                Default checkbox
-            </label>
+      <div class="form-group mb-4">
+        <div class="form-group">
+          <label for="produto">Selecione um produto:</label>
+          <select id="produto" class="form-control" [(ngModel)]="item.produto" name="produto">
+            <option *ngFor="let produto of produtos" [ngValue]="produto">{{ produto.nome }}</option>
+          </select>
         </div>
-        <button *ngIf="item.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
-        <button *ngIf="item.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+  
+        <div class="form-group">
+          <label for="sabor">Selecione um sabor:</label>
+          <select id="sabor" class="form-control" [(ngModel)]="item.sabors" name="sabor" multiple>
+            <option *ngFor="let sabor of sabores" [ngValue]="sabor">{{ sabor.nome }}</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label for="atributo">Selecione um atributo de tamanho:</label>
+          <select id="atributo" class="form-control" [(ngModel)]="item.atributoEspecifico" name="atributo">
+            <option *ngFor="let atributo of atributos" [ngValue]="atributo">{{ atributo.tamanho }}</option>
+          </select>
+        </div>
+        
+      </div>
+      <button type="button" (click)="create()" class="w-30 btn btn-success">Criar</button>
     </form>
-</div>
+  </div>
+  

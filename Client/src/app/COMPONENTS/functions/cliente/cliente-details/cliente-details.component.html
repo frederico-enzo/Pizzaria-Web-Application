@@ -26,21 +26,11 @@
             </div>
             <div class="d-flex align-items-center a" *ngIf="cliente.id > 0">
                 <label for="endereco"> Endereco Id</label> :
-                <input type="number" [(ngModel)]="cliente.endereco.id" name="endereco" class="form-control"
-                    id="endereco" placeholder="Digite seu endereco"> <br>
-            </div>
+                <input type="number" [(ngModel)]="enderecoId" name="endereco" class="form-control"
+                  id="endereco" placeholder="Digite o ID do endereço"> <br>
+              </div>              
         </div>
-
-
         <button *ngIf="cliente.id == null" type="button" (click)="create()" class="w-30 btn btn-success">Cadastrar</button> 
         <button *ngIf="cliente.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
-
-
     </form>
-
-
-
-
-
-
 </div>
