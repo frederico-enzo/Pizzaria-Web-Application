@@ -4,9 +4,12 @@
     gap: 20px;
     justify-content: center;
 }
-.a{
+
+.a {
     margin-top: 20px;
+    cursor: pointer;
 }
+
 .product-item {
     background-color: #fff;
     border: 1px solid #dd766a94;
@@ -29,6 +32,7 @@
     margin-right: 20px;
     background-size: cover;
     border-radius: 10px;
+    background-image: url("./assets/17610036-design-de-pizzaria-para-site-online-de-entrega-de-pizza-imagemial-pitsiola-arranca-um-enorme-pedaco-de-pizza-pizza-gigante-papperoni-selo-de-pizza-italiana-nativa-ilustracao-de-comida-para-design-de-cartaz-vetor.jpg");
 }
 
 .product-details {

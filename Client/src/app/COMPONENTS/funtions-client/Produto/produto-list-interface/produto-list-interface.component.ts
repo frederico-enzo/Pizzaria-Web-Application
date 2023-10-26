@@ -22,6 +22,7 @@ export class ProdutoListInterfaceComponent {
     private service: ProdutoService
   ) { this.listAll(); }
 
+  
     open(modal: any) {
       this.modalService.open(modal, { size: 'xd' });
     }
