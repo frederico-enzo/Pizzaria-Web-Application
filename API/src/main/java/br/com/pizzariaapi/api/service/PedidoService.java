@@ -1,4 +1,5 @@
 package br.com.pizzariaapi.api.service;
+import br.com.pizzariaapi.api.dto.AtributoDTO;
 import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.dto.PedidoDTO;
 import br.com.pizzariaapi.api.entity.Atributo;
@@ -39,6 +40,10 @@ public class PedidoService {
         }
         return valorTotal;
     }
+    public List<PedidoDTO> findAll(){
+        return repository.findAll().stream().map(this::toPedidoDTO).toList();
+    }
+
     public PedidoDTO findById(Long id) {
         Pedido pedido = repository.findById(id).orElse(null);
         return toPedidoDTO(pedido);

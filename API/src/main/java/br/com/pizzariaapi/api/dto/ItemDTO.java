@@ -1,6 +1,7 @@
 package br.com.pizzariaapi.api.dto;
 
 import br.com.pizzariaapi.api.entity.Atributo;
+import br.com.pizzariaapi.api.entity.Pedido;
 import br.com.pizzariaapi.api.entity.Sabor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,4 +15,6 @@ public class ItemDTO {
     private int quantidade;
     private List<Sabor> sabors;
     private Atributo atributoEspecifico;
+    private Pedido pedido;
+
 }

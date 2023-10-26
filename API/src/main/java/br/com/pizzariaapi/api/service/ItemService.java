@@ -1,9 +1,12 @@
 package br.com.pizzariaapi.api.service;
 
 import br.com.pizzariaapi.api.dto.ItemDTO;
+import br.com.pizzariaapi.api.dto.PedidoDTO;
 import br.com.pizzariaapi.api.entity.Item;
+import br.com.pizzariaapi.api.entity.Pedido;
 import br.com.pizzariaapi.api.entity.Tamanho;
 import br.com.pizzariaapi.api.repository.ItemRepository;
+import br.com.pizzariaapi.api.repository.PedidoRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ItemService {
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private PedidoRepository repository;
     @Autowired
     private ModelMapper modelMapper;
     private Item toItem(ItemDTO itemDTO){
@@ -35,7 +40,7 @@ public class ItemService {
         } else if (tamanho == Tamanho.MEDIA) {
             maxSabores = 4;
         } else if (tamanho == Tamanho.PEQUENO) {
-            maxSabores = 3;
+            maxSabores = 2;
         }
         if (itemDTO.getSabors().size() < maxSabores) {
             throw new IllegalArgumentException("O tamanho " + tamanho + " é permitido somente " + maxSabores + " sabores");
@@ -54,12 +59,14 @@ public class ItemService {
     @Transactional(rollbackFor = Exception.class)
     public String create(ItemDTO itemDTO) {
         validationItemDTO(itemDTO);
+        quantidadeDeSabores(itemDTO);
         toItemDTO(itemRepository.save(toItem(itemDTO)));
         return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
     public String update(Long id, ItemDTO itemDTO){
         idNotNull(id);
+        quantidadeDeSabores(itemDTO);
         validationItemDTO(itemDTO);
         toItemDTO(itemRepository.save(toItem(itemDTO)));
         return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
