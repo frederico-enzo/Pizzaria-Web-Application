@@ -46,29 +46,66 @@ export class ItemDetailsComponent {
     this.listAllTamanho();
   }
 
+  quantidadeDeSabores(item: Item) {
+    const maxSabores: number = this.getMaxSabores(item.atributoEspecifico.tamanho);
+
+    if (item.sabors.length > maxSabores) {
+      throw new Error(`O tamanho ${item.atributoEspecifico.tamanho} permite somente ${maxSabores} sabores.`);
+    }
+  }
+
+  getMaxSabores(tamanho: Tamanho): number {
+    switch (tamanho) {
+      case Tamanho.GIGANTE:
+        return 5;
+      case Tamanho.GRANDE:
+      case Tamanho.MEDIA:
+        return 4;
+      case Tamanho.PEQUENO:
+        return 2;
+      default:
+        return 0;
+    }
+  }
+
   create() {
     if (this.pedidoId) {
-      const novoCLieten = new Pedido();
-      novoCLieten.id = this.pedidoId;
-      this.item.pedido = novoCLieten;
+      const novoCliente = new Pedido();
+      novoCliente.id = this.pedidoId;
+      this.item.pedido = novoCliente;
     }
-    this.service.create(this.item).subscribe({
-      next: item => {
-        this.mensagem = "Sucesso!";
-        this.sucesso = true;
-        this.retorno.emit(item);
-        this.modalService.dismissAll();
-      },
-      error: erro => {
-        console.error(erro);
-        if (erro.status < 400) {
+
+    try {
+      this.quantidadeDeSabores(this.item); 
+      this.service.create(this.item).subscribe({
+        next: item => {
+          this.mensagem = "Sucesso!";
+          this.sucesso = true;
+          this.retorno.emit(item);
           this.modalService.dismissAll();
-          window.location.reload();
+        },
+        error: erro => {
+          console.error(erro);
+          if (erro.status < 400) {
+            this.mensagem = "Erro!";
+            setTimeout(() => {
+              this.error = false;
+            }, 1000);
+          } else {
+            this.modalService.dismissAll();
+          }
         }
-      }
-    });
+      });
+    } catch (error) {
+      console.error(error);
+      this.mensagem = "Erro!";
+      setTimeout(() => {
+        this.error = false;
+      }, 1000);
+    }
   }
-  
+
+
   listAllProduto() {
     this.serviceProduto.listAll().subscribe({
       next: lista => {

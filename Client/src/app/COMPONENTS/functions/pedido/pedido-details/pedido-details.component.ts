@@ -41,7 +41,8 @@ export class PedidoDetailsComponent {
       error: erro => { 
         console.error(erro);
         if(erro.status < 400){
-
+          this.mensagem = "Erro!";
+          this.sucesso = true;
           this.modalService.dismissAll();
             window.location.reload();
         }

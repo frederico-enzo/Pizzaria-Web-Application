@@ -13,7 +13,7 @@ export class PedidoListComponent {
   
 
   lista: Pedido[] = [];
-  find : Pedido = new Pedido;
+  pedido : Pedido = new Pedido;
 
   selectedPedidoId: number | undefined; 
   SelecionadoParaEdicao: Pedido = new Pedido();
@@ -30,15 +30,22 @@ export class PedidoListComponent {
 
   go(id: number) {
     this.service.find(id).subscribe({
-      next: cliente => {
-        this.find = cliente;
-        console.log(this.find);
+      next: pedido => {
+        this.pedido = pedido;
+        console.log(this.pedido);
+  
+        if (this.pedido && this.pedido.items) {
+          this.pedido.valorTotal = this.pedido.items.reduce((total, item) => {
+            return total + item.atributoEspecifico.preco * item.quantidade;
+          }, 0);
+        }
       },
       error: erro => {
         console.error(erro);
       }
     });
   }
+  
 
   listAll() {
     this.service.listAll().subscribe({
@@ -65,6 +72,9 @@ export class PedidoListComponent {
     this.modalService.dismissAll();
   }
 
-
+  ir(modal: any) {
+    this.SelecionadoParaEdicao = new Pedido();
+    this.modalService.open(modal, { size:  'xl'});
+  }
   
 }

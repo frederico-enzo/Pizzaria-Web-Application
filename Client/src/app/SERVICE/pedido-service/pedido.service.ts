@@ -17,7 +17,7 @@ export class PedidoService {
     return this.http.get<Pedido[]>(this.API);
   }
   find(id: Number): Observable<Pedido>{
-    return this.http.delete<Pedido>(this.API+"/"+id);
+    return this.http.get<Pedido>(this.API+"/"+id);
   } 
   create(pedido: Pedido): Observable<Pedido> {
     return this.http.post<Pedido>(this.API, pedido);
