@@ -2,7 +2,7 @@
   <div class="w-50 h-100">
     <div class="d-flex justify-content-between mb-3">
       <h3>Lista de Cliente</h3>
-      <button type="button" (click)="adicionar(cadastro)" class="btn btn-success">CREATE</button>
+      <button type="button" (click)="adicionar(form)" class="btn btn-success">CREATE</button>
     </div>
     <table class="table table-striped w-100">
       <thead>
@@ -23,21 +23,37 @@
           <td>{{ cliente.telefone }}</td>
           <td>{{ cliente.senha }}</td>
           <td>
-            <button class="btn btn-primary" (click)="editar(cadastro, cliente, i)">Editar</button> -
-            <button class="btn btn-danger" (click)="delete(cliente.id)">Deletar</button>
+            <button class="btn btn-primary" (click)="editar(form, cliente, i)">Editar</button> -
+            <button class="btn btn-danger" (click)="delete(cliente.id)">Deletar</button> -
+            <button class="btn btn-outline-secondary" (click)="adicionar(info)" (click)="findById( cliente.id)">Mais
+              ...</button>
+
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-  <ng-template #cadastro let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title"> Pessoa</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-      </div>
-      <div class="modal-body">
-        <app-cliente-details [cliente]="SelecionadaParaEdicao"
-          (retorno)="addOuEditar($event)"></app-cliente-details>
-      </div>
-    </ng-template>
+
+
+<ng-template #form let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"> Pessoa</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-cliente-details [cliente]="SelecionadoParaEdicao" (retorno)="addOuEditar($event)"></app-cliente-details>
+  </div>
+</ng-template>
+
+<ng-template #info let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"> Informacoes sobre Cliente</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="d-flex justify-content-center flex-column align-items-center">
+      
+    </div>
+  </div>
+</ng-template>

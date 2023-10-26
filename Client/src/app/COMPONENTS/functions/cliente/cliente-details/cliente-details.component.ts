@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Cliente } from 'src/app/MODEL/cliente-model/cliente';
+import { Endereco } from 'src/app/MODEL/endereco-model/endereco';
 import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service';
 
 @Component({
@@ -15,8 +16,17 @@ export class ClienteDetailsComponent {
   mensagem !: string;
   error: boolean = false;
 
-  service = inject(ClienteService);
-  constructor(private modalService: NgbModal) { }
+  SelecionadoParaEdicao: Endereco = new Endereco();
+
+  constructor(private modalService: NgbModal, private service: ClienteService) { }
+
+
+
+
+
+
+
+
 
   create() {
     this.service.create(this.cliente).subscribe({

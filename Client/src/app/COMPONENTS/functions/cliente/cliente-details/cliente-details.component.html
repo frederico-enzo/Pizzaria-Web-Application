@@ -30,8 +30,17 @@
                     id="endereco" placeholder="Digite seu endereco"> <br>
             </div>
         </div>
-        <button *ngIf="cliente.id == null" type="button" (click)="create()" class="w-30 btn btn-success">Cadastrar</button>
+
+
+        <button *ngIf="cliente.id == null" type="button" (click)="create()" class="w-30 btn btn-success">Cadastrar</button> 
         <button *ngIf="cliente.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
 
+
     </form>
+
+
+
+
+
+
 </div>

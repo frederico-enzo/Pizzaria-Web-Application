@@ -11,9 +11,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class SaborDetailsComponent {
   @Input() sabor: Sabor = new Sabor();
   @Output() retorno = new EventEmitter<Sabor>();
-  componenteEmEdicao: number | null = null;
+  mensagem !: string;
+  error: boolean = false;
+
   service = inject(SaborService);
-  constructor(    private modalService: NgbModal,) {  }
+  constructor(private modalService: NgbModal,) {  }
 
   addComponente(componente: string, inputElement: HTMLInputElement  ) {
     if (!this.sabor.componentes) {
@@ -22,56 +24,48 @@ export class SaborDetailsComponent {
     this.sabor.componentes.push(componente);
     inputElement.value = '';
   }
-  editarComponente(index: number) {
-    this.componenteEmEdicao = index;
-  }
 
-  salvarComponente(index: number) {
-    this.componenteEmEdicao = null;
-  }
-
-  cancelarEdicao() {
-    this.componenteEmEdicao = null;
-  }
-
-  removerComponente(index: number) {
-    this.sabor.componentes.splice(index, 1);
-  }
-
-  alternarModoEdicao() {
-    this.componenteEmEdicao = null;
-  }
-  create() {
+   create() {
     this.service.create(this.sabor).subscribe({
-      next: sabor => { 
+      next: sabor => {
         this.retorno.emit(sabor);
         this.modalService.dismissAll();
       },
-      error: erro => { 
+      error: erro => {
         console.error(erro);
-        if(erro.status < 400){
+        if (erro.status < 400) {
           this.modalService.dismissAll();
-            window.location.reload();
+          window.location.reload();
+        } else {
+          this.mensagem = "Erro!";
+          this.error = true;
+          setTimeout(() => {
+            this.error = false;
+          }, 1000);
         }
       }
     });
   }
-
   update() {
     this.service.update(this.sabor, this.sabor.id).subscribe({
-      next: sabor => {
-        this.retorno.emit(sabor);
+      next: cliente => {
+        this.retorno.emit(cliente);
         this.modalService.dismissAll();
         window.location.reload();
       },
-      error: erro => { 
-          if(erro.status < 400){
-            this.modalService.dismissAll();
-            window.location.reload();
-
-          }
+      error: erro => {
+        console.error(erro);
+        if (erro.status < 400) {
+          this.modalService.dismissAll();
+          window.location.reload();
+        } else {
+          this.mensagem = "Erro!";
+          this.error = true;
+          setTimeout(() => {
+            this.error = false;
+          }, 1000);
+        }
       }
     });
   }
-
 }

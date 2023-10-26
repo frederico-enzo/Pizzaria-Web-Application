@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { Pedido } from 'src/app/MODEL/pedido-model/pedido';
-import { PedidoService } from 'src/app/SERVICE/pedido-service/pedido.service';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+
 
 @Component({
   selector: 'app-pedido-details',
@@ -8,4 +7,5 @@ import { PedidoService } from 'src/app/SERVICE/pedido-service/pedido.service';
   styleUrls: ['./pedido-details.component.scss']
 })
 export class PedidoDetailsComponent {
+
 }

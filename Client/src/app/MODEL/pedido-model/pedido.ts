@@ -6,4 +6,5 @@ export class Pedido {
     cliente!: Cliente; 
     valorTotal!: number;
     items!: Item[]; 
+    ativo!:boolean;
   }

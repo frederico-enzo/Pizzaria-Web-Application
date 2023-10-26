@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, afterNextRender, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Cliente } from 'src/app/MODEL/cliente-model/cliente';
 import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service';
@@ -9,72 +9,68 @@ import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service'
   styleUrls: ['./cliente-list.component.scss']
 })
 export class ClienteListComponent {
-  lista: Cliente[] = []
-  SelecionadaParaEdicao: Cliente = new Cliente();
+
+  lista: Cliente[] = [];
+  find : Cliente = new Cliente;
+
+
+  SelecionadoParaEdicao: Cliente = new Cliente();
   indiceSelecionadoParaEdicao!: number;
 
-  constructor(
-    private modalService: NgbModal,
-    private service: ClienteService
-  ) { this.listAll();  }
+  modalService = inject(NgbModal);
+  service = inject(ClienteService);
+
+  constructor() {
+    this.listAll();
+  }
 
   delete(id: number) {
     this.service.delete(id).subscribe({
       next: () => {
-        console.error('Exclusão bem-sucedida!');
         this.listAll();
       },
       error: erro => {
-        console.error('Erro ao excluir a pessoa. Consulte o console para mais detalhes.');
         console.error(erro);
       }
     });
   }
+  
+  findById(id: number) {
+    this.service.findById(id).subscribe({
+      next: cliente => {
+        this.find = cliente;
+      },
+      error: erro => {
+        console.error(erro);
+      }
+    });
+  }
+
   listAll() {
     this.service.listAll().subscribe({
       next: lista => {
         this.lista = lista;
       },
       error: erro => {
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console.');
         console.error(erro);
       }
     });
   }
 
   adicionar(modal: any) {
-    this.SelecionadaParaEdicao = new Cliente();
-    this.modalService.open(modal, { size:  'xd'});
+    this.SelecionadoParaEdicao = new Cliente();
+    this.modalService.open(modal, { size:  'lg'});
   }
-
   editar(modal: any, cliente: Cliente, indice: number) {
-    this.SelecionadaParaEdicao = Object.assign({}, cliente);
+    this.SelecionadoParaEdicao = Object.assign({}, cliente);
     this.indiceSelecionadoParaEdicao = indice;
-    this.modalService.open(modal, { size: 'xd' });
+    this.modalService.open(modal, { size: 'lg' });
   }
   addOuEditar(cliente: Cliente) {
-    if (cliente.id === 0) {
-      this.service.create(cliente).subscribe({
-        next: pessoaCriada => {
-          this.lista.push(pessoaCriada);
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao criar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    } else {
-      this.service.update(cliente, cliente.id).subscribe({
-        next: Atualizada => {
-          this.lista[this.indiceSelecionadoParaEdicao] = Atualizada;
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao atualizar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    }
+    this.listAll();
+    this.modalService.dismissAll();
   }
+
+
+  
 }
