@@ -59,14 +59,12 @@ public class ItemService {
     @Transactional(rollbackFor = Exception.class)
     public String create(ItemDTO itemDTO) {
         validationItemDTO(itemDTO);
-        quantidadeDeSabores(itemDTO);
         toItemDTO(itemRepository.save(toItem(itemDTO)));
         return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
     public String update(Long id, ItemDTO itemDTO){
         idNotNull(id);
-        quantidadeDeSabores(itemDTO);
         validationItemDTO(itemDTO);
         toItemDTO(itemRepository.save(toItem(itemDTO)));
         return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";

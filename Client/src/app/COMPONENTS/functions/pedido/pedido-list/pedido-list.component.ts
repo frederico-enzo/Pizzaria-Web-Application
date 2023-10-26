@@ -27,6 +27,17 @@ export class PedidoListComponent {
   selectPedido(pedidoId: number) {
     this.selectedPedidoId = pedidoId;
   }
+  
+  delete(id: number) {
+    this.service.delete(id).subscribe({
+      next: () => {
+        this.listAll();
+      },
+      error: erro => {
+        console.error(erro);
+      }
+    });
+  }
 
   go(id: number) {
     this.service.find(id).subscribe({

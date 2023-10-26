@@ -50,17 +50,24 @@ export class ItemDetailsComponent {
     const maxSabores: number = this.getMaxSabores(item.atributoEspecifico.tamanho);
 
     if (item.sabors.length > maxSabores) {
+      this.mensagem = "Erro!";
+      this.error = true;
+      setTimeout(() => {
+        this.error = false;
+      }, 1000);
       throw new Error(`O tamanho ${item.atributoEspecifico.tamanho} permite somente ${maxSabores} sabores.`);
-    }
+    } else{
+      this.modalService.dismissAll();
+    } 
   }
 
   getMaxSabores(tamanho: Tamanho): number {
     switch (tamanho) {
       case Tamanho.GIGANTE:
-        return 5;
+        return 4;
       case Tamanho.GRANDE:
       case Tamanho.MEDIA:
-        return 4;
+        return 3;
       case Tamanho.PEQUENO:
         return 2;
       default:
@@ -88,6 +95,7 @@ export class ItemDetailsComponent {
           console.error(erro);
           if (erro.status < 400) {
             this.mensagem = "Erro!";
+            this.error = true;
             setTimeout(() => {
               this.error = false;
             }, 1000);

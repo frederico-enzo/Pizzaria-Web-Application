@@ -1,7 +1,7 @@
 <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center mt-5">
-  <div class="w-50 h-100">
-    <div class="d-flex justify-content-between mb-3">
-      <h3>Lista de Cliente</h3>
+  <div class="w-0 h-100">
+    <div class="d-flex justify-content-between mb-3 ab" >
+      <h3>Lista de Cliente</h3>  
       <button type="button" (click)="adicionar(form)" class="btn btn-success">CREATE</button>
     </div>
     <table class="table table-striped w-100">
@@ -17,9 +17,10 @@
           <th scope="row">{{ pedido.id }}</th>
           <td>{{ pedido.cliente.nome }}</td>
           <td>
-            <button class="btn btn-outline-primary" (click)="selectPedido(pedido.id)"
-              (click)="adicionar(Carrinho)">Item</button>-
-            <button class="btn btn-outline-secondary" (click)="adicionar(info)" (click)="go(pedido.id)">..</button>
+            <button class="btn btn-outline-secondary" (click)="selectPedido(pedido.id)"
+              (click)="adicionar(Carrinho)">🛒</button>-
+
+            <button class="btn btn-outline-primary" (click)="adicionar(info)" (click)="go(pedido.id)">Info</button>
         </tr>
       </tbody>
     </table>
@@ -29,7 +30,7 @@
 
 <ng-template #form let-modal>
   <div class="modal-header">
-    <h4 class="modal-title"> Pessoa</h4>
+    <h4 class="modal-title"> Item</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
