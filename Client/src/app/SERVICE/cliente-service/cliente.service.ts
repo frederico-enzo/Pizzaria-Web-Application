@@ -19,7 +19,7 @@ export class ClienteService {
   }
   
 
-  listAll(): Observable<Cliente[]> {
+  findAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.API);
   }
   

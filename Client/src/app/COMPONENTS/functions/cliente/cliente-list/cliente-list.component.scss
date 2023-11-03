@@ -1,0 +1,51 @@
+.p{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 45px;
+    margin-bottom: 10px;
+}
+.pa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border-right: 1px solid black;
+    border-radius: 5px;
+    height: 45px;
+    width: 150px;
+
+}
+.pa-two{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-radius: 5px;
+    height: 45px;
+    width: 150px;
+}
+p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 150px;
+    height: 45px;
+}
+
+.p :nth-child(2){
+    width: 300px;
+
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h5{
+    width: 100%;
+}

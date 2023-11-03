@@ -1,36 +1,55 @@
 <div class="register-form">
-    <div *ngIf="error == true"  class="alert alert-danger" role="alert">
+    <div *ngIf="error == true" class="alert alert-danger" role="alert">
         {{mensagem}}
     </div>
     <form class="d-flex flex-column justify-content-between">
-        <div class="form-group mb-4">
-            <div class="d-flex align-items-center a">
-                <label for="nome">Nome </label> :
-                <input type="text" [(ngModel)]="cliente.nome" name="nome" class="form-control" id="nome"
-                    placeholder="Digite seu nome">
+        <div class="d-flex w">
+            <div class="form-floating mb-3 col-6">
+                <input type="text" class="form-control" name="Nome" placeholder="Nome" [(ngModel)]="cliente.nome">
+                <label for="Nome">Nome</label>
             </div>
-            <div class="d-flex align-items-center a">
-                <label for="senha">Senha </label> :
-                <input type="text" [(ngModel)]="cliente.senha" name="senha" class="form-control" id="tamanho"
-                    placeholder="Digite seu senha"> <br>
+            <div class="form-floating mb-3 col-6">
+                <input type="text" class="form-control" name="Telefone" placeholder="Telefone"
+                    [(ngModel)]="cliente.telefone">
+                <label for="Telefone">Telefone</label>
             </div>
-            <div class="d-flex align-items-center a">
-                <label for="email">Email </label> :
-                <input type="text" [(ngModel)]="cliente.email" name="email" class="form-control" id="tamanho"
-                    placeholder="Digite seu email"> <br>
-            </div>
-            <div class="d-flex align-items-center a">
-                <label for="telefone">Telefone </label> :
-                <input type="number" [(ngModel)]="cliente.telefone" name="telefone" class="form-control" id="tamanho"
-                    placeholder="Digite seu telefone"> <br>
-            </div>
-            <div class="d-flex align-items-center a" *ngIf="cliente.id > 0">
-                <label for="endereco"> Endereco Id</label> :
-                <input type="number" [(ngModel)]="enderecoId" name="endereco" class="form-control"
-                  id="endereco" placeholder="Digite o ID do endereço"> <br>
-              </div>              
         </div>
-        <button *ngIf="cliente.id == null" type="button" (click)="create()" class="w-30 btn btn-success">Cadastrar</button> 
+        <div class="form-floating mb-3 ">
+            <input type="text" class="form-control" name="Email" placeholder="Email" [(ngModel)]="cliente.email">
+            <label for="Email">E-mail</label>
+        </div>
+
+        <div class="form-floating mb-3 ">
+            <input type="text" class="form-control" name="Senha" placeholder="Senha" [(ngModel)]="cliente.senha">
+            <label for="Senha">Senha</label>
+        </div>
+
+
+
+
+        <div class="d-flex w" *ngIf="cliente.id > 0">
+            <div class="form-floating mb-3 col-5">
+                <input type="text" class="form-control" name="Nome" placeholder="Nome" [(ngModel)]="cliente.nome">
+                <label for="Nome">Nome</label>
+            </div>
+            <div class="form-floating mb-3 col-4">
+                <input type="text" class="form-control" name="Telefone" placeholder="Telefone"
+                    [(ngModel)]="cliente.telefone">
+                <label for="Telefone">Telefone</label>
+            </div>
+            <div class="form-floating mb-3 col-1'">
+                <input type="text" class="form-control" name="Telefone" placeholder="Telefone"
+                    [(ngModel)]="cliente.telefone">
+                <label for="Telefone">Telefone</label>
+            </div>
+        </div>
+
+
+
+        <button *ngIf="cliente.id == null" type="button" (click)="create()"
+            class="w-30 btn btn-success">Cadastrar</button>
         <button *ngIf="cliente.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
     </form>
 </div>
+
+ 

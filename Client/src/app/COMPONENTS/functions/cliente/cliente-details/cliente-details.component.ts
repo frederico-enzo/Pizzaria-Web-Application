@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Cliente } from 'src/app/MODEL/cliente-model/cliente';
 import { Endereco } from 'src/app/MODEL/endereco-model/endereco';
 import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service';
@@ -10,22 +10,34 @@ import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service'
   styleUrls: ['./cliente-details.component.scss']
 })
 export class ClienteDetailsComponent {
+
+
+  modalService = inject(NgbModal);
+  modalRef!: NgbModalRef;
+
+  enderecoSelecionado!: Endereco;
+
+
+
+
+
+
   @Input() enderecoId!: number;
   @Input() cliente: Cliente = new Cliente();
-  @Output() retorno = new EventEmitter<Cliente>();
+  @Output() return = new EventEmitter<Cliente>();
   mensagem !: string;
   sucesso : boolean = false;
   error : boolean = false;
 
   service = inject(ClienteService);
-  constructor(private modalService: NgbModal) {  }
+  constructor() {  }
 
   create() {
     this.service.create(this.cliente).subscribe({
       next: cliente => { 
         this.mensagem = "Sucesso!";
         this.sucesso = true;
-        this.retorno.emit(cliente);
+        this.return.emit(cliente);
         this.modalService.dismissAll();
       },
       error: erro => { 
@@ -51,7 +63,7 @@ export class ClienteDetailsComponent {
   
     this.service.update(this.cliente, this.cliente.id).subscribe({
       next: cliente => {
-        this.retorno.emit(cliente);
+        this.return.emit(cliente);
         this.modalService.dismissAll();
         window.location.reload();
       },
@@ -64,4 +76,9 @@ export class ClienteDetailsComponent {
     });
   }
   
+
+
+  open(modal: any){
+    this.modalRef = this.modalService.open(modal, {size: 'lg'});
+  }
 }

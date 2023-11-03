@@ -3,9 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponent } from './COMPONENTS/layout/header/header.component';
-import { FooterComponent } from './COMPONENTS/layout/footer/footer.component';
-import { IndexComponent } from './COMPONENTS/layout/index/index.component';
 import { SignUpComponent } from './COMPONENTS/system/sign-up/sign-up.component';
 import { SignInComponent } from './COMPONENTS/system/sign-in/sign-in.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,18 +24,12 @@ import { ProdutoListComponent } from './COMPONENTS/functions/produto/produto-lis
 import { ClienteDetailsComponent } from './COMPONENTS/functions/cliente/cliente-details/cliente-details.component';
 import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-list/cliente-list.component';
 import { AtributoListComponent } from './COMPONENTS/functions/atributo/atributo-list/atributo-list.component';
-import { ClienteDateilsInterfaceComponent } from './COMPONENTS/funtions-client/Cliente/cliente-dateils-interface/cliente-dateils-interface.component';
-import { CarrinhoDatailsComponent } from './COMPONENTS/funtions-client/Carrinho/carrinho-datails/carrinho-datails.component';
-import { ProfileComponent } from './COMPONENTS/funtions-client/Cliente/profile/profile.component';
-import { ProdutoListInterfaceComponent } from './COMPONENTS/funtions-client/Produto/produto-list-interface/produto-list-interface.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    IndexComponent,
     SignUpComponent,
     SignInComponent,
     AdmIndexComponent,
@@ -57,10 +48,6 @@ import { ProdutoListInterfaceComponent } from './COMPONENTS/funtions-client/Prod
     ProdutoListComponent,
     ClienteDetailsComponent,
     ClienteListComponent,
-    ClienteDateilsInterfaceComponent,
-    CarrinhoDatailsComponent,
-    ProfileComponent,
-    ProdutoListInterfaceComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +56,6 @@ import { ProdutoListInterfaceComponent } from './COMPONENTS/funtions-client/Prod
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
