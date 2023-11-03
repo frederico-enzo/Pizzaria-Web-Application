@@ -25,7 +25,9 @@ export class PedidoService {
   update(pedido:Pedido, id: Number):Observable<Pedido>{
     return this.http.put<Pedido>(this.API+"/"+id, pedido);
   } 
-
+  delete(id: Number): Observable<Pedido>{
+    return this.http.delete<Pedido>(this.API+"/"+id);
+  } 
 
 
 
