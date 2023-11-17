@@ -1,7 +1,5 @@
 package br.com.pizzariaapi.api.controller;
 
-import br.com.pizzariaapi.api.dto.ProdutoDTO;
-import br.com.pizzariaapi.api.service.ProdutoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

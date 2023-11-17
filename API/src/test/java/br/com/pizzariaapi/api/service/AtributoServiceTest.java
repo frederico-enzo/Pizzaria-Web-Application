@@ -2,10 +2,6 @@ package br.com.pizzariaapi.api.service;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import br.com.pizzariaapi.api.dto.AtributoDTO;
-import br.com.pizzariaapi.api.entity.Atributo;
-import br.com.pizzariaapi.api.entity.Tamanho;
-import br.com.pizzariaapi.api.repository.AtributoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

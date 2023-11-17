@@ -1,14 +1,10 @@
 package br.com.pizzariaapi.api.service;
-import br.com.pizzariaapi.api.dto.EnderecoDTO;
-import br.com.pizzariaapi.api.entity.Endereco;
-import br.com.pizzariaapi.api.repository.EnderecoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
-import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
