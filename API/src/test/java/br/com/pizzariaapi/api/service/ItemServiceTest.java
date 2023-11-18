@@ -1,10 +1,5 @@
 package br.com.pizzariaapi.api.service;
 
-import br.com.pizzariaapi.api.dto.AtributoDTO;
-import br.com.pizzariaapi.api.dto.ItemDTO;
-import br.com.pizzariaapi.api.dto.ProdutoDTO;
-import br.com.pizzariaapi.api.entity.*;
-import br.com.pizzariaapi.api.repository.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -13,7 +8,6 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

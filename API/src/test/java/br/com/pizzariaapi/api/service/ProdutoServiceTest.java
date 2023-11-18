@@ -1,9 +1,6 @@
 package br.com.pizzariaapi.api.service;
 
 
-import br.com.pizzariaapi.api.dto.ProdutoDTO;
-import br.com.pizzariaapi.api.entity.Produto;
-import br.com.pizzariaapi.api.repository.ProdutoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
