@@ -1,6 +1,5 @@
 package br.com.pizzariaapi.api.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,9 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-@Data @Entity
-@Table(name = "tb_usuario" , schema = "public")
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Data
+@Entity @Table(name = "tb_usuario" , schema = "public")
 public class Usuario implements UserDetails {
 
     @Id
@@ -31,7 +29,6 @@ public class Usuario implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

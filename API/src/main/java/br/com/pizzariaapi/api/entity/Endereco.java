@@ -6,8 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @Entity
-@Table(name = "" , schema = "public")
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Data
+@Entity @Table(name = "tb_endereco" , schema = "public")
 public class Endereco {
 }
