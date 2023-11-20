@@ -29,8 +29,8 @@ public class UsuarioService {
         Assert.hasText(usuarioDTO.getLogin(),"Por favor, digite um login válido!");
         Assert.notNull(usuarioDTO.getPassword(),"Por favor, digite um passaword!");
         Assert.hasText(usuarioDTO.getPassword(),"Por favor, digite um passaword válido!");
-        Assert.notNull(usuarioDTO.getCpf(),"Por favor, digite um cpf!");
-        Assert.hasText(usuarioDTO.getCpf(),"Por favor, digite um cpf válido!");
+//        Assert.notNull(usuarioDTO.getCpf(),"Por favor, digite um cpf!");
+//        Assert.hasText(usuarioDTO.getCpf(),"Por favor, digite um cpf válido!");
     }
     public UsuarioDTO findById(Long id){
         Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));

@@ -25,9 +25,6 @@ public class Usuario implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "cpr", unique = true)
-    private String cpf;
-
     @Column(name = "role")
     private Role role;
 
