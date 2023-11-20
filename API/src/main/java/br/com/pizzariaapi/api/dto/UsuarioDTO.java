@@ -10,11 +10,8 @@ import lombok.NoArgsConstructor;
 public class UsuarioDTO {
 
     private Long id;
-    @NotBlank(message = "O username não pode estar em branco e deve ser fornecido.")
     private String username;
-    @NotBlank(message = "O password não pode estar em branco e deve ser fornecido.")
     private String password;
-    @NotBlank(message = "O cpf não pode estar em branco e deve ser fornecido.")
     private String cpf;
     private Endereco endereco;
 }
