@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @NoArgsConstructor @AllArgsConstructor @Data
 @Entity @Table(name = "tb_usuario" , schema = "public")
@@ -17,22 +19,29 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true, length = 200)
-    private String username;
+    @Column(name = "login", unique = true)
+    private String login;
 
-    @Column(name = "password", nullable = false, length = 30)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "cpr", nullable = false, unique = true, length = 11)
-    private String cpf;
+    @Column(name = "role")
+    private Role role;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
+    public Usuario(String login, String password, Role role){
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
     @Override
     public String getPassword() {
@@ -40,7 +49,7 @@ public class Usuario implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return username;
+        return login;
     }
     @Override
     public boolean isAccountNonExpired() {

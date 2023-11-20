@@ -4,10 +4,11 @@ import br.com.pizzariaapi.api.dto.UsuarioDTO;
 import br.com.pizzariaapi.api.entity.Usuario;
 import br.com.pizzariaapi.api.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.util.Assert;
+
 
 @Service
 public class UsuarioService {
@@ -23,25 +24,34 @@ public class UsuarioService {
         return modelMapper.map(usuario, UsuarioDTO.class);
     }
 
-    private UsuarioDTO findByID (Long id){
+    private void Valid(UsuarioDTO usuarioDTO){
+        Assert.notNull(usuarioDTO.getLogin(),"Por favor, digite um login!");
+        Assert.hasText(usuarioDTO.getLogin(),"Por favor, digite um login válido!");
+        Assert.notNull(usuarioDTO.getPassword(),"Por favor, digite um passaword!");
+        Assert.hasText(usuarioDTO.getPassword(),"Por favor, digite um passaword válido!");
+//        Assert.notNull(usuarioDTO.getCpf(),"Por favor, digite um cpf!");
+//        Assert.hasText(usuarioDTO.getCpf(),"Por favor, digite um cpf válido!");
+    }
+    public UsuarioDTO findById(Long id){
+        Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
         return toDTO(repository.findById(id).orElse(null));
     }
-    private List<UsuarioDTO> findAll(){
+    public List<UsuarioDTO> findAll(){
         return repository.findAll().stream().map(this::toDTO).toList();
     }
-    private UsuarioDTO post(UsuarioDTO usuarioDTO){
+    public UsuarioDTO post(UsuarioDTO usuarioDTO){
+        Valid(usuarioDTO);
         return toDTO(repository.save(toEntity(usuarioDTO)));
     }
-    private UsuarioDTO put(UsuarioDTO usuarioDTO, Long id){
+    public UsuarioDTO put(UsuarioDTO usuarioDTO, Long id){
         Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        Valid(usuarioDTO);
         return toDTO(repository.save(toEntity(usuarioDTO)));
     }
-    private void delete(Long id){
+    public void delete(Long id){
         Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
         repository.deleteById(id);
-    };
-
-
+    }
 
 
 }
