@@ -25,8 +25,8 @@ public class UsuarioService {
     }
 
     private void Valid(UsuarioDTO usuarioDTO){
-        Assert.notNull(usuarioDTO.getUsername(),"Por favor, digite um username!");
-        Assert.hasText(usuarioDTO.getUsername(),"Por favor, digite um username válido!");
+        Assert.notNull(usuarioDTO.getLogin(),"Por favor, digite um login!");
+        Assert.hasText(usuarioDTO.getLogin(),"Por favor, digite um login válido!");
         Assert.notNull(usuarioDTO.getPassword(),"Por favor, digite um passaword!");
         Assert.hasText(usuarioDTO.getPassword(),"Por favor, digite um passaword válido!");
         Assert.notNull(usuarioDTO.getCpf(),"Por favor, digite um cpf!");
