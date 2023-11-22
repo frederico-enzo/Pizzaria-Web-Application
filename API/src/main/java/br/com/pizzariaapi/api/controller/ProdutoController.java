@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/produtos")
 public class ProdutoController {
     @Autowired
     private ProdutoService service;
     @GetMapping("/find")
-    public ResponseEntity<ProdutoDTO> getClienteById(@RequestParam Long id) {
+    public ResponseEntity<ProdutoDTO> findById(@RequestParam Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
     @GetMapping("/findAll")
@@ -26,7 +28,7 @@ public class ProdutoController {
         return ResponseEntity.ok(service.post(produtoDTO));
     }
     @PutMapping("/update")
-    public ResponseEntity<ProdutoDTO> updateAtributo(@RequestParam Long id,@RequestBody  ProdutoDTO produtoDTO) {
+    public ResponseEntity<ProdutoDTO> put(@RequestParam Long id,@RequestBody  ProdutoDTO produtoDTO) {
         return  ResponseEntity.ok(service.put(id, produtoDTO));
     }
     @DeleteMapping("/delete")

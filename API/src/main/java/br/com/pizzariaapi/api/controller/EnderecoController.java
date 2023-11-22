@@ -16,7 +16,7 @@ public class EnderecoController {
     @Autowired
     private EnderecoService service;
     @GetMapping("/find")
-    public ResponseEntity<EnderecoDTO> getClienteById(@RequestParam Long id) {
+    public ResponseEntity<EnderecoDTO> findById(@RequestParam Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
     @GetMapping("/findAll")
@@ -28,7 +28,7 @@ public class EnderecoController {
         return ResponseEntity.ok(service.post(enderecoDTO));
     }
     @PutMapping("/update")
-    public ResponseEntity<EnderecoDTO> updateAtributo(@RequestParam Long id,@RequestBody  EnderecoDTO enderecoDTO) {
+    public ResponseEntity<EnderecoDTO> put(@RequestParam Long id,@RequestBody  EnderecoDTO enderecoDTO) {
         return  ResponseEntity.ok(service.put(id, enderecoDTO));
     }
     @DeleteMapping("/delete")

@@ -28,5 +28,15 @@ public class PropriedadeService {
         return toDTO(repository.findById(id).orElse(null));
     }
 
-
+    public PropriedadeDTO post(PropriedadeDTO propriedadeDTO) {
+        return toDTO(repository.save(toEntity(propriedadeDTO)));
+    }
+    public PropriedadeDTO put(PropriedadeDTO propriedadeDTO,Long id) {
+        org.springframework.util.Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        return toDTO(repository.save(toEntity(propriedadeDTO)));
+    }
+    public void delete(Long id){
+        org.springframework.util.Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        repository.deleteById(id);
+    }
 }

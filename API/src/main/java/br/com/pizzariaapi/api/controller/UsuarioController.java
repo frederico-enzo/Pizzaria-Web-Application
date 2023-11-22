@@ -15,7 +15,7 @@ public class UsuarioController {
 @Autowired
 private UsuarioService service;
     @GetMapping("/find")
-    public ResponseEntity<UsuarioDTO> getClienteById(@RequestParam  Long id) {
+    public ResponseEntity<UsuarioDTO> findById(@RequestParam  Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
     @GetMapping("/findAll")
@@ -27,7 +27,7 @@ private UsuarioService service;
         return ResponseEntity.ok(service.post(usuarioDTO));
     }
     @PutMapping("/update")
-    public ResponseEntity<UsuarioDTO> updateAtributo(@RequestParam Long id,@RequestBody  UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> put(@RequestParam Long id,@RequestBody  UsuarioDTO usuarioDTO) {
         return  ResponseEntity.ok(service.put(usuarioDTO, id));
     }
     @DeleteMapping("/delete")
