@@ -7,22 +7,24 @@ import { Endereco } from 'src/app/MODEL/endereco-model/endereco';
   providedIn: 'root'
 })
 export class EnderecoService {
-  API: string = 'http://localhost:8080/enderecos';
+  API: string = 'http://localhost:8080/endereços';
   http = inject(HttpClient);
 
   constructor() { }
 
+  findById(id: Number): Observable<Endereco> {
+    return this.http.delete<Endereco>(this.API + "/find?id=" + id);
+  }
   listAll(): Observable<Endereco[]> {
-    return this.http.get<Endereco[]>(this.API);
+    return this.http.get<Endereco[]>(this.API + "/findAll");
   }
-
-  create(endereco: Endereco): Observable<Endereco> {
-    return this.http.post<Endereco>(this.API, endereco);
+  post(endereco: Endereco): Observable<Endereco> {
+    return this.http.post<Endereco>(this.API + "/create", endereco);
   }
-  update(endereco:Endereco, id: Number):Observable<Endereco>{
-    return this.http.put<Endereco>(this.API+"/"+id, endereco);
-  } 
-  delete(id: Number): Observable<void>{
-    return this.http.delete<void>(this.API+"/"+id);
-  } 
+  put(endereco: Endereco, id: Number): Observable<Endereco> {
+    return this.http.put<Endereco>(this.API + "/update?id=" + id, endereco);
+  }
+  delete(id: Number): Observable<void> {
+    return this.http.delete<void>(this.API + "/delete?id=" + id);
+  }
 }

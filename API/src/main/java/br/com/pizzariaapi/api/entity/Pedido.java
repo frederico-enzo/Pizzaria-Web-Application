@@ -1,6 +1,5 @@
 package br.com.pizzariaapi.api.entity;
 
-import br.com.pizzariaapi.api.dto.UsuarioDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,17 +19,8 @@ public class Pedido {
     @Column(name = "valorTotal")
     private double valorTotal;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "pedido")
-    private List<Item> items = new ArrayList<>();
+    private List<Demanda> items = new ArrayList<>();
     @Column(name = "ativo")
     private boolean ativo;
-    @PrePersist
-    public void calcularValorTotal() {
-        double total = 0.0;
-        for (Item item : items) {
-            if (item.getPropriedade() != null) {
-                total += item.getPropriedade().getPreco() * item.getQuantidade();
-            }
-        }
-        this.valorTotal = total;
-    }
+
 }

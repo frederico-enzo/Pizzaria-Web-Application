@@ -1,7 +1,7 @@
 package br.com.pizzariaapi.api.controller;
 
-import br.com.pizzariaapi.api.dto.PedidoDTO;
-import br.com.pizzariaapi.api.service.PedidoService;
+import br.com.pizzariaapi.api.dto.DemandaDTO;
+import br.com.pizzariaapi.api.service.DemandaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,26 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pedidos")
-public class PedidoController {
-
+@RequestMapping("/demandas")
+public class DemandaController {
     @Autowired
-    private PedidoService service;
+    private DemandaService service;
     @GetMapping("/find")
-    public ResponseEntity<PedidoDTO> findById(@RequestParam Long id) {
+    public ResponseEntity<DemandaDTO> findById(@RequestParam Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
     @GetMapping("/findAll")
-    public ResponseEntity<List<PedidoDTO>> findAll(){
+    public ResponseEntity<List<DemandaDTO>> findAll(){
         return ResponseEntity.ok(this.service.findAll());
     }
     @PostMapping("/create")
-    public ResponseEntity<PedidoDTO> post(@RequestBody PedidoDTO pedidoDTO) {
-        return ResponseEntity.ok(service.post(pedidoDTO));
+    public ResponseEntity<DemandaDTO> post(@RequestBody DemandaDTO itemDTO) {
+        return ResponseEntity.ok(service.post(itemDTO));
     }
     @PutMapping("/update")
-    public ResponseEntity<PedidoDTO> put(@RequestParam Long id, @RequestBody PedidoDTO pedidoDTO) {
-        return  ResponseEntity.ok(service.put(id, pedidoDTO));
+    public ResponseEntity<DemandaDTO> put(@RequestParam Long id, @RequestBody DemandaDTO itemDTO) {
+        return  ResponseEntity.ok(service.put(itemDTO, id));
     }
     @DeleteMapping("/delete")
     public ResponseEntity<Void> delete(@RequestParam Long id) {

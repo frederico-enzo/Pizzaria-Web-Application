@@ -12,18 +12,19 @@ export class ProdutoService {
   http = inject(HttpClient);
 
   constructor() { }
-
+  findById(id: Number): Observable<Produto> {
+    return this.http.delete<Produto>(this.API + "/find?id=" + id);
+  }
   listAll(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(this.API);
+    return this.http.get<Produto[]>(this.API + "/findAll");
   }
-
-  create(produto: Produto): Observable<Produto> {
-    return this.http.post<Produto>(this.API, produto);
+  post(produto: Produto): Observable<Produto> {
+    return this.http.post<Produto>(this.API + "/create", produto);
   }
-  update(produto:Produto, id: Number):Observable<Produto>{
-    return this.http.put<Produto>(this.API+"/"+id, produto);
-  } 
-  delete(id: Number): Observable<void>{
-    return this.http.delete<void>(this.API+"/"+id);
+  put(produto: Produto, id: Number): Observable<Produto> {
+    return this.http.put<Produto>(this.API + "/update?id=" + id, produto);
+  }
+  delete(id: Number): Observable<void> {
+    return this.http.delete<void>(this.API + "/delete?id=" + id);
   } 
 }

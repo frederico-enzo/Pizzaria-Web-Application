@@ -1,6 +1,6 @@
 package br.com.pizzariaapi.api.service;
 import br.com.pizzariaapi.api.dto.PedidoDTO;
-import br.com.pizzariaapi.api.entity.Item;
+import br.com.pizzariaapi.api.entity.Demanda;
 import br.com.pizzariaapi.api.entity.Pedido;
 import br.com.pizzariaapi.api.repository.PedidoRepository;
 import org.modelmapper.ModelMapper;
@@ -25,7 +25,7 @@ public class PedidoService {
 
     public double calcularValorTotal(PedidoDTO pedidoDTO) {
         double valorTotal = 0.0;
-        for (Item item : pedidoDTO.getItems()) {
+        for (Demanda item : pedidoDTO.getItems()) {
             int quantidade = item.getQuantidade();
             double precoUnitario = item.getPropriedade().getPreco();
             double valorParcialItem = quantidade * precoUnitario;

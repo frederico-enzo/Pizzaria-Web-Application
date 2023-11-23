@@ -1,4 +1,4 @@
-import { Cliente } from "../cliente-model/cliente";
+import { Cliente } from "../usuario-model/usuario";
 import { Item } from "../item-model/item";
 
 export class Pedido {
