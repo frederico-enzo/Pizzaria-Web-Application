@@ -11,6 +11,7 @@ public class Propriedade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
+    @ManyToOne
     @JoinColumn(name = "tamanho")
     private Tamanho tamanho;
     @Column(name = "descricao")

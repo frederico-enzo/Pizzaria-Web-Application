@@ -1,10 +1,8 @@
 package br.com.pizzariaapi.api.controller;
 
 import br.com.pizzariaapi.api.dto.PropriedadeDTO;
-import br.com.pizzariaapi.api.dto.TamanhoDTO;
-import br.com.pizzariaapi.api.service.ProdutoService;
+
 import br.com.pizzariaapi.api.service.PropriedadeService;
-import br.com.pizzariaapi.api.service.TamanhoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
