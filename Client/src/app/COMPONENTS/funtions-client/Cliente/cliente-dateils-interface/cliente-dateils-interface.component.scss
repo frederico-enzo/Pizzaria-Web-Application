@@ -1,0 +1,61 @@
+.conteiner{
+    padding: 50px;
+}
+.oppa{
+    margin-top: 50px;
+}
+.back{
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 60px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+}
+.out {
+    padding-right: 0;
+    margin-right: 15px;
+    margin-left: 7px;
+    margin-bottom: 15px;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    background-image: url('./assets/icons8-exportar-26 (1).png');
+    transition: 0.2s;
+}
+.config{
+    margin-right: 0px;
+    margin-bottom: 10px;
+    margin-right: 12px;
+
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-image: url('./assets/icons8-configuração-50.png');
+    transition: 0.2s;
+}
+li .config {
+    margin-left: -10;
+
+}
+li:hover .config {
+    background-image: url('./assets/icons8-configuração-50\ \(1\).png');
+ 
+}
+li:hover {
+    color: red; 
+}
+
+li:hover .out {
+    background-image: url('./assets/icons8-exportar-26\ \(2\).png');
+ 
+}
+li{
+    margin: 0   ;
+    padding: 0;
+}

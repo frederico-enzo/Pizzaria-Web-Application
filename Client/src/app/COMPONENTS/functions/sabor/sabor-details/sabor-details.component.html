@@ -1,0 +1,22 @@
+<div class="register-form">
+    <form class="d-flex flex-column justify-content-between">
+        <div *ngIf="error == true" class="alert alert-danger" role="alert">
+            {{mensagem}}
+        </div>
+        <div class="b form-group mb-4">
+            <div class="d-flex align-items-center a">
+                <label for="nome">Sabor</label> :
+                <input type="text" [(ngModel)]="sabor.nome" name="nome" class="form-control" id="nome"
+                    placeholder="Nome do Sabor">
+            </div>
+            <div class="d-flex align-items-center a">
+                <label for="Ingredientes">Ingredientes</label> :
+                <input type="text" #inputElement class="form-control" placeholder="Novo Ingredientes">
+                <button type="button" (click)="addComponente(inputElement.value, inputElement)"
+                    class="w-30 btn btn-success">+</button>
+            </div>
+        </div>
+        <button *ngIf="sabor.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
+        <button *ngIf="sabor.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+    </form>
+</div>

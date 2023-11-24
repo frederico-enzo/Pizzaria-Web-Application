@@ -1,10 +1,10 @@
 package br.com.pizzariaapi.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class ProdutoDTO {
     private Long id;
     private String nome;

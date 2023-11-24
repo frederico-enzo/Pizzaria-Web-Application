@@ -1,38 +1,47 @@
 package br.com.pizzariaapi.api.controller;
 
+
 import br.com.pizzariaapi.api.dto.EnderecoDTO;
-import br.com.pizzariaapi.api.dto.UsuarioDTO;
 import br.com.pizzariaapi.api.service.EnderecoService;
-import br.com.pizzariaapi.api.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/endereços")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/enderecos")
 public class EnderecoController {
     @Autowired
     private EnderecoService service;
-    @GetMapping("/find")
-    public ResponseEntity<EnderecoDTO> findById(@RequestParam Long id) {
-        return ResponseEntity.ok(service.findById(id));
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EnderecoDTO> getEnderecoById(@PathVariable Long id) {
+        EnderecoDTO enderecoDTO = service.findById(id);
+        return ResponseEntity.ok(enderecoDTO);
     }
-    @GetMapping("/findAll")
-    public ResponseEntity<List<EnderecoDTO>> findAll(){
-        return ResponseEntity.ok(this.service.findAll());
+
+    @GetMapping
+    public ResponseEntity<List<EnderecoDTO>> getAllEnderecos() {
+        List<EnderecoDTO> enderecoDTOs = service.findAll();
+        return ResponseEntity.ok(enderecoDTOs);
     }
-    @PostMapping("/create")
-    public ResponseEntity<EnderecoDTO> post(@RequestBody EnderecoDTO enderecoDTO) {
-        return ResponseEntity.ok(service.post(enderecoDTO));
+
+    @PostMapping
+    public ResponseEntity<String> createEndereco(@RequestBody EnderecoDTO enderecoDTO) {
+        String responseMessage = service.create(enderecoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
     }
-    @PutMapping("/update")
-    public ResponseEntity<EnderecoDTO> put(@RequestParam Long id,@RequestBody  EnderecoDTO enderecoDTO) {
-        return  ResponseEntity.ok(service.put(id, enderecoDTO));
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateEndereco(@PathVariable Long id, @RequestBody EnderecoDTO enderecoDTO) {
+        String responseMessage = service.update(id, enderecoDTO);
+        return ResponseEntity.ok(responseMessage);
     }
-    @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestParam Long id) {
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEndereco(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -1,19 +1,21 @@
 package br.com.pizzariaapi.api.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 
-@Data @NoArgsConstructor @AllArgsConstructor
-@Entity @Table(name = "tb_sabor", schema = "public")
+@Entity
+@Getter @Setter
+@Table(name = "tb.Ingredientes", schema = "public")
 public class Sabor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
     private Long id;
-    @Column(name = "nome", length = 100, nullable = false)
+    @Column(name = "nome", nullable = false, unique = true)
     private String nome;
-    @Column(name = "ingredientes", nullable = false)
-    private String descricao;
+    @Column(name = "ingrediente", nullable = false, unique = true)
+    private List<String> componentes;
 }

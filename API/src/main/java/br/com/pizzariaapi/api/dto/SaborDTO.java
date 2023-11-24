@@ -1,12 +1,13 @@
 package br.com.pizzariaapi.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+import java.util.List;
+
+@Getter @Setter
 public class SaborDTO {
     private Long id;
     private String nome;
-    private String descricao;
+    private List<String> componentes;
 }

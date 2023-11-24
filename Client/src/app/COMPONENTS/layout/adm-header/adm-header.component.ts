@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import 'bootstrap/dist/js/bootstrap.bundle';
 
 @Component({
   selector: 'app-adm-header',

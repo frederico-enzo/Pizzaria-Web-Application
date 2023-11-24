@@ -1,11 +1,13 @@
 package br.com.pizzariaapi.api.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@NoArgsConstructor @AllArgsConstructor @Data
-@Entity @Table(name = "tb.Produto", schema = "public")
+@Entity
+@Getter @Setter
+@Table(name = "tb.Produto", schema = "public")
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,12 +1,17 @@
 package br.com.pizzariaapi.api.service;
+import br.com.pizzariaapi.api.dto.AtributoDTO;
+import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.dto.PedidoDTO;
-import br.com.pizzariaapi.api.entity.Demanda;
+import br.com.pizzariaapi.api.entity.Atributo;
+import br.com.pizzariaapi.api.entity.Item;
 import br.com.pizzariaapi.api.entity.Pedido;
+import br.com.pizzariaapi.api.entity.Produto;
 import br.com.pizzariaapi.api.repository.PedidoRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,44 +21,51 @@ public class PedidoService {
     private PedidoRepository repository;
     @Autowired
     private ModelMapper modelMapper;
-    private Pedido toEntity(PedidoDTO pedidoDTO){
+    private Pedido toPedido(PedidoDTO pedidoDTO){
         return modelMapper.map(pedidoDTO, Pedido.class);
     }
-    private PedidoDTO toDTO(Pedido pedido){
+    private PedidoDTO toPedidoDTO(Pedido pedido){
         return modelMapper.map(pedido, PedidoDTO.class);
     }
-
+    private void idNotNull(Long id){
+        Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
     public double calcularValorTotal(PedidoDTO pedidoDTO) {
         double valorTotal = 0.0;
-        for (Demanda item : pedidoDTO.getItems()) {
+        for (Item item : pedidoDTO.getItems()) {
             int quantidade = item.getQuantidade();
-            double precoUnitario = item.getPropriedade().getPreco();
+            double precoUnitario = item.getAtributoEspecifico().getPreco();
             double valorParcialItem = quantidade * precoUnitario;
             valorTotal += valorParcialItem;
         }
         return valorTotal;
     }
     public List<PedidoDTO> findAll(){
-        return repository.findAll().stream().map(this::toDTO).toList();
+        return repository.findAll().stream().map(this::toPedidoDTO).toList();
     }
 
     public PedidoDTO findById(Long id) {
-        return toDTO(repository.findById(id).orElse(null));
+        Pedido pedido = repository.findById(id).orElse(null);
+        return toPedidoDTO(pedido);
     }
-    public PedidoDTO post(PedidoDTO pedidoDTO) {
+    @Transactional(rollbackFor = Exception.class)
+    public String create(PedidoDTO pedidoDTO) {
         Assert.isTrue(pedidoDTO.getCliente() != null, "Cliente inválido");
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
-        return toDTO(repository.save(toEntity(pedidoDTO)));
-
+        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
     }
-    public PedidoDTO put(Long id, PedidoDTO pedidoDTO){
-        Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    @Transactional(rollbackFor = Exception.class)
+    public String update(Long id, PedidoDTO pedidoDTO){
+        idNotNull(id);
         Assert.isTrue(pedidoDTO.getCliente() != null,"Cliente inválido");
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
-        return toDTO(repository.save(toEntity(pedidoDTO)));
+        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
-        Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        idNotNull(id);
         repository.deleteById(id);
     }
 }

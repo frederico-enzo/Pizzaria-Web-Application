@@ -1,5 +1,6 @@
 package br.com.pizzariaapi.api.service;
 
+import br.com.pizzariaapi.api.dto.AtributoDTO;
 import br.com.pizzariaapi.api.dto.ProdutoDTO;
 import br.com.pizzariaapi.api.entity.Produto;
 import br.com.pizzariaapi.api.repository.ProdutoRepository;
@@ -23,7 +24,10 @@ public class ProdutoService {
     private ProdutoDTO toProdutorDTO(Produto produto){
         return modelMapper.map(produto, ProdutoDTO.class);
     }
-    void Valid(ProdutoDTO produtoDTO){
+     void idNotNull(Long id){
+        Assert.notNull(produtoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
+     void validationProdutoDTO(ProdutoDTO produtoDTO){
         Assert.notNull(produtoDTO.getNome(), "Nome inválido");
         Assert.hasText(produtoDTO.getNome(), "Nome inválido");
         Assert.notNull(produtoDTO.getCategoria(), "Categoria inválida");
@@ -40,21 +44,23 @@ public class ProdutoService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public ProdutoDTO post(ProdutoDTO produtoDTO) {
-        Valid(produtoDTO);
-        return toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
-
+    public String create(ProdutoDTO produtoDTO) {
+        validationProdutoDTO(produtoDTO);
+        toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
-    public ProdutoDTO put(Long id, ProdutoDTO produtoDTO ){
-        Assert.notNull(produtoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
-        Valid(produtoDTO);
-        return toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
+    public String update(Long id, ProdutoDTO produtoDTO ){
+        idNotNull(id);
+        validationProdutoDTO(produtoDTO);
+        toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
-        Assert.notNull(produtoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+        idNotNull(id);
         produtoRepository.deleteById(id);
     }
+
 
 }

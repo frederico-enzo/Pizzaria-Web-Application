@@ -1,14 +1,14 @@
 package br.com.pizzariaapi.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Setter @Getter
 public class EnderecoDTO {
     private Long id;
     private String rua;
     private String bairro;
     private Integer numero;
     private String cep;
+
 }

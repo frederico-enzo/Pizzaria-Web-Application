@@ -1,0 +1,16 @@
+<div class="register-form">
+    <form class="d-flex flex-column justify-content-between">
+        <div class="form-group mb-4">
+            <input type="select" [(ngModel)]="atributo.tamanho" name="tamanho" class="form-control" id="tamanho"
+                placeholder="Tamnaho do seu Produto">
+                <br>
+            <input *ngIf="atributo.id > 0" type="select" [(ngModel)]="atributo.descricao" name="descricao" class="form-control" id="descricao"
+                placeholder="Tamnaho do seu Produto">
+                <br>
+            <input *ngIf="atributo.id > 0" type="select" [(ngModel)]="atributo.preco" name="preco" class="form-control" id="preco"
+                placeholder="Tamnaho do seu Produto">
+        </div>
+        <button *ngIf="atributo.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
+        <button *ngIf="atributo.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+    </form>
+</div>

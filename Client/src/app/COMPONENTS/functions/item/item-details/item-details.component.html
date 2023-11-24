@@ -1,0 +1,37 @@
+<div class="register-form">
+  <div *ngIf="error == true" class="alert alert-danger" role="alert">
+    {{mensagem}}
+  </div>
+  <form class="d-flex flex-column justify-content-between">
+    <div class="form-group mb-4">
+      <div class="form-group">
+        <label for="produto">Selecione um produto:</label>
+        <select id="produto" class="form-control" [(ngModel)]="item.produto" name="produto">
+          <option *ngFor="let produto of produtos" [ngValue]="produto">{{ produto.nome }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sabor">Selecione um sabor:</label>
+        <select id="sabor" class="form-control" [(ngModel)]="item.sabors" name="sabor" multiple>
+          <option *ngFor="let sabor of sabores" [ngValue]="sabor">{{ sabor.nome }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="atributo">Selecione um atributo de tamanho:</label>
+        <select id="atributo" class="form-control" [(ngModel)]="item.atributoEspecifico" name="atributo">
+          <option *ngFor="let atributo of atributos" [ngValue]="atributo">{{ atributo.tamanho }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="quantidade">Digite a Quantidade:</label>
+        <input id="quantidade" class="form-control" [(ngModel)]="item.quantidade" name="quantidade">
+  
+      </div>
+
+    </div>
+    <button type="button" (click)="create()" class="w-30 btn btn-success">Criar</button>
+  </form>
+</div>

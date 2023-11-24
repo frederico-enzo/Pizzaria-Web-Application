@@ -1,15 +1,16 @@
 package br.com.pizzariaapi.api.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@NoArgsConstructor @AllArgsConstructor @Data
-@Entity @Table(name = "tb_endereco" , schema = "public")
+@Entity
+@Getter @Setter
+@Table(name = "tb_enderecos", schema = "public")
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
     @Column(name = "rua")
@@ -23,5 +24,4 @@ public class Endereco {
 
     @Column(name = "cep")
     private String cep;
-
 }

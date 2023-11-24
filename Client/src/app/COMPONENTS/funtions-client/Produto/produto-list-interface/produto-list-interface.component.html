@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center a">
+    <h3>Lista de Produtos</h3>
+</div>
+<div (click)="open(pedido)" class="d-flex justify-content-center a">
+    <div class="color  a">
+        <div class="product-list">
+            <div *ngFor="let produto of lista" class="product-item">
+                <div class="product-image">
+                </div>
+                <div class="product-details">
+                    <h5 class="product-name">Produto: {{ produto.nome }}</h5>
+                    <p class="product-category">Categoria: {{ produto.categoria }}</p>
+                    <p class="product-preparation-time">Preparo: {{ produto.tempoPreparo }} Minutos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #pedido let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title"> </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <app-pedido-details></app-pedido-details>
+        </div>
+    </div>
+</ng-template>

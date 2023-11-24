@@ -1,0 +1,43 @@
+<div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center mt-5">
+  <div class="w-50 h-100">
+    <div class="d-flex justify-content-between mb-4 ">
+      <h3>Lista de Endereco</h3>
+      <button type="button" (click)="adicionar(cadastro)" class="btn btn-success">CREATE</button>
+    </div>
+    <table class="table table-striped w-100">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Rua</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Numero</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let enderecop of lista; let i = index">
+          <th scope="row">{{ enderecop.id }}</th>
+          <td>{{ enderecop.rua }}</td>
+          <td>{{ enderecop.bairro }}</td>
+          <td>{{ enderecop.numero }}</td>
+          <td>{{ enderecop.cep }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editar(cadastro , enderecop, i)">Editar</button> -
+            <button class="btn btn-danger" (click)="delete(enderecop.id)">Deletar</button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #cadastro let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"> Endereco</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <app-endereco-details [endereco]="SelecionadaParaEdicao" (retorno)="addOuEditar($event)"></app-endereco-details>
+  </div>
+</ng-template>

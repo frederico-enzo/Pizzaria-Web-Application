@@ -14,17 +14,20 @@ import java.util.List;
 @Service
 public class EnderecoService {
     @Autowired
-    private EnderecoRepository repository;
+    private EnderecoRepository enderecoRepository;
     @Autowired
     private ModelMapper modelMapper;
 
-    private Endereco toEntity(EnderecoDTO enderecoDTO){
+    private Endereco toEndereco(EnderecoDTO enderecoDTO){
         return modelMapper.map(enderecoDTO, Endereco.class);
     }
-    private EnderecoDTO toDTO(Endereco endereco){
+    private EnderecoDTO toEnderecoDTO(Endereco endereco){
         return modelMapper.map(endereco, EnderecoDTO.class);
     }
-    private void Valid(EnderecoDTO enderecoDTO){
+    private void idNotNull(Long id){
+        Assert.notNull(enderecoRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
+    }
+    private void validationEnderecoDTO(EnderecoDTO enderecoDTO){
         Assert.notNull(enderecoDTO.getBairro(), "Informe o Bairro!");
         Assert.hasText(enderecoDTO.getBairro(), "Informe o Bairro!");
         Assert.notNull(enderecoDTO.getNumero(), "Informe o Numero!");
@@ -33,26 +36,30 @@ public class EnderecoService {
         Assert.hasText(enderecoDTO.getRua(), "Informe o Rua!");
     }
     public EnderecoDTO findById(Long id){
-        Endereco endereco = repository.findById(id).orElse(null);
-        return toDTO(endereco);
+        Endereco endereco = enderecoRepository.findById(id).orElse(null);
+        return toEnderecoDTO(endereco);
     }
     public List<EnderecoDTO> findAll(){
-        return repository.findAll().stream().map(this::toDTO).toList();
+        return enderecoRepository.findAll().stream().map(this::toEnderecoDTO).toList();
     }
     @Transactional(rollbackFor = Exception.class)
-    public EnderecoDTO post(EnderecoDTO enderecoDTO){
-        Valid(enderecoDTO);
-        return toDTO(repository.save(toEntity(enderecoDTO)));
+    public String create(EnderecoDTO enderecoDTO){
+        validationEnderecoDTO(enderecoDTO);
+        toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
+        return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
-    public EnderecoDTO put(Long id, EnderecoDTO enderecoDTO){
-        Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
-        Valid(enderecoDTO);
-        return toDTO(repository.save(toEntity(enderecoDTO)));
+    public String update(Long id, EnderecoDTO enderecoDTO){
+        idNotNull(id);
+        validationEnderecoDTO(enderecoDTO);
+        toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
+        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
     }
     public void delete(Long id){
-        Assert.notNull(repository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
-        repository.deleteById(id);
+        idNotNull(id);
+        enderecoRepository.deleteById(id);
     }
+
+
 
 }
