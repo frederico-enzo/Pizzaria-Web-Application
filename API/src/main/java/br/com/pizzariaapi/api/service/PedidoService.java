@@ -1,5 +1,6 @@
 package br.com.pizzariaapi.api.service;
 import br.com.pizzariaapi.api.dto.AtributoDTO;
+import br.com.pizzariaapi.api.dto.EnderecoDTO;
 import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.dto.PedidoDTO;
 import br.com.pizzariaapi.api.entity.Atributo;
@@ -49,19 +50,19 @@ public class PedidoService {
         return toPedidoDTO(pedido);
     }
     @Transactional(rollbackFor = Exception.class)
-    public String post(PedidoDTO pedidoDTO) {
+    public PedidoDTO post(PedidoDTO pedidoDTO) {
         Assert.isTrue(pedidoDTO.getCliente() != null, "Cliente inválido");
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
-        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
-        return "Sucesso ao cadastrar novo Registro";
+        return toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+
     }
     @Transactional(rollbackFor = Exception.class)
-    public String put(Long id, PedidoDTO pedidoDTO){
+    public PedidoDTO put(Long id, PedidoDTO pedidoDTO){
         idNotNull(id);
         Assert.isTrue(pedidoDTO.getCliente() != null,"Cliente inválido");
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
-        toPedidoDTO(repository.save(toPedido(pedidoDTO)));
-        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
+        return toPedidoDTO(repository.save(toPedido(pedidoDTO)));
+
     }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){

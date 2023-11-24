@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class ItemService {
     @Autowired
@@ -30,6 +32,9 @@ public class ItemService {
     private void idNotNull(Long id){
     Assert.notNull(itemRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
+//    public List<ItemDTO> findAll(){
+//        return repository.findAll().stream().map(this::toItemDTO).toList();
+//    }
      void quantidadeDeSabores(ItemDTO itemDTO) {
         int maxSabores = 0;
         Tamanho tamanho = itemDTO.getAtributoEspecifico().getTamanho();
@@ -57,17 +62,17 @@ public class ItemService {
         return toItemDTO(itemRepository.findById(id).orElse(null));
     }
     @Transactional(rollbackFor = Exception.class)
-    public String create(ItemDTO itemDTO) {
+    public ItemDTO post(ItemDTO itemDTO) {
         validationItemDTO(itemDTO);
         toItemDTO(itemRepository.save(toItem(itemDTO)));
-        return "Sucesso ao cadastrar novo Registro";
+        return toItemDTO(itemRepository.save(toItem(itemDTO)));
     }
     @Transactional(rollbackFor = Exception.class)
-    public String update(Long id, ItemDTO itemDTO){
+    public ItemDTO put(Long id, ItemDTO itemDTO){
         idNotNull(id);
         validationItemDTO(itemDTO);
-        toItemDTO(itemRepository.save(toItem(itemDTO)));
-        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
+        return toItemDTO(itemRepository.save(toItem(itemDTO)));
+
     }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){
