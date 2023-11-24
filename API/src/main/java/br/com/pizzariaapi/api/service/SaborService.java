@@ -41,17 +41,16 @@ public class SaborService {
         return saborRepository.findAll().stream().map(this::toIngredienteDTO).toList();
     }
     @Transactional(rollbackFor = Exception.class)
-    public String create(SaborDTO saborDTO){
+    public SaborDTO post(SaborDTO saborDTO){
         validationIngredienteDTO(saborDTO);
-        toIngredienteDTO(saborRepository.save(toIngrediente(saborDTO)));
-        return "Sucesso ao cadastrar novo Registro";
+        return toIngredienteDTO(saborRepository.save(toIngrediente(saborDTO)));
     }
     @Transactional(rollbackFor = Exception.class)
-    public String update(Long id, SaborDTO saborDTO){
+    public SaborDTO put(Long id, SaborDTO saborDTO){
         idNotNull(id);
         validationIngredienteDTO(saborDTO);
-        toIngredienteDTO(saborRepository.save(toIngrediente(saborDTO)));
-        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
+        return toIngredienteDTO(saborRepository.save(toIngrediente(saborDTO)));
+
     }
     public void delete(Long id){
         idNotNull(id);

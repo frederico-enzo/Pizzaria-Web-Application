@@ -44,17 +44,16 @@ public class ProdutoService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public String create(ProdutoDTO produtoDTO) {
+    public ProdutoDTO post(ProdutoDTO produtoDTO) {
         validationProdutoDTO(produtoDTO);
-        toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
-        return "Sucesso ao cadastrar novo Registro";
+        return toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
+
     }
     @Transactional(rollbackFor = Exception.class)
-    public String update(Long id, ProdutoDTO produtoDTO ){
+    public ProdutoDTO put(Long id, ProdutoDTO produtoDTO ){
         idNotNull(id);
         validationProdutoDTO(produtoDTO);
-        toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
-        return "Sucesso ao cadastrar novo Registro";
+        return toProdutorDTO(produtoRepository.save(toProtudo(produtoDTO)));
     }
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id){

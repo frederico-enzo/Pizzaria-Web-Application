@@ -36,10 +36,10 @@ class ClienteServiceTest {
         Long id = 1L;
         Cliente cliente = new Cliente();
         cliente.setId(id);
-        cliente.setNome("John Doe");
+        cliente.setLogin("John Doe");
         ClienteDTO expectedDto = new ClienteDTO();
         expectedDto.setId(id);
-        expectedDto.setNome("John Doe");
+        expectedDto.setPassword("John Doe");
         when(repository.findById(id)).thenReturn(Optional.of(cliente));
         when(modelMapper.map(cliente, ClienteDTO.class)).thenReturn(expectedDto);
         ClienteDTO result = service.findById(id);
@@ -64,16 +64,14 @@ class ClienteServiceTest {
     void create() {
         // Arrange
         ClienteDTO clienteDTO = new ClienteDTO();
-        clienteDTO.setNome("John Doe");
-        clienteDTO.setSenha("password");
-        clienteDTO.setEmail("john@example.com");
-        clienteDTO.setTelefone("123456789");
+        clienteDTO.setLogin("John Doe");
+        clienteDTO.setPassword("password");
+
 
         Cliente cliente = new Cliente();
-        cliente.setNome("John Doe");
-        cliente.setSenha("password");
-        cliente.setEmail("john@example.com");
-        cliente.setTelefone("123456789");
+        cliente.setLogin("John Doe");
+        cliente.setPassword("password");
+
 
         when(repository.save(any(Cliente.class))).thenReturn(cliente);
 
@@ -87,17 +85,16 @@ class ClienteServiceTest {
 
         Long id = 1L;
         ClienteDTO clienteDTO = new ClienteDTO();
-        clienteDTO.setNome("John Doe");
-        clienteDTO.setSenha("newpassword");
-        clienteDTO.setEmail("newemail@example.com");
-        clienteDTO.setTelefone("987654321");
+        clienteDTO.setLogin("John Doe");
+        clienteDTO.setPassword("password");
+
 
         Cliente cliente = new Cliente();
         cliente.setId(id);
-        cliente.setNome("John Doe");
-        cliente.setSenha("newpassword");
-        cliente.setEmail("newemail@example.com");
-        cliente.setTelefone("987654321");
+        cliente.setLogin("John Doe");
+        cliente.setPassword("password");
+
+
 
         when(repository.findById(id)).thenReturn(Optional.of(cliente));
         when(repository.save(any(Cliente.class))).thenReturn(cliente);

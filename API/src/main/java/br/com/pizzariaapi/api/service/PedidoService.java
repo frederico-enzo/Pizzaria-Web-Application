@@ -49,14 +49,14 @@ public class PedidoService {
         return toPedidoDTO(pedido);
     }
     @Transactional(rollbackFor = Exception.class)
-    public String create(PedidoDTO pedidoDTO) {
+    public String post(PedidoDTO pedidoDTO) {
         Assert.isTrue(pedidoDTO.getCliente() != null, "Cliente inválido");
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));
         toPedidoDTO(repository.save(toPedido(pedidoDTO)));
         return "Sucesso ao cadastrar novo Registro";
     }
     @Transactional(rollbackFor = Exception.class)
-    public String update(Long id, PedidoDTO pedidoDTO){
+    public String put(Long id, PedidoDTO pedidoDTO){
         idNotNull(id);
         Assert.isTrue(pedidoDTO.getCliente() != null,"Cliente inválido");
         pedidoDTO.setValorTotal(calcularValorTotal(pedidoDTO));

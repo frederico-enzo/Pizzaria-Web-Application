@@ -20,29 +20,23 @@ public class ProdutoController {
     private  ProdutoService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoDTO> getProdutoById(@PathVariable Long id) {
-        ProdutoDTO produtoDTO = service.findById(id);
-        return ResponseEntity.ok(produtoDTO);
-    }
-
-    @PostMapping
-    public ResponseEntity<String> createProduto(@RequestBody ProdutoDTO produtoDTO) {
-        String responseMessage = service.create(produtoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
+    public ResponseEntity<ProdutoDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
     @GetMapping
-    public ResponseEntity<List<ProdutoDTO>> findAll() {
-        List<ProdutoDTO> produtoDTOS = service.findAll();
-        return ResponseEntity.ok(produtoDTOS);
+    public ResponseEntity<List<ProdutoDTO>> getAll() {
+        return ResponseEntity.ok(service.findAll());
+    }
+    @PostMapping
+    public ResponseEntity<ProdutoDTO> create(@RequestBody ProdutoDTO produtoDTO) {
+        return ResponseEntity.ok(service.post(produtoDTO));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateProduto(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
-        String responseMessage = service.update(id, produtoDTO);
-        return ResponseEntity.ok(responseMessage);
+    public ResponseEntity<ProdutoDTO> put(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
+        return ResponseEntity.ok(service.put(id, produtoDTO));
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduto(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

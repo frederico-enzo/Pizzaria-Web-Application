@@ -17,40 +17,23 @@ public class SaborController {
     private  SaborService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<SaborDTO> getSaborById(@PathVariable Long id) {
-        SaborDTO saborDTO = service.findById(id);
-        return ResponseEntity.ok(saborDTO);
+    public ResponseEntity<SaborDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
-
     @GetMapping
-    public ResponseEntity<List<SaborDTO>> getAllSabores() {
-        List<SaborDTO> saborDTOs = service.findAll();
-        return ResponseEntity.ok(saborDTOs);
+    public ResponseEntity<List<SaborDTO>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
-
     @PostMapping
-    public ResponseEntity<String> createSabor(@RequestBody SaborDTO saborDTO) {
-        try {
-            String responseMessage = service.create(saborDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro durante a criação do sabor");
-        }
+    public ResponseEntity<SaborDTO> create(@RequestBody SaborDTO saborDTO) {
+        return ResponseEntity.ok(service.post(saborDTO));
     }
-
-
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateSabor(@PathVariable Long id, @RequestBody SaborDTO saborDTO) {
-        try{
-        String responseMessage = service.update(id, saborDTO);
-        return ResponseEntity.ok(responseMessage);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro durante a criação do sabor");
-        }
+    public ResponseEntity<SaborDTO> put(@PathVariable Long id, @RequestBody SaborDTO saborDTO) {
+        return ResponseEntity.ok(service.put(id, saborDTO));
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSabor(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
