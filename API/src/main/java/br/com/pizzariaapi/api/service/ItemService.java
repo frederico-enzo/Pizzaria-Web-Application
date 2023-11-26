@@ -2,6 +2,7 @@ package br.com.pizzariaapi.api.service;
 
 import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.dto.PedidoDTO;
+import br.com.pizzariaapi.api.dto.ProdutoDTO;
 import br.com.pizzariaapi.api.entity.Item;
 import br.com.pizzariaapi.api.entity.Pedido;
 import br.com.pizzariaapi.api.entity.Tamanho;
@@ -32,10 +33,11 @@ public class ItemService {
     private void idNotNull(Long id){
     Assert.notNull(itemRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
-//    public List<ItemDTO> findAll(){
-//        return repository.findAll().stream().map(this::toItemDTO).toList();
-//    }
-     void quantidadeDeSabores(ItemDTO itemDTO) {
+    public List<ItemDTO> findAll(){
+        return itemRepository.findAll().stream().map(this::toItemDTO).toList();
+    }
+
+    void quantidadeDeSabores(ItemDTO itemDTO) {
         int maxSabores = 0;
         Tamanho tamanho = itemDTO.getAtributoEspecifico().getTamanho();
         if (tamanho == Tamanho.GIGANTE) {

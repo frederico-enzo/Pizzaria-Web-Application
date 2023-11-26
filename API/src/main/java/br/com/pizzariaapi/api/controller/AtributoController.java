@@ -17,33 +17,23 @@ public class AtributoController {
     @Autowired
     private  AtributoService service;
     @GetMapping("/{id}")
-    public ResponseEntity<AtributoDTO> getAtributoById(@PathVariable Long id) {
-        AtributoDTO atributoDTO = service.findById(id);
-        if (atributoDTO != null) {
-            return ResponseEntity.ok(atributoDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<AtributoDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
     @GetMapping
     public ResponseEntity<List<AtributoDTO>> getAll() {
-        List<AtributoDTO> atributoDTOS = service.findAll();
-        return ResponseEntity.ok(atributoDTOS);
+        return ResponseEntity.ok(service.findAll());
     }
     @PostMapping
-    public ResponseEntity<AtributoDTO> createAtributo(@RequestBody AtributoDTO atributoDTO) {
-        AtributoDTO createdAtributo = service.post(atributoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdAtributo);
+    public ResponseEntity<AtributoDTO> create(@RequestBody AtributoDTO atributoDTO) {
+        return ResponseEntity.ok(service.post(atributoDTO));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AtributoDTO> updateAtributo(@PathVariable Long id, @RequestBody AtributoDTO atributoDTO) {
-        atributoDTO.setId(id);
-        AtributoDTO updatedAtributo = service.put(atributoDTO);
-        return ResponseEntity.ok(updatedAtributo);
+    public ResponseEntity<AtributoDTO> put(@PathVariable Long id, @RequestBody AtributoDTO atributoDTO) {
+        return ResponseEntity.ok(service.put(atributoDTO,id));
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAtributo(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

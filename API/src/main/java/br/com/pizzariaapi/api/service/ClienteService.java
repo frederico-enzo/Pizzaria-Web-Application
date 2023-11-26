@@ -47,17 +47,17 @@ public class ClienteService {
         return clienteRepository.findAll().stream().map(this::toClienteDTO).toList();
     }
     @Transactional(rollbackFor = Exception.class)
-    public String create(ClienteDTO clienteDTO){
+    public ClienteDTO post(ClienteDTO clienteDTO){
         validationClienteDTO(clienteDTO);
-        toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
-        return "Sucesso ao cadastrar novo Registro";
+        return toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+
     }
     @Transactional(rollbackFor = Exception.class)
-    public String update(Long id, ClienteDTO clienteDTO){
+    public ClienteDTO put(Long id, ClienteDTO clienteDTO){
         idNotNull(id);
         validationClienteDTO(clienteDTO);
-        toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
-        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
+        return toClienteDTO(clienteRepository.save(toCliente(clienteDTO)));
+
     }
     public void delete(Long id){
         idNotNull(id);

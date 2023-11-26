@@ -2,6 +2,7 @@ package br.com.pizzariaapi.api.controller;
 
 
 import br.com.pizzariaapi.api.dto.EnderecoDTO;
+import br.com.pizzariaapi.api.dto.ItemDTO;
 import br.com.pizzariaapi.api.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,30 +19,23 @@ public class EnderecoController {
     private EnderecoService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<EnderecoDTO> getEnderecoById(@PathVariable Long id) {
-        EnderecoDTO enderecoDTO = service.findById(id);
-        return ResponseEntity.ok(enderecoDTO);
+    public ResponseEntity<EnderecoDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
-
     @GetMapping
-    public ResponseEntity<List<EnderecoDTO>> getAllEnderecos() {
-        List<EnderecoDTO> enderecoDTOs = service.findAll();
-        return ResponseEntity.ok(enderecoDTOs);
+    public ResponseEntity<List<EnderecoDTO>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
-
     @PostMapping
-    public ResponseEntity<String> createEndereco(@RequestBody EnderecoDTO enderecoDTO) {
-        String responseMessage = service.create(enderecoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
+    public ResponseEntity<EnderecoDTO> create(@RequestBody EnderecoDTO enderecoDTO) {
+        return ResponseEntity.ok(service.post(enderecoDTO));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateEndereco(@PathVariable Long id, @RequestBody EnderecoDTO enderecoDTO) {
-        String responseMessage = service.update(id, enderecoDTO);
-        return ResponseEntity.ok(responseMessage);
+    public ResponseEntity<EnderecoDTO> put(@PathVariable Long id, @RequestBody EnderecoDTO enderecoDTO) {
+        return ResponseEntity.ok(service.put(id, enderecoDTO));
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEndereco(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

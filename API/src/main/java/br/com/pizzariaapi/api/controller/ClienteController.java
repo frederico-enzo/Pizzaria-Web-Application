@@ -1,6 +1,7 @@
 package br.com.pizzariaapi.api.controller;
 
 import br.com.pizzariaapi.api.dto.ClienteDTO;
+import br.com.pizzariaapi.api.dto.EnderecoDTO;
 import br.com.pizzariaapi.api.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,32 +18,23 @@ public class ClienteController {
     private  ClienteService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClienteDTO> getClienteById(@PathVariable Long id) {
-        ClienteDTO clienteDTO = service.findById(id);
-        return ResponseEntity.ok(clienteDTO);
+    public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.findById(id));
     }
-
     @GetMapping
-    public ResponseEntity<List<ClienteDTO>> getAllClientes() {
-        List<ClienteDTO> clienteDTOs = service.findAll();
-        return ResponseEntity.ok(clienteDTOs);
+    public ResponseEntity<List<ClienteDTO>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
-
-
     @PostMapping
-    public ResponseEntity<String> createCliente(@RequestBody ClienteDTO clienteDTO) {
-        String responseMessage = service.create(clienteDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseMessage);
+    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO clienteDTO) {
+        return ResponseEntity.ok(service.post(clienteDTO));
     }
-
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
-        String responseMessage = service.update(id, clienteDTO);
-        return ResponseEntity.ok(responseMessage);
+    public ResponseEntity<ClienteDTO> put(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        return ResponseEntity.ok(service.put(id, clienteDTO));
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

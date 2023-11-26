@@ -43,17 +43,17 @@ public class EnderecoService {
         return enderecoRepository.findAll().stream().map(this::toEnderecoDTO).toList();
     }
     @Transactional(rollbackFor = Exception.class)
-    public String create(EnderecoDTO enderecoDTO){
+    public EnderecoDTO post(EnderecoDTO enderecoDTO){
         validationEnderecoDTO(enderecoDTO);
-        toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
-        return "Sucesso ao cadastrar novo Registro";
+        return toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
+
     }
     @Transactional(rollbackFor = Exception.class)
-    public String update(Long id, EnderecoDTO enderecoDTO){
+    public EnderecoDTO put(Long id, EnderecoDTO enderecoDTO){
         idNotNull(id);
         validationEnderecoDTO(enderecoDTO);
-        toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
-        return "Sucesso ao atualizar Registro do ID:" + id + " Cliente";
+        return toEnderecoDTO(enderecoRepository.save(toEndereco(enderecoDTO)));
+
     }
     public void delete(Long id){
         idNotNull(id);

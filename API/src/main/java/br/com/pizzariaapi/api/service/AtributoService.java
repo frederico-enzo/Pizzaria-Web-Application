@@ -72,7 +72,7 @@ public class AtributoService {
         return toAtributoDTO(repository.save(toAtributo(atributoDTO)));
     }
     @Transactional(rollbackFor = Exception.class)
-    public AtributoDTO put(AtributoDTO atributoDTO) {
+    public AtributoDTO put(AtributoDTO atributoDTO,Long id) {
         idNotNull(atributoDTO.getId());
         validationAtributoDTO(atributoDTO);
         return toAtributoDTO(repository.save(toAtributo(atributoDTO)));

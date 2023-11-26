@@ -20,10 +20,10 @@ public class ItemController {
     public ResponseEntity<ItemDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
-//    @GetMapping
-//    public ResponseEntity<List<ItemDTO>> getAll() {
-//        return ResponseEntity.ok(service.findAll());
-//    }
+    @GetMapping
+    public ResponseEntity<List<ItemDTO>> getAll() {
+        return ResponseEntity.ok(service.findAll());
+    }
     @PostMapping
     public ResponseEntity<ItemDTO> create(@RequestBody ItemDTO itemDTO) {
         return ResponseEntity.ok(service.post(itemDTO));
