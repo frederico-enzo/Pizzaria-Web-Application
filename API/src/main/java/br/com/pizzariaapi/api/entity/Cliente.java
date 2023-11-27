@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,28 +18,29 @@ public class Cliente implements UserDetails {
     private Long id;
 
     @Column(name = "login", unique = true)
-    private String login;
+    private String username;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "role")
-    private Role role;
+    private String role;
 
     @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    public Cliente(String login, String password, Role role){
-        this.login = login;
+    public Cliente(String username, String password, String role){
+        this.username = username;
         this.password = password;
         this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(this.role));
+        return authorities;
     }
     @Override
     public String getPassword() {
@@ -46,7 +48,7 @@ public class Cliente implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
     @Override
     public boolean isAccountNonExpired() {

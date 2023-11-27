@@ -6,7 +6,8 @@ import lombok.Setter;
 @Getter @Setter
 public class ClienteDTO {
     private Long id;
-    private String login;
-    private String password;
+    private String username;
+    private String role;
+    private String token;
     private Endereco endereco;
 }

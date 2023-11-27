@@ -32,10 +32,9 @@ public class ClienteService {
         Assert.notNull(clienteRepository.findById(id).orElse(null), String.format("ID [%s] não encontrado" , id));
     }
     private void validationClienteDTO(ClienteDTO clienteDTO){
-        Assert.notNull(clienteDTO.getLogin(), "Digite seu Nome!");
-        Assert.hasText(clienteDTO.getLogin(), "Digite seu Nome!");
-        Assert.hasText(clienteDTO.getPassword(), "Digite sua Senha!");
-        Assert.notNull(clienteDTO.getPassword(), "Digite sua Senha!");
+        Assert.notNull(clienteDTO.getUsername(), "Digite seu Nome!");
+        Assert.hasText(clienteDTO.getUsername(), "Digite seu Nome!");
+
 
     }
     public ClienteDTO findById(Long id){
