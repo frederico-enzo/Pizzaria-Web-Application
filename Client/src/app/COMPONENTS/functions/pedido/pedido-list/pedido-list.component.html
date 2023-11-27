@@ -15,7 +15,7 @@
       <tbody>
         <tr *ngFor="let pedido of lista; let i = index">
           <th scope="row">{{ pedido.id }}</th>
-          <td>{{ pedido.cliente.nome }}</td>
+          <td>{{ pedido.cliente.username }}</td>
           <td>
             <button class="btn btn-outline-secondary" (click)="selectPedido(pedido.id)"
               (click)="adicionar(Carrinho)">🛒</button>-
@@ -64,9 +64,7 @@
             <h4><strong>Informações do Cliente </strong></h4>
             <br>
             <div class="d-flex a ">
-              <p><strong>Nome:</strong> {{ pedido.cliente.nome }}</p>
-              <p><strong>Telefone:</strong> {{ pedido.cliente.telefone }}</p>
-              <p><strong>Email:</strong> {{ pedido.cliente.email }}</p>
+              <p><strong>Nome:</strong> {{ pedido.cliente.username }}</p>
             </div>
 
             <div class="d-flex a ">

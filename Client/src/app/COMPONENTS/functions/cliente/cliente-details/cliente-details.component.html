@@ -6,24 +6,15 @@
         <div class="form-group mb-4">
             <div class="d-flex align-items-center a">
                 <label for="nome">Nome </label> :
-                <input type="text" [(ngModel)]="cliente.nome" name="nome" class="form-control" id="nome"
+                <input type="text" [(ngModel)]="cliente.username" name="nome" class="form-control" id="nome"
                     placeholder="Digite seu nome">
             </div>
             <div class="d-flex align-items-center a">
                 <label for="senha">Senha </label> :
-                <input type="text" [(ngModel)]="cliente.senha" name="senha" class="form-control" id="tamanho"
+                <input type="text" [(ngModel)]="cliente.password" name="senha" class="form-control" id="tamanho"
                     placeholder="Digite seu senha"> <br>
             </div>
-            <div class="d-flex align-items-center a">
-                <label for="email">Email </label> :
-                <input type="text" [(ngModel)]="cliente.email" name="email" class="form-control" id="tamanho"
-                    placeholder="Digite seu email"> <br>
-            </div>
-            <div class="d-flex align-items-center a">
-                <label for="telefone">Telefone </label> :
-                <input type="number" [(ngModel)]="cliente.telefone" name="telefone" class="form-control" id="tamanho"
-                    placeholder="Digite seu telefone"> <br>
-            </div>
+
             <div class="d-flex align-items-center a" *ngIf="cliente.id > 0">
                 <label for="endereco"> Endereco Id</label> :
                 <input type="number" [(ngModel)]="enderecoId" name="endereco" class="form-control"

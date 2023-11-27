@@ -1,12 +1,10 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Atributo } from 'src/app/MODEL/atributo-model/atributo';
-import { Cliente } from 'src/app/MODEL/cliente-model/cliente';
 import { Item } from 'src/app/MODEL/item-model/item';
 import { Pedido } from 'src/app/MODEL/pedido-model/pedido';
 import { Produto } from 'src/app/MODEL/produto-model/produto';
 import { Sabor } from 'src/app/MODEL/sabor-model/sabor';
-import { Tamanho } from 'src/app/MODEL/tamanho-enum/tamanho';
 import { AtributoService } from 'src/app/SERVICE/atributo-service/atributo.service';
 import { ItemService } from 'src/app/SERVICE/item-service/item.service';
 import { ProdutoService } from 'src/app/SERVICE/produto-service/produto.service';
@@ -61,14 +59,14 @@ export class ItemDetailsComponent {
     } 
   }
 
-  getMaxSabores(tamanho: Tamanho): number {
+  getMaxSabores(tamanho: String): number {
     switch (tamanho) {
-      case Tamanho.GIGANTE:
+      case 'GIGANTE':
         return 4;
-      case Tamanho.GRANDE:
-      case Tamanho.MEDIA:
+      case 'GRANDE':
+      case 'MEDIA':
         return 3;
-      case Tamanho.PEQUENO:
+      case 'PEQUENO':
         return 2;
       default:
         return 0;

@@ -10,20 +10,4 @@ import { NgModel } from '@angular/forms';
 })
 export class SignUpComponent {
 
-  constructor(private clienteService: ClienteService) { }
-  usuario: Cliente = new Cliente();
-
-  singup() {
-    this.clienteService.create(this.usuario).subscribe(
-      (cliente) => {
-        this.usuario = new Cliente();
-        console.log('Cliente cadastrado com sucesso:'+ this.usuario, cliente);
-      },
-      (error) => {
-        console.error('Erro ao cadastrar cliente:', error);
-      }
-    );
-  }
-
-
   }

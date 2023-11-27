@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { SaborService } from './sabor.service';
+import { LoginService } from './login.service';
 
-describe('SaborService', () => {
-  let service: SaborService;
+describe('LoginService', () => {
+  let service: LoginService;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [SaborService],
+      providers: [LoginService],
     });
 
-    service = TestBed.inject(SaborService);
+    service = TestBed.inject(LoginService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
   it('should be created', () => {

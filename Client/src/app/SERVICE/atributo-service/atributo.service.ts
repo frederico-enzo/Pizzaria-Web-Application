@@ -15,7 +15,6 @@ export class AtributoService {
   listAll(): Observable<Atributo[]> {
     return this.http.get<Atributo[]>(this.API);
   }
-
   create(atributo: Atributo): Observable<Atributo> {
     return this.http.post<Atributo>(this.API, atributo);
   }

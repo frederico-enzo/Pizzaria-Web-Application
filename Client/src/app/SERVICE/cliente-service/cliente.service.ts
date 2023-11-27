@@ -13,12 +13,6 @@ export class ClienteService {
 
   constructor() { }
 
-  checkLogin(email: string, senha: string) {
-    return this.http.get<Cliente[]>(this.API)
-      .pipe(map(clientes => clientes.find(cliente => cliente.email === email && cliente.senha === senha)));
-  }
-  
-
   listAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.API);
   }

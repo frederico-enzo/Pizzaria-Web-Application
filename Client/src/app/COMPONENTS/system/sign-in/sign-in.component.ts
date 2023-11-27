@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Cliente } from 'src/app/MODEL/cliente-model/cliente';
-import { ClienteService } from 'src/app/SERVICE/cliente-service/cliente.service';
-import { ActivatedRoute } from '@angular/router';
+import { LoginService } from 'src/app/SERVICE/login-service/login.service';
+import { Login } from 'src/app/MODEL/login-model/login';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,33 +9,25 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
-  usuario: Cliente = new Cliente();
+  login: Login = new Login();
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private clienteService: ClienteService
+    private loginService: LoginService,
+    private router: Router
   ) {
-    this.route.params.subscribe(params => {
-      const clientId = params['id'];
-    });
+    this.loginService.removeToken();
   }
 
-  login() {
-    this.clienteService.checkLogin(this.usuario.email, this.usuario.senha).subscribe(
-      (cliente) => {
-        if (cliente && this.usuario.email === 'admin') {
-          this.router.navigate(['/admin']);
-        } else if (cliente) {
-          this.router.navigate(['/client', cliente.id]);
-        } else {
-          console.error('Cliente não encontrado.');
-        }
+  logar() {
+    // Implemente a requisição aqui e coloque o token no localStorage
+    this.loginService.logar(this.login).subscribe({
+      next: (token) => {
+        localStorage.setItem("token", token.token);
+        this.router.navigate(['admin/pedido-adm']);
       },
-      (error) => {
-        console.error('Erro ao fazer login:', error);
-        alert('Erro ao fazer login. Tente novamente mais tarde.');
+      error: (erro) => {
+        console.log(erro);
       }
-    );
+    });
   }
 }
