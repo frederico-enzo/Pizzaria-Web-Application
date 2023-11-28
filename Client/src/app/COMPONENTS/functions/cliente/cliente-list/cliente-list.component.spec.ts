@@ -22,4 +22,17 @@ describe('ClienteListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('should call lancar() method successfully', () => {
+    const modalServiceSpy = jasmine.createSpyObj('NgbModal', ['open']);
+    component.modalService = modalServiceSpy;
+
+    component.adicionar('modal');
+
+    expect(modalServiceSpy.open).toHaveBeenCalledWith('modal', { size: 'lg' });
+  });
+
+
+
+
 });

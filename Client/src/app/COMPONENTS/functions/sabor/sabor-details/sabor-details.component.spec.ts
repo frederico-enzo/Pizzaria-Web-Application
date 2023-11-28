@@ -35,11 +35,10 @@ describe('SaborDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
-  it('Test  de 1 @Input - Interpolação no templete'),() => {
-    let element = fixture.debugElement.query(By.css('input[name="nome"]'));
-    expect(element.nativeElement.NgModel).toEqual('calabresa');
-
-  }  
+  it('should have a default Sabor instance', () => {
+    expect(component.sabor).toBeDefined();
+    expect(component.sabor instanceof Sabor).toBeTruthy();
+  });
+    
 
 });

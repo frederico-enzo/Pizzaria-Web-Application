@@ -22,4 +22,5 @@ describe('EnderecoListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

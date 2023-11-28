@@ -20,7 +20,7 @@
                     id="tempoPreparo" placeholder="Digite tempo para o Preparo">
             </div>
         </div>
-        <button *ngIf="produto.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
-        <button *ngIf="produto.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+        <button *ngIf="produto.id == null" name="create" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
+        <button *ngIf="produto.id > 0" name="update" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
     </form>
 </div>

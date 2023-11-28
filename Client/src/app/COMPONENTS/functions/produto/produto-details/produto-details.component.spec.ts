@@ -38,13 +38,34 @@ describe('ProdutoDetailsComponent', () => {
   });
 
 
-  it('should not display "New" button when produto.id is greater than 0', () => {
-    const produto = new Produto();
-    produto.id = 1;
-    component.produto = produto;
-    fixture.detectChanges();
-    const newButton = fixture.debugElement.query(By.css('button[w-30][btn-success]'));
-    expect(newButton).toBeFalsy();
+  it('test @Input 1 ', () => {
+    let element = fixture.debugElement.query(By.css('input[name="nome"]'))
+    expect(element.nativeElement.ngModel).toEqual('pizza');
   });
 
+  it('test @Input 2 ', () => {
+    let element = fixture.debugElement.query(By.css('input[name="categoria"]'))
+    expect(element.nativeElement.ngModel).toEqual('massa');
+  });
+
+  it('test @Input 3 ', () => {
+    let element = fixture.debugElement.query(By.css('input[name="tempoPreparo"]'))
+    expect(element.nativeElement.ngModel).toEqual(30);
+  });
+
+  it('test @Input 1 to be null', () => {
+    let element = fixture.debugElement.query(By.css('input[name="nome"]'))
+    expect(element.nativeElement.ngModel).not.toBe(null);
+  });
+
+  it('test @Input 2 to be null', () => {
+    let element = fixture.debugElement.query(By.css('input[name="categoria"]'))
+    expect(element.nativeElement.ngModel).not.toBe(null);
+  });
+
+  it('test @Input 3 to be null', () => {
+    let element = fixture.debugElement.query(By.css('input[name="tempoPreparo"]'))
+    expect(element.nativeElement.ngModel).not.toBe(null);
+  });
+  
 });

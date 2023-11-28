@@ -9,6 +9,9 @@ import { ProdutoService } from 'src/app/SERVICE/produto-service/produto.service'
   styleUrls: ['./produto-list.component.scss']
 })
 export class ProdutoListComponent {
+  exemploErro() {
+    throw new Error('Method not implemented.');
+  }
   lista: Produto[] = []
   SelecionadaParaEdicao: Produto = new Produto();
   indiceSelecionadoParaEdicao!: number;

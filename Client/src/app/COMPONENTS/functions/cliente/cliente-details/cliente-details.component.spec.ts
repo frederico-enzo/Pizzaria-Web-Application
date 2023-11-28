@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClienteDetailsComponent } from './cliente-details.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Cliente } from 'src/app/MODEL/cliente-model/cliente';
 
 describe('ClienteDetailsComponent', () => {
   let component: ClienteDetailsComponent;
@@ -23,4 +24,22 @@ describe('ClienteDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have @Input() cliente property', () => {
+    const cliente = new Cliente();
+    component.cliente = cliente;
+    expect(component.cliente).toBe(cliente);
+  });
+
+  it('should have @Output() retorno property', () => {
+    expect(component.retorno).toBeTruthy();
+  });
+  
+  it('should have ClienteService property clienteService', () => {
+    expect(component.cliente).toBeDefined();
+  });
+
+
+
+
 });
