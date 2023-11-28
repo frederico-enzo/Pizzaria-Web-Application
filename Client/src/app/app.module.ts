@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SignUpComponent } from './COMPONENTS/system/sign-up/sign-up.component';
 import { SignInComponent } from './COMPONENTS/system/sign-in/sign-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,10 +24,10 @@ import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-lis
 import { AtributoListComponent } from './COMPONENTS/functions/atributo/atributo-list/atributo-list.component';
 import { httpInterceptorProviders } from './INTERCEPTOR/http-interceptor.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
     SignInComponent,
     AdmIndexComponent,
     AdmHeaderComponent,
@@ -45,6 +44,7 @@ import { httpInterceptorProviders } from './INTERCEPTOR/http-interceptor.service
     ProdutoListComponent,
     ClienteDetailsComponent,
     ClienteListComponent,
+
    
   ],
   imports: [

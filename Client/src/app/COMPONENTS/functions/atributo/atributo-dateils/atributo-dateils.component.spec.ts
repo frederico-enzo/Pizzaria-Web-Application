@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Atributo } from 'src/app/MODEL/atributo-model/atributo';
 import { By } from '@angular/platform-browser';
 
-describe('AtributoDateilsComponent', () => {
+describe('Componente AtributoDateils', () => {
   let component: AtributoDateilsComponent;
   let fixture: ComponentFixture<AtributoDateilsComponent>;
 
@@ -24,18 +24,26 @@ describe('AtributoDateilsComponent', () => {
     fixture.detectChanges();
   });
 
-
-  it('should create', () => {
+  it('deve ser criado', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with an Atributo object', () => {
+  it('deve ser inicializado com um objeto Atributo', () => {
     expect(component.atributo).toBeDefined();
     expect(component.atributo instanceof Atributo).toBeTruthy();
   });
 
+  it('deve ter a propriedade @Input() atributo', () => {
+    const entity = new Atributo();
+    component.atributo = entity;
+    expect(component.atributo).toBe(entity);
+  });
 
- it('should display descricao and preco inputs when atributo.id is greater than 0', () => {
+  it('deve ter a propriedade @Output() retorno', () => {
+    expect(component.retorno).toBeTruthy();
+  });
+
+  it('deve exibir os inputs descricao e preco quando atributo.id for maior que 0', () => {
     component.atributo.id = 1;
     fixture.detectChanges();
 
@@ -46,7 +54,14 @@ describe('AtributoDateilsComponent', () => {
     expect(precoInput).toBeTruthy();
   });
 
+  it('não deve exibir os inputs descricao e preco quando atributo.id for nulo', () => {
+    component.atributo.id = 0;
+    fixture.detectChanges();
 
+    const descricaoInput = fixture.debugElement.query(By.css('input[name="descricao"]'));
+    const precoInput = fixture.debugElement.query(By.css('input[name="preco"]'));
 
-
+    expect(descricaoInput).toBeFalsy();
+    expect(precoInput).toBeFalsy();
+  });
 });

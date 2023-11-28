@@ -83,9 +83,6 @@ export class PedidoListComponent {
     this.modalService.dismissAll();
   }
 
-  ir(modal: any) {
-    this.SelecionadoParaEdicao = new Pedido();
-    this.modalService.open(modal, { size:  'xl'});
-  }
+
   
 }

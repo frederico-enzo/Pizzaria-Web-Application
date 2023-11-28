@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignUpComponent } from './COMPONENTS/system/sign-up/sign-up.component';
 import { SignInComponent } from './COMPONENTS/system/sign-in/sign-in.component';
 import { AdmIndexComponent } from './COMPONENTS/layout/adm-index/adm-index.component';
 import { SaborListComponent } from './COMPONENTS/functions/sabor/sabor-list/sabor-list.component';
@@ -14,7 +13,6 @@ import { rotaGuardGuard } from './GUARDS/rota-guard.guard';
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   {path: "login",component: SignInComponent},
-  { path: "signup", component: SignUpComponent },
   { path: "admin", component: AdmIndexComponent, canActivate: [rotaGuardGuard], children: [
     {path : "atributo-adm" , component: AtributoListComponent},
     {path : "cliente-adm" , component: ClienteListComponent},

@@ -67,5 +67,21 @@ describe('ProdutoDetailsComponent', () => {
     let element = fixture.debugElement.query(By.css('input[name="tempoPreparo"]'))
     expect(element.nativeElement.ngModel).not.toBe(null);
   });
+  it('should have @Output() retorno property', () => {
+    expect(component.retorno).toBeTruthy();
+  });
   
+  it('should have a default Produto instance', () => {
+    expect(component.produto).toBeDefined();
+    expect(component.produto instanceof Produto).toBeTruthy();
+  });
+  it('should have ClienteService property clienteService', () => {
+    expect(component.produto).toBeDefined();
+  });
+  it('should have @Input() cliente property', () => {
+    const entity = new Produto();
+    component.produto = entity;
+    expect(component.produto).toBe(entity);
+  });
+
 });

@@ -4,7 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { HttpInterceptorService } from './http-interceptor.service';
 
-describe('HttpInterceptorService', () => {
+describe('InterceptorService', () => {
   let httpClient: HttpClient;
   let httpController: HttpTestingController;
   let router: jasmine.SpyObj<Router>;
@@ -28,6 +28,8 @@ describe('HttpInterceptorService', () => {
   afterEach(() => {
     httpController.verify();
   });
+
+
 
   it('deve redirecionar para login em caso de erro 401', () => {
     spyOn(localStorage, 'getItem').and.returnValue('fake-token');

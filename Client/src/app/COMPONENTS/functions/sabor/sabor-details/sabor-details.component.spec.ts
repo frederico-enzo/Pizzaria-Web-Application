@@ -39,6 +39,18 @@ describe('SaborDetailsComponent', () => {
     expect(component.sabor).toBeDefined();
     expect(component.sabor instanceof Sabor).toBeTruthy();
   });
+  it('should have @Output() retorno property', () => {
+    expect(component.retorno).toBeTruthy();
+  });
     
+  it('should have ClienteService property clienteService', () => {
+    expect(component.sabor).toBeDefined();
+  });
+
+  it('should have @Input() cliente property', () => {
+    const entity = new Sabor();
+    component.sabor = entity;
+    expect(component.sabor).toBe(entity);
+  });
 
 });

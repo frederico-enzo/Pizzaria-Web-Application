@@ -9,6 +9,7 @@ import { AtributoService } from 'src/app/SERVICE/atributo-service/atributo.servi
   styleUrls: ['./atributo-list.component.scss']
 })
 export class AtributoListComponent {
+  [x: string]: any;
   lista: Atributo[] = []
   SelecionadaParaEdicao: Atributo = new Atributo();
   indiceSelecionadoParaEdicao!: number;

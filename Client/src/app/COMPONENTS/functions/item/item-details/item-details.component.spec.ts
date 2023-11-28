@@ -21,4 +21,7 @@ describe('ItemDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should have @Output() retorno property', () => {
+    expect(component.retorno).toBeTruthy();
+  });
 });

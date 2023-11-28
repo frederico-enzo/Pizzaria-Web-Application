@@ -1,22 +1,18 @@
 <div class="fundo">
     <div class="main">
         <h2>Pizzaria</h2>
-    <form (ngSubmit)="logar()">
+        <form (ngSubmit)="logar()">
             <div class="form-floating mb-3">
-            <input  type="text" class="form-control" name="exampleInputText1" aria-describedby="emailHelp"
-            [(ngModel)]="login.username" autocomplete="off" >
-            <label for="login">User Name     </label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="password" class="form-control" name="exampleInputPassword1"
-            [(ngModel)]="login.password" >
-            <label for="senha">Senha</label>
-        </div>
-        <div class="d-flex gap-2 allien-center     justify-content-center">
-            <button class="btn btn-outline-success" routerLink="/signup" type="button"
-                value="cadastrar">Cadastrar</button>
-            <button class="btn btn-success"  type="submit" value="Logar">Logar</button>
-        </div>
-    </form>
+                <input type="text" class="form-control" name="exampleInputText1" [(ngModel)]="login.username">
+                <label for="login">User Name </label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="exampleInputPassword1" [(ngModel)]="login.password">
+                <label for="senha">Senha</label>
+            </div>
+            <div class="d-flex gap-2 allien-center justify-content-center">
+                <button class="btn btn-success" type="submit" value="Logar">Logar</button>
+            </div>
+        </form>
     </div>
 </div>

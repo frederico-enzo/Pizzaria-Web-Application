@@ -19,7 +19,6 @@ export class SignInComponent {
   }
 
   logar() {
-    // Implemente a requisição aqui e coloque o token no localStorage
     this.loginService.logar(this.login).subscribe({
       next: (token) => {
         localStorage.setItem("token", token.token);
