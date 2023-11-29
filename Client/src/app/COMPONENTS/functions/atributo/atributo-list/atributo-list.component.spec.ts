@@ -8,6 +8,7 @@ import { Atributo } from 'src/app/MODEL/atributo-model/atributo';
 describe('AtributoListComponent', () => {
   let component: AtributoListComponent;
   let fixture: ComponentFixture<AtributoListComponent>;
+  let h3: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,6 +18,7 @@ describe('AtributoListComponent', () => {
     });
     fixture = TestBed.createComponent(AtributoListComponent);
     component = fixture.componentInstance;
+    h3 = fixture.nativeElement.querySelector('h3');
     fixture.detectChanges();
   });
 
@@ -24,11 +26,25 @@ describe('AtributoListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have initial properties', () => {
-    expect(component.lista).toEqual([]);
-    expect(component.SelecionadaParaEdicao).toBeDefined();
-    expect(component.indiceSelecionadoParaEdicao).toBeUndefined();
+ 
+
+
+  it('should set the indiceSelecionadoParaEdicao property to the edited atributo index when the editar function is called', () => {
+    const entity = new Atributo();
+    const indice = 0;
+
+    component.editar('modal', entity, indice);
+
+    expect(component.indiceSelecionadoParaEdicao).toEqual(indice);
   });
+
+  it('should set the SelecionadaParaEdicao property to a new Atributo object when the adicionar function is called', () => {
+    component.adicionar('modal');
+
+    expect(component.SelecionadaParaEdicao).toBeInstanceOf(Atributo);
+    expect(component.SelecionadaParaEdicao).toEqual(new Atributo());
+  });
+
 
 
 });

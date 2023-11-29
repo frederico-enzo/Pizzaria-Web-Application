@@ -129,7 +129,6 @@ export class ItemDetailsComponent {
         this.sabores = lista;
       },
       error: erro => {
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console.');
         console.error(erro);
       }
     });
@@ -140,8 +139,6 @@ export class ItemDetailsComponent {
         this.atributos = lista;
       },
       error: erro => {
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console.');
-        console.error(erro);
       }
     });
   }

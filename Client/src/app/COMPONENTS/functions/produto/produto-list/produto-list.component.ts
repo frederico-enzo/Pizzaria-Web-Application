@@ -56,28 +56,7 @@ export class ProdutoListComponent {
     this.modalService.open(modal, { size: 'xd' });
   }
   addOuEditar(produto: Produto) {
-    if (produto.id === 0) {
-      this.service.create(produto).subscribe({
-        next: produto => {
-          this.lista.push(produto);
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao criar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    } else {
-      this.service.update(produto, produto.id).subscribe({
-        next: Atualizada => {
-          this.lista[this.indiceSelecionadoParaEdicao] = Atualizada;
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao atualizar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    }
+    this.listAll();
+    this.modalService.dismissAll();
   }
 }

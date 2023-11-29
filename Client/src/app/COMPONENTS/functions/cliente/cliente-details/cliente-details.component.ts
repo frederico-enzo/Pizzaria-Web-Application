@@ -39,13 +39,10 @@ export class ClienteDetailsComponent {
     });
   }
   update() {
-    // Verifique se o cliente tem um endereço associado
     if (this.enderecoId) {
-      // Crie um objeto de endereço com o ID fornecido
       const novoEndereco = new Endereco();
       novoEndereco.id = this.enderecoId;
   
-      // Atribua o novo endereço ao cliente
       this.cliente.endereco = novoEndereco;
     }
   

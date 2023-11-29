@@ -23,8 +23,6 @@ import { ClienteDetailsComponent } from './COMPONENTS/functions/cliente/cliente-
 import { ClienteListComponent } from './COMPONENTS/functions/cliente/cliente-list/cliente-list.component';
 import { AtributoListComponent } from './COMPONENTS/functions/atributo/atributo-list/atributo-list.component';
 import { httpInterceptorProviders } from './INTERCEPTOR/http-interceptor.service';
-import { FuncionarioDetailsComponent } from './COMPONENTS/functions/funcionario/funcionario-details/funcionario-details.component';
-import { FuncionarioListComponent } from './COMPONENTS/functions/funcionario/funcionario-list/funcionario-list.component';
 
 
 @NgModule({
@@ -46,10 +44,7 @@ import { FuncionarioListComponent } from './COMPONENTS/functions/funcionario/fun
     ProdutoListComponent,
     ClienteDetailsComponent,
     ClienteListComponent,
-    FuncionarioDetailsComponent,
-    FuncionarioListComponent,
 
-   
   ],
   imports: [
     BrowserModule,

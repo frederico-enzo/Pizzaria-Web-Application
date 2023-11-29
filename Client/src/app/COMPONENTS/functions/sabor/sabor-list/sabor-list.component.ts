@@ -53,29 +53,9 @@ export class SaborListComponent {
     this.indiceSelecionadoParaEdicao = indice;
     this.modalService.open(modal, { size: 'xd' });
   }
-  addOuEditar(sabor: Sabor) {
-    if (sabor.id === 0) {
-      this.service.create(sabor).subscribe({
-        next: castrada => {
-          this.lista.push(castrada);
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao criar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    } else {
-      this.service.update(sabor, sabor.id).subscribe({
-        next: Atualizada => {
-          this.lista[this.indiceSelecionadoParaEdicao] = Atualizada;
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao atualizar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    }
+  addOuEditar(cliente: Sabor) {
+    this.listAll();
+    this.modalService.dismissAll();
   }
+  
 }

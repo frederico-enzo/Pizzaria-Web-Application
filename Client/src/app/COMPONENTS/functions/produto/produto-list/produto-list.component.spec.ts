@@ -58,5 +58,20 @@ describe('ProdutoListComponent', () => {
     expect(component.SelecionadaParaEdicao).toBeDefined();
     expect(component.indiceSelecionadoParaEdicao).toBeUndefined();
   });
+  it('should set the SelecionadaParaEdicao property to a new Atributo object when the adicionar function is called', () => {
+    component.adicionar('modal');
+
+    expect(component.SelecionadaParaEdicao).toBeInstanceOf(Produto);
+    expect(component.SelecionadaParaEdicao).toEqual(new Produto());
+  });
+
+  it('should set the indiceSelecionadoParaEdicao property to the edited atributo index when the editar function is called', () => {
+    const entity = new Produto();
+    const indice = 0;
+
+    component.editar('modal', entity, indice);
+
+    expect(component.indiceSelecionadoParaEdicao).toEqual(indice);
+  });
 
 });

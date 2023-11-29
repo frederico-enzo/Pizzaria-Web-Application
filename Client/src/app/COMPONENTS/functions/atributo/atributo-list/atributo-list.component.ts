@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Atributo } from 'src/app/MODEL/atributo-model/atributo';
 import { AtributoService } from 'src/app/SERVICE/atributo-service/atributo.service';
@@ -13,21 +13,18 @@ export class AtributoListComponent {
   lista: Atributo[] = []
   SelecionadaParaEdicao: Atributo = new Atributo();
   indiceSelecionadoParaEdicao!: number;
+  modalService = inject(NgbModal);
 
   constructor(
-    private modalService: NgbModal,
     private atributoService: AtributoService
   ) { this.listAll();  }
 
   delete(id: number) {
     this.atributoService.delete(id).subscribe({
       next: () => {
-        console.error('Exclusão bem-sucedida!');
         this.listAll();
       },
       error: erro => {
-        console.error('Erro ao excluir a pessoa. Consulte o console para mais detalhes.');
-        console.error(erro);
       }
     });
   }
@@ -37,7 +34,6 @@ export class AtributoListComponent {
         this.lista = lista;
       },
       error: erro => {
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console.');
         console.error(erro);
       }
     });
@@ -54,28 +50,7 @@ export class AtributoListComponent {
     this.modalService.open(modal, { size: 'xd' });
   }
   addOuEditar(atributo: Atributo) {
-    if (atributo.id === 0) {
-      this.atributoService.create(atributo).subscribe({
-        next: pessoaCriada => {
-          this.lista.push(pessoaCriada);
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao criar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    } else {
-      this.atributoService.update(atributo, atributo.id).subscribe({
-        next: Atualizada => {
-          this.lista[this.indiceSelecionadoParaEdicao] = Atualizada;
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao atualizar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    }
+      this.listAll();
+      this.modalService.dismissAll();
   }
 }

@@ -21,11 +21,9 @@ export class EnderecoListComponent {
   delete(id: number) {
     this.service.delete(id).subscribe({
       next: () => {
-        console.error('Exclusão bem-sucedida!');
         this.listAll();
       },
       error: erro => {
-        console.error('Erro ao excluir a pessoa. Consulte o console para mais detalhes.');
         console.error(erro);
       }
     });
@@ -36,7 +34,6 @@ export class EnderecoListComponent {
         this.lista = lista;
       },
       error: erro => {
-        alert('Exemplo de tratamento de erro/exception! Observe o erro no console.');
         console.error(erro);
       }
     });
@@ -53,28 +50,7 @@ export class EnderecoListComponent {
     this.modalService.open(modal, { size: 'xd' });
   }
   addOuEditar(endereco: Endereco) {
-    if (endereco.id === 0) {
-      this.service.create(endereco).subscribe({
-        next: pessoaCriada => {
-          this.lista.push(pessoaCriada);
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao criar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    } else {
-      this.service.update(endereco, endereco.id).subscribe({
-        next: Atualizada => {
-          this.lista[this.indiceSelecionadoParaEdicao] = Atualizada;
-          this.modalService.dismissAll();
-        },
-        error: erro => {
-          console.error('Erro ao atualizar a pessoa. Consulte o console para mais detalhes.');
-          console.error(erro);
-        }
-      });
-    }
+    this.listAll();
+    this.modalService.dismissAll();
   }
 }

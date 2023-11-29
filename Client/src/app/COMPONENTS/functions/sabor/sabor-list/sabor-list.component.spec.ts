@@ -59,5 +59,20 @@ describe('SaborListComponent', () => {
     expect(component.indiceSelecionadoParaEdicao).toBeUndefined();
   });
 
+  it('should set the SelecionadaParaEdicao property to a new Atributo object when the adicionar function is called', () => {
+    component.adicionar('modal');
 
+    expect(component.SelecionadaParaEdicao).toBeInstanceOf(Sabor);
+    expect(component.SelecionadaParaEdicao).toEqual(new Sabor());
+  });
+
+  
+  it('should set the indiceSelecionadoParaEdicao property to the edited atributo index when the editar function is called', () => {
+    const entity = new Sabor();
+    const indice = 0;
+
+    component.editar('modal', entity, indice);
+
+    expect(component.indiceSelecionadoParaEdicao).toEqual(indice);
+  });
 });

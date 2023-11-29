@@ -44,6 +44,24 @@ describe('ClienteListComponent', () => {
     expect(modalService.open).toHaveBeenCalledWith('modal', { size: 'lg' });
   });
 
+  it('should set the SelecionadaParaEdicao property to a new Atributo object when the adicionar function is called', () => {
+    component.adicionar('modal');
 
- 
+    expect(component.SelecionadoParaEdicao).toBeInstanceOf(Cliente);
+    expect(component.SelecionadoParaEdicao).toEqual(new Cliente());
+  });
+
+
+  
+  it('should set the indiceSelecionadoParaEdicao property to the edited atributo index when the editar function is called', () => {
+    const entity = new Cliente();
+    const indice = 0;
+
+    component.editar('modal', entity, indice);
+
+    expect(component.indiceSelecionadoParaEdicao).toEqual(indice);
+  });
+
+
+
 });

@@ -58,4 +58,20 @@ describe('PedidoListComponent', () => {
     expect(component.indiceSelecionadoParaEdicao).toBeUndefined();
   });
 
+  it('should set the SelecionadaParaEdicao property to a new Atributo object when the adicionar function is called', () => {
+    component.adicionar('modal');
+
+    expect(component.SelecionadoParaEdicao).toBeInstanceOf(Pedido);
+    expect(component.SelecionadoParaEdicao).toEqual(new Pedido());
+  });
+
+  it('should set the indiceSelecionadoParaEdicao property to the edited atributo index when the editar function is called', () => {
+    const entity = new Pedido();
+    const indice = 0;
+
+    component.editar('modal', entity, indice);
+
+    expect(component.indiceSelecionadoParaEdicao).toEqual(indice);
+  });
+
 });

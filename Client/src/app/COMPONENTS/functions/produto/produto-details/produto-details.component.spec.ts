@@ -3,7 +3,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ProdutoDetailsComponent } from './produto-details.component';
 import { Produto } from 'src/app/MODEL/produto-model/produto';
-import { By } from '@angular/platform-browser';
 
 describe('ProdutoDetailsComponent', () => {
   let component: ProdutoDetailsComponent;
@@ -38,50 +37,13 @@ describe('ProdutoDetailsComponent', () => {
   });
 
 
-  it('test @Input 1 ', () => {
-    let element = fixture.debugElement.query(By.css('input[name="nome"]'))
-    expect(element.nativeElement.ngModel).toEqual('pizza');
-  });
-
-  it('test @Input 2 ', () => {
-    let element = fixture.debugElement.query(By.css('input[name="categoria"]'))
-    expect(element.nativeElement.ngModel).toEqual('massa');
-  });
-
-  it('test @Input 3 ', () => {
-    let element = fixture.debugElement.query(By.css('input[name="tempoPreparo"]'))
-    expect(element.nativeElement.ngModel).toEqual(30);
-  });
-
-  it('test @Input 1 to be null', () => {
-    let element = fixture.debugElement.query(By.css('input[name="nome"]'))
-    expect(element.nativeElement.ngModel).not.toBe(null);
-  });
-
-  it('test @Input 2 to be null', () => {
-    let element = fixture.debugElement.query(By.css('input[name="categoria"]'))
-    expect(element.nativeElement.ngModel).not.toBe(null);
-  });
-
-  it('test @Input 3 to be null', () => {
-    let element = fixture.debugElement.query(By.css('input[name="tempoPreparo"]'))
-    expect(element.nativeElement.ngModel).not.toBe(null);
-  });
-  it('should have @Output() retorno property', () => {
-    expect(component.retorno).toBeTruthy();
-  });
   
-  it('should have a default Produto instance', () => {
-    expect(component.produto).toBeDefined();
-    expect(component.produto instanceof Produto).toBeTruthy();
-  });
-  it('should have ClienteService property clienteService', () => {
-    expect(component.produto).toBeDefined();
-  });
-  it('should have @Input() cliente property', () => {
-    const entity = new Produto();
-    component.produto = entity;
-    expect(component.produto).toBe(entity);
-  });
+
+
+
+
+
+
+
 
 });

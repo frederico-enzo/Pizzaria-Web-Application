@@ -12,8 +12,10 @@ export class AtributoDateilsComponent {
   @Input() atributo: Atributo = new Atributo();
   @Output() retorno = new EventEmitter<Atributo>();
 
+  modalService = inject(NgbModal);
+
   service = inject(AtributoService);
-  constructor(private modalService: NgbModal) { }
+  constructor() { }
 
   create() {
     this.service.create(this.atributo).subscribe({

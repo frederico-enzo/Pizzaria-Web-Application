@@ -59,7 +59,32 @@ describe('EnderecoListComponent', () => {
     expect(component.indiceSelecionadoParaEdicao).toBeUndefined();
   });
 
+  it('should call adicionar() method successfully', () => {
+    spyOn(modalService, 'open').and.callThrough();
+
+    component.adicionar('modal');
+
+    expect(component.SelecionadaParaEdicao).toEqual(new Endereco());
+    expect(modalService.open).toHaveBeenCalledWith('modal', { size: 'xd' });
+  });
+
+  it('should set the SelecionadaParaEdicao property to a new Atributo object when the adicionar function is called', () => {
+    component.adicionar('modal');
+
+    expect(component.SelecionadaParaEdicao).toBeInstanceOf(Endereco);
+    expect(component.SelecionadaParaEdicao).toEqual(new Endereco());
+  });
   
+  it('should set the indiceSelecionadoParaEdicao property to the edited atributo index when the editar function is called', () => {
+    const entity = new Endereco();
+    const indice = 0;
+
+    component.editar('modal', entity, indice);
+
+    expect(component.indiceSelecionadoParaEdicao).toEqual(indice);
+  });
+
+
 
   
 });
