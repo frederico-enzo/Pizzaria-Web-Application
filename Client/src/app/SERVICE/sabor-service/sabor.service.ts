@@ -8,7 +8,7 @@ import { Sabor } from 'src/app/MODEL/sabor-model/sabor';
 })
 export class SaborService {
 
-  API: string = 'http://localhost:8080/sabores';
+  API: string = 'http://localhost:5000/sabores';
   http = inject(HttpClient);
 
   constructor() { }

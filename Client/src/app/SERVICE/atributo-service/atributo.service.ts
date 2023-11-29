@@ -7,7 +7,7 @@ import { Atributo } from 'src/app/MODEL/atributo-model/atributo';
   providedIn: 'root'
 })
 export class AtributoService {
-  API: string = 'http://localhost:8080/atributos';
+  API: string = 'http://localhost:5000/atributos';
   http = inject(HttpClient);
 
   constructor() { }

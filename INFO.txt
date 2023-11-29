@@ -1,0 +1,5 @@
+netstat -ano | findstr :5000 // SE A PORT ESTIVE EM USO COLOQUE ISSO PARA VER O QUE ESTA OCUPANDO A PORT
+taskkill /F /PID <> // PARA TIRAR O QUE ESTA OCUPANDO A PORT
+
+cd C:\Users\peite\Documents\desenvolvimento\Pizzaria-Web-Application\API\target // ENTRA NA PASTA ONDE ESTA O BUILD 
+java -jar .\API-0.0.2-SNAPSHOT.jar // EXECUTA A SNAPSHOT
