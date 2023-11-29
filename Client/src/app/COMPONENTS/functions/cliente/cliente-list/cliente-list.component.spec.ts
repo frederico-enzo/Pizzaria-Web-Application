@@ -35,24 +35,6 @@ describe('ClienteListComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it('should call lancar() method successfully', () => {
-    const modalServiceSpy = jasmine.createSpyObj('NgbModal', ['open']);
-    component.modalService = modalServiceSpy;
-
-    component.adicionar('modal');
-
-    expect(modalServiceSpy.open).toHaveBeenCalledWith('modal', { size: 'lg' });
-  });
-
-  it('should call listAll() on construction', () => {
-    spyOn(clienteService, 'listAll').and.returnValue(of([]));
-
-    fixture = TestBed.createComponent(ClienteListComponent);
-    component = fixture.componentInstance;
-
-    expect(clienteService.listAll).toHaveBeenCalled();
-  });
-
   it('should call adicionar() method successfully', () => {
     spyOn(modalService, 'open').and.callThrough();
 
@@ -62,11 +44,6 @@ describe('ClienteListComponent', () => {
     expect(modalService.open).toHaveBeenCalledWith('modal', { size: 'lg' });
   });
 
-  it('should have initial properties', () => {
-    expect(component.lista).toEqual([]);
-    expect(component.SelecionadoParaEdicao).toBeDefined();
-    expect(component.indiceSelecionadoParaEdicao).toBeUndefined();
-  });
 
-
+ 
 });

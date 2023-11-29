@@ -52,5 +52,14 @@ describe('SaborDetailsComponent', () => {
     component.sabor = entity;
     expect(component.sabor).toBe(entity);
   });
+  it('should show error message when error is true', () => {
+    component.error = true;
+    component.mensagem = 'Erro de teste';
+    fixture.detectChanges();
+    const errorMessage = fixture.nativeElement.querySelector('.alert-danger');
+    expect(errorMessage.textContent).toContain('Erro de teste');
+  });
+
+
 
 });

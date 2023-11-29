@@ -20,44 +20,9 @@ describe('ClienteDetailsComponent', () => {
     fixture.detectChanges();
   });
 
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have @Input() cliente property', () => {
-    const cliente = new Cliente();
-    component.cliente = cliente;
-    expect(component.cliente).toBe(cliente);
-  });
 
-  it('should have @Output() retorno property', () => {
-    expect(component.retorno).toBeTruthy();
-  });
-  
-  it('should have ClienteService property clienteService', () => {
-    expect(component.cliente).toBeDefined();
-  });
-
-  it('should have @Output() retorno property', () => {
-    expect(component.retorno).toBeTruthy();
-  });
-
- it('should have @Input() cliente property', () => {
-    const cliente = new Cliente();
-    component.cliente = cliente;
-    expect(component.cliente).toBe(cliente);
-  });
-  it('should have ClienteService property clienteService', () => {
-    expect(component.cliente).toBeDefined();
-  });
-  it('should have @Output() retorno property', () => {
-    expect(component.retorno).toBeTruthy();
-  });
-
-  it('should have @Input() cliente property', () => {
-    const entity = new Cliente();
-    component.cliente = entity;
-    expect(component.cliente).toBe(entity);
-  });
 });

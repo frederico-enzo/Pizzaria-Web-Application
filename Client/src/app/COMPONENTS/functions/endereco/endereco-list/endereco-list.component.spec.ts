@@ -14,7 +14,6 @@ describe('EnderecoListComponent', () => {
   let modalService: NgbModal;
   let service: EnderecoService;
 
-  
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -32,12 +31,11 @@ describe('EnderecoListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('deve ser criado', () => {
     expect(component).toBeTruthy();
   });
 
-
-  it('should call listAll() on construction', () => {
+  it('deve chamar listAll() na construção', () => {
     spyOn(service, 'listAll').and.returnValue(of([]));
 
     fixture = TestBed.createComponent(EnderecoListComponent);
@@ -46,10 +44,7 @@ describe('EnderecoListComponent', () => {
     expect(service.listAll).toHaveBeenCalled();
   });
 
-
-
-
-  it('should call adicionar() method successfully', () => {
+  it('deve chamar adicionar() com sucesso', () => {
     spyOn(modalService, 'open').and.callThrough();
 
     component.adicionar('modal');
@@ -58,12 +53,13 @@ describe('EnderecoListComponent', () => {
     expect(modalService.open).toHaveBeenCalledWith('modal', { size: 'xd' });
   });
 
-  it('should have initial properties', () => {
+  it('deve ter propriedades iniciais', () => {
     expect(component.lista).toEqual([]);
     expect(component.SelecionadaParaEdicao).toBeDefined();
     expect(component.indiceSelecionadoParaEdicao).toBeUndefined();
   });
 
+  
 
-
+  
 });

@@ -18,7 +18,25 @@ describe('AdmIndexComponent', () => {
     fixture.detectChanges();
   });
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AdmIndexComponent);
+    fixture.detectChanges();
+  });
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should create the app', () => {
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it('should render app-adm-header', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('app-adm-header')).toBeTruthy();
+  });
+
+  it('should render router-outlet', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });

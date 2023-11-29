@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/SERVICE/login-service/login.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { Login } from 'src/app/MODEL/login-model/login';
+import { throwError } from 'rxjs';
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
@@ -71,6 +72,9 @@ describe('SignInComponent', () => {
     expect(elemento.nativeElement.ngModel).not.toBe(null);
   });
 
+
+
+  
 
 
 });

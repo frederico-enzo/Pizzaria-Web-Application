@@ -16,7 +16,7 @@
                     class="w-30 btn btn-success">+</button>
             </div>
         </div>
-        <button *ngIf="sabor.id == null" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
-        <button *ngIf="sabor.id > 0" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
+        <button *ngIf="sabor.id == null" name="create" type="button" (click)="create()" class="w-30 btn btn-success">New</button>
+        <button *ngIf="sabor.id > 0 "name="updade" type="button" (click)="update()" class="w-30 btn btn-success">Salvar</button>
     </form>
 </div>
