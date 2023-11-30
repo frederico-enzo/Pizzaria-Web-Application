@@ -8,7 +8,7 @@ import { Cliente } from 'src/app/MODEL/cliente-model/cliente';
 })
 export class ClienteService {
 
-  API: string = 'http://localhost:8080/clientes';
+  API: string = 'http://localhost:5000/clientes';
   http = inject(HttpClient);
 
   constructor() { }

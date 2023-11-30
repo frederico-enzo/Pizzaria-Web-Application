@@ -8,7 +8,7 @@ import { Item } from 'src/app/MODEL/item-model/item';
 })
 export class ItemService {
 
-  API: string = 'http://localhost:8080/itens';
+  API: string = 'http://localhost:5000/itens';
   http = inject(HttpClient);
 
   constructor() { }
